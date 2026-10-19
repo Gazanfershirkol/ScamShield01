@@ -1,0 +1,66 @@
+# =============================================================
+# ScamShield AI — .gitignore
+# Rules: never commit secrets, virtual envs, generated
+#        artifacts, editor noise, or local OS detritus.
+#        Approved project Markdown files are NOT excluded.
+# =============================================================
+
+# ── Python virtual environment ────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+
+# ── Python bytecode & caches ──────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# ── Testing & coverage artefacts ──────────────────────────────
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.log
+
+# ── Trained model artefacts (large binary files) ──────────────
+# Serialized models live here; do not commit binaries to Git
+# unless you explicitly decide to version a specific release.
+app/models/*.joblib
+app/models/*.pkl
+app/models/*.bin
+
+# ── Evaluation output generated at runtime ───────────────────
+app/models/evaluation_meta.json
+docs/EVALUATION_REPORT.md
+
+# ── Raw & processed datasets (may contain PII even if scrubbed)─
+data/raw/
+data/processed/
+# Synthetic fixtures are small & safe to version; include them:
+!data/synthetic/
+
+# ── IDE & editor noise ────────────────────────────────────────
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ── Windows OS noise ──────────────────────────────────────────
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── Misc ──────────────────────────────────────────────────────
+*.DS_Store
+*.bak
+*.swp
+*.tmp
+dist/
+build/
+*.egg-info/

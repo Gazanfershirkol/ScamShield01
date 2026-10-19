@@ -1,0 +1,83 @@
+# Project State & Memory Ledger — ScamShield AI
+
+**Last Updated:** 2026-10-19T15:32:00+05:30  
+**Current Phase:** Phase 0 (Workspace Inspection & Architecture Planning) — **COMPLETE**  
+**Next Phase:** Phase 1 (Environment Setup & Project Scaffolding) — **AWAITING APPROVAL**
+
+---
+
+## 1. Verified Facts (Empirically Confirmed)
+
+1. **Workspace Root:** `e:/SCAM SHIELD 01` was initially completely empty. No existing files, source code, git repository, virtual environments, or datasets existed prior to Phase 0.
+2. **Version Control:** Git binary is available on the host at `C:\Program Files\Git\cmd\git.exe`, but `.git` repository has not yet been initialized in `e:/SCAM SHIELD 01`.
+3. **Python Runtime Status:** 
+   - `python` command is not currently mapped in standard PowerShell PATH.
+   - `py.exe` launcher exists at `C:\Windows\py.exe`, but `py -0p` and `py -V` report: `"No installed Python found!"` in the current terminal environment.
+   - No Python installations were detected in standard directories (`C:\Program Files\Python*`, `C:\Users\GAZANFER SHIRKOL\AppData\Local\Programs\Python*`).
+4. **Operating Environment:** Windows 11 host operating system. Local shell is PowerShell.
+5. **Competition Deadline:** 22 October 2026 (~3 days remaining).
+6. **Documentation Deliverables:** All 11 foundational Markdown documents have been authored in the project root: `PRD.md`, `Architecture.md`, `Rules.md`, `Phases.md`, `Design.md`, `TASKS.md`, `TESTING.md`, `SECURITY.md`, `README.md`, `CHANGELOG.md`, `MEMORY.md`.
+
+---
+
+## 2. Approved Architectural & Engineering Decisions
+
+1. **Tech Stack Selection:**
+   - Backend: Python with **FastAPI** (fast, typed, automatic OpenAPI documentation).
+   - Core ML: **scikit-learn** using `TfidfVectorizer` (n-grams 1-2) with calibrated `LogisticRegression` (fast inference, microsecond cold start, high interpretability via feature coefficients).
+   - URL Engine: Pure Python lexical/heuristic analyzer (`urllib.parse`, Shannon entropy, homoglyph check) with **100% offline zero-network fetch policy**.
+   - Frontend: **Vanilla HTML5, CSS3, and JavaScript** (no node/npm build step, no Tailwind bloat, maximum portability and resilience).
+   - Server: Uvicorn on `http://127.0.0.1:8000`.
+2. **Persistence Policy:** Ephemeral in-memory analysis. Zero database required. Zero user data retention.
+3. **Security Policy:** Submitted URLs are never resolved or fetched over HTTP/TCP/DNS. Inputs capped at 10,000 characters for text and 2,048 characters for URLs.
+4. **Verdict Policy:** Three-state standardized output (`likely safe`, `needs review`, `likely scam`) paired with normalized 0–100 risk score and plain-English explanatory evidence breakdown.
+5. **Evaluation Protocol:** 70/15/15 stratified train/val/test split. TF-IDF vectorizer fit strictly on train split. Held-out test set sealed until final evaluation script run.
+
+---
+
+## 3. Assumptions (Requiring Verification Before/During Phase 1)
+
+1. The project owner or system administrator will either point to an existing Python installation or install Python 3.10+ (via Microsoft Store, winget, or official python.org installer) before Phase 1 dependencies can be installed.
+2. A balanced open-source dataset (e.g. SMS Spam Collection benchmark) can be ingested locally or augmented with synthetic regional scam templates without network dependency during execution.
+
+---
+
+## 4. Commands Actually Executed & Real Observed Results
+
+| Timestamp (UTC) | Command Executed | Exit Code | Observed Output / Effect |
+| :--- | :--- | :--- | :--- |
+| 2026-10-19 09:25 | `list_dir(e:/SCAM SHIELD 01)` | 0 | Directory confirmed empty. |
+| 2026-10-19 09:43 | `Get-ChildItem -Force; git status` | 1 | No files found; "fatal: not a git repository". |
+| 2026-10-19 09:43 | `python --version` | 1 | "python : The term 'python' is not recognized..." |
+| 2026-10-19 09:44 | `Get-Command py, python, python3` | 0 | `py.exe` located at `C:\Windows\py.exe`. |
+| 2026-10-19 09:45 | `py -0p` | 0 | "No installed Pythons found!" |
+| 2026-10-19 09:46 | Common Python path search | 0 | No Python directories located in standard paths. |
+| 2026-10-19 09:47 | `where.exe git; where.exe node; where.exe mise` | 1 | `git.exe` found at `C:\Program Files\Git\cmd\git.exe`. |
+| 2026-10-19 09:48 | `where.exe python` | 1 | "INFO: Could not find files for the given pattern(s)." |
+| 2026-10-19 09:56 | `py -V` | 1 | "No installed Python found!" |
+| 2026-10-19 10:02 | File authoring: 11 markdown specs | 0 | All documents written to `e:/SCAM SHIELD 01/`. |
+
+---
+
+## 5. Implemented Features
+
+- **Completed:** None (Application code has not been authored; documentation phase only).
+- **Status:** 100% of Phase 0 documentation completed and verified.
+
+---
+
+## 6. Known Blockers
+
+- **Host Python Environment:** A functioning Python 3.10+ interpreter must be available on the Windows system PATH before Task T-002 (creating virtual environment and installing dependencies) can proceed.
+
+---
+
+## 7. Open Questions
+
+1. Does the project owner have an existing Python installation in a non-standard directory (e.g. Anaconda, Miniconda, custom drive, or WSL), or should we assist with installing/configuring Python 3.10+ on this Windows machine?
+
+---
+
+## 8. Exact Next Action
+
+- **Task T-001 (Phase 1):** Initialize Git repository in `e:/SCAM SHIELD 01/`, add `.gitignore`, and create the initial baseline commit containing all Phase 0 specifications.
