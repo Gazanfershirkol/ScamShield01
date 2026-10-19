@@ -1,8 +1,8 @@
 # Project State & Memory Ledger — ScamShield AI
 
-**Last Updated:** 2026-10-19T15:32:00+05:30  
-**Current Phase:** Phase 0 (Workspace Inspection & Architecture Planning) — **COMPLETE**  
-**Next Phase:** Phase 1 (Environment Setup & Project Scaffolding) — **AWAITING APPROVAL**
+**Last Updated:** 2026-10-19T15:45:00+05:30  
+**Current Phase:** Phase 1 (Environment Setup & Project Scaffolding) — **IN PROGRESS** (partially complete; blocked on Python)  
+**Next Phase:** Phase 1 Task T-002 — **BLOCKED** (Python interpreter required)
 
 ---
 
@@ -52,32 +52,58 @@
 | 2026-10-19 09:44 | `Get-Command py, python, python3` | 0 | `py.exe` located at `C:\Windows\py.exe`. |
 | 2026-10-19 09:45 | `py -0p` | 0 | "No installed Pythons found!" |
 | 2026-10-19 09:46 | Common Python path search | 0 | No Python directories located in standard paths. |
-| 2026-10-19 09:47 | `where.exe git; where.exe node; where.exe mise` | 1 | `git.exe` found at `C:\Program Files\Git\cmd\git.exe`. |
-| 2026-10-19 09:48 | `where.exe python` | 1 | "INFO: Could not find files for the given pattern(s)." |
+| 2026-10-19 09:47 | `where.exe git` | 0 | `git.exe` at `C:\Program Files\Git\cmd\git.exe`. |
+| 2026-10-19 09:48 | `where.exe python` | 1 | "INFO: Could not find files..." |
 | 2026-10-19 09:56 | `py -V` | 1 | "No installed Python found!" |
 | 2026-10-19 10:02 | File authoring: 11 markdown specs | 0 | All documents written to `e:/SCAM SHIELD 01/`. |
+| 2026-10-19 10:07 | `git config --global user.name/email` | 0 | Identity: `Gazan` / `gazanfer2006@gmail.com`. |
+| 2026-10-19 10:08 | `git -C "e:\SCAM SHIELD 01" init` | 0 | "Initialized empty Git repository in E:/SCAM SHIELD 01/.git/" |
+| 2026-10-19 10:09 | Created `.gitignore` (65-line spec) | 0 | File written to `e:/SCAM SHIELD 01/.gitignore`. |
+| 2026-10-19 10:09 | `git status --short` (pre-stage) | 0 | 12 untracked files listed: 11 Markdown docs + `.gitignore`. No secrets or unexpected files. |
+| 2026-10-19 10:10 | `git add` (12 files, named explicitly) | 0 | All 12 staged; LF→CRLF warnings are normal on Windows; no errors. |
+| 2026-10-19 10:10 | `git diff --cached --stat` | 0 | 12 files, 1617 insertions; verified staged set matches intended list. |
+| 2026-10-19 10:10 | `git commit` (Phase 0 baseline) | 0 | Commit `8c214e9` on branch `main`. Message: "chore(phase-0): add project governance documentation baseline". |
+| 2026-10-19 10:11 | `git log --oneline -3` | 0 | Shows single commit `8c214e9` — clean root commit. |
+| 2026-10-19 10:11 | `git status --short` (post-commit) | 0 | Empty — working tree clean. |
+| 2026-10-19 10:12 | `python --version` | 1 | "python : The term 'python' is not recognized..." |
+| 2026-10-19 10:13 | `py --version` | 112 | "No installed Python found!" (exit code 112) |
+| 2026-10-19 10:14 | `py -0p` | 0 | "No installed Pythons found!" |
 
 ---
 
 ## 5. Implemented Features
 
-- **Completed:** None (Application code has not been authored; documentation phase only).
-- **Status:** 100% of Phase 0 documentation completed and verified.
+- **Completed (Phase 0):** All 11 governance Markdown documents authored and verified.
+- **Completed (Phase 1, partial):** Git repository initialized; `.gitignore` created; Phase 0 documentation baseline committed to `main` as commit `8c214e9`.
+- **Pending (Phase 1):** Python virtual environment creation and dependency installation (T-002) — BLOCKED.
 
 ---
 
 ## 6. Known Blockers
 
-- **Host Python Environment:** A functioning Python 3.10+ interpreter must be available on the Windows system PATH before Task T-002 (creating virtual environment and installing dependencies) can proceed.
+- **Host Python Environment (ACTIVE BLOCKER for T-002, T-003, and all subsequent tasks):** A functioning Python 3.10+ interpreter must be available on the Windows system PATH before creating a virtual environment or running any scripts.
+  - `python --version` → not recognized in PATH.
+  - `py --version` → `No installed Python found!` (exit code 112).
+  - `py -0p` → `No installed Pythons found!`
+  - **Action required:** Install Python 3.10+ and verify it appears in PATH before proceeding.
 
 ---
 
 ## 7. Open Questions
 
-1. Does the project owner have an existing Python installation in a non-standard directory (e.g. Anaconda, Miniconda, custom drive, or WSL), or should we assist with installing/configuring Python 3.10+ on this Windows machine?
+1. Does the project owner have Python 3.10+ installed in a non-standard location (e.g. Anaconda, Miniconda, WSL, or a custom drive), or will they install it via one of the recommended methods below?
+
+   **Recommended installation options (in order of ease on Windows):**
+   - **Microsoft Store:** Search "Python 3.12" — installs to `%LOCALAPPDATA%\Programs\Python` and auto-registers with the `py` launcher.
+   - **winget (if available):** `winget install -e --id Python.Python.3.12`
+   - **Official installer:** Download from https://www.python.org/downloads/ — check ✅ "Add Python to PATH" during setup.
+
+   Once Python is installed, run `py -V` or `python --version` to confirm, then report the exact version string.
 
 ---
 
 ## 8. Exact Next Action
 
-- **Task T-001 (Phase 1):** Initialize Git repository in `e:/SCAM SHIELD 01/`, add `.gitignore`, and create the initial baseline commit containing all Phase 0 specifications.
+**Prerequisite (user action required):** Install Python 3.10+ and confirm it is available in PATH.
+
+**Then — Task T-002 (Phase 1):** Create Python virtual environment (`.venv`) and author `requirements.txt` with pinned minimal dependencies.

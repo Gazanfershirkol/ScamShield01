@@ -2,6 +2,22 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 1: Repository Baseline (2026-10-19)
+
+### Added
+- Initialized Git repository in `e:/SCAM SHIELD 01/` via `git init` (branch `main`).
+- Created `.gitignore` excluding `.venv/`, `__pycache__/`, `.pytest_cache/`, `.env`, model binaries (`*.joblib`, `*.pkl`), raw and processed datasets, and IDE/OS noise. Approved Markdown documentation files are explicitly not excluded.
+
+### Changed
+- Staged and committed 12 files (11 Markdown specs + `.gitignore`) as root commit `8c214e9` with message: `chore(phase-0): add project governance documentation baseline`.
+- Updated `TASKS.md`: T-001 marked **DONE**; T-002 marked **BLOCKED**.
+- Updated `MEMORY.md`: Phase 1 command log appended with verified real outputs; blockers updated.
+
+### Blocked
+- T-002 (Python virtual environment setup) is blocked: `python --version`, `py --version`, and `py -0p` all confirm no Python interpreter is registered on the host PATH.
+
+---
+
 ## [Unreleased] - Phase 0: Project Initiation & Architecture Planning (2026-10-19)
 
 ### Added

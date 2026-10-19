@@ -10,8 +10,8 @@ Tasks must be updated strictly upon verified execution of tests or commands.
 | ID | Phase | Priority | Description | Dependencies | Expected Files | Verification Command | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **T-000** | Phase 0 | P0 | Inspect workspace, check tools, and create complete Markdown governance documentation | None | `PRD.md`, `Architecture.md`, `Rules.md`, `Phases.md`, `Design.md`, `TASKS.md`, `TESTING.md`, `SECURITY.md`, `README.md`, `CHANGELOG.md`, `MEMORY.md` | `Get-ChildItem *.md` | **DONE** |
-| **T-001** | Phase 1 | P0 | Initialize Git repository, configure `.gitignore`, and commit documentation baseline | T-000 | `.gitignore`, `.git/` | `git status` | `NOT_STARTED` |
-| **T-002** | Phase 1 | P0 | Configure Python virtual environment and install pinned dependencies | T-001 | `.venv/`, `requirements.txt` | `python -m pip list` | `NOT_STARTED` |
+| **T-001** | Phase 1 | P0 | Initialize Git repository, configure `.gitignore`, and commit documentation baseline | T-000 | `.gitignore`, `.git/` | `git status` | **DONE** — commit `8c214e9` on branch `main`, 2026-10-19 |
+| **T-002** | Phase 1 | P0 | Configure Python virtual environment and install pinned dependencies | T-001 | `.venv/`, `requirements.txt` | `python -m pip list` | **BLOCKED** — `python` and `py` both report no installed Python. Install Python 3.10+ first. |
 | **T-003** | Phase 1 | P0 | Scaffold directory structure and create configuration module with sanity test | T-002 | `app/config.py`, `app/__init__.py`, `tests/test_sanity.py` | `pytest tests/test_sanity.py` | `NOT_STARTED` |
 | **T-004** | Phase 2 | P0 | Assemble raw datasets and build preprocessing, PII scrubbing, and stratified train/val/test splitting pipeline | T-003 | `scripts/prepare_data.py`, `data/processed/*.csv`, `tests/test_data_pipeline.py` | `python scripts/prepare_data.py && pytest tests/test_data_pipeline.py` | `NOT_STARTED` |
 | **T-005** | Phase 3 | P0 | Implement passive zero-network lexical URL analysis engine and heuristic feature extraction | T-003 | `app/services/url_analyzer.py`, `tests/test_url_analyzer.py` | `pytest tests/test_url_analyzer.py` | `NOT_STARTED` |
@@ -50,7 +50,7 @@ graph TD
 
 ## Status Ledger
 - **Total Tasks:** 13
-- **Completed:** 1 (T-000)
+- **Completed:** 2 (T-000, T-001)
 - **In Progress:** 0
-- **Blocked:** 0
-- **Not Started:** 12
+- **Blocked:** 1 (T-002 — awaiting Python installation)
+- **Not Started:** 10
