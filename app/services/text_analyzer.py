@@ -71,7 +71,8 @@ class TextAnalyzer:
         urgency_terms = ["immediately", "urgent", "24 hours", "tonight", "hours", "expires", "suspended", "cutoff", "terminated"]
         found_urgency = [t for t in urgency_terms if t in lower]
         if found_urgency:
-            patterns.append(f"High urgency language ('{found_urgency[0]}', '{found_urgency[1]}' if len(found_urgency) > 1 else 'urgent')")
+            terms_str = ", ".join(f"'{t}'" for t in found_urgency[:2])
+            patterns.append(f"High urgency language ({terms_str})")
 
         threat_terms = ["blocked", "disconnected", "penalty", "arrest", "court", "freeze", "deactivated", "legal"]
         found_threats = [t for t in threat_terms if t in lower]
