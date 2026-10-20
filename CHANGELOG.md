@@ -2,6 +2,19 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 4: Text Classification Engine (2026-10-20)
+
+### Added
+- Implemented `scripts/train.py`: fits `TfidfVectorizer` (1-2 n-grams, 5000 max features), trains `LogisticRegression(class_weight='balanced')`, calibrates probabilities with Platt scaling (`CalibratedClassifierCV`), and serializes model bundle to `app/models/text_model.joblib`.
+- Implemented `app/services/text_analyzer.py` with singleton model loader, microsecond probability inference, dot-product token explainability, and semantic pattern tag generation.
+- Created `tests/test_text_analyzer.py` with 8 unit tests (100% pass) verifying urgency detection, benign messages, explainability token extraction, and 10,000 character payload limits.
+
+### Changed
+- Updated `TASKS.md`: T-006 marked **DONE** (7/13 total tasks completed).
+- Updated `MEMORY.md`: Recorded Phase 4 completion and model metrics.
+
+---
+
 ## [Unreleased] - Phase 3: URL Passive Lexical Analysis Engine (2026-10-20)
 
 ### Added

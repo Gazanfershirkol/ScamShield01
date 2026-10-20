@@ -15,7 +15,7 @@ Tasks must be updated strictly upon verified execution of tests or commands.
 | **T-003** | Phase 1 | P0 | Scaffold directory structure and create configuration module with sanity test | T-002 | `app/config.py`, `app/__init__.py`, `tests/test_sanity.py` | `pytest tests/test_sanity.py` | **DONE** — directory tree, config, and 4 sanity tests passing |
 | **T-004** | Phase 2 | P0 | Assemble raw datasets and build preprocessing, PII scrubbing, and stratified train/val/test splitting pipeline | T-003 | `scripts/prepare_data.py`, `data/processed/*.csv`, `tests/test_data_pipeline.py` | `python scripts/prepare_data.py && pytest tests/test_data_pipeline.py` | **DONE** — 2500 unique samples, 70/15/15 splits, zero leakage verified (6 green tests) |
 | **T-005** | Phase 3 | P0 | Implement passive zero-network lexical URL analysis engine and heuristic feature extraction | T-003 | `app/services/url_analyzer.py`, `tests/test_url_analyzer.py` | `pytest tests/test_url_analyzer.py` | **DONE** — lexical heuristics, Shannon entropy, SSRF zero-network guarantee (10 green tests) |
-| **T-006** | Phase 4 | P0 | Build TF-IDF + Calibrated Linear Classifier training pipeline and model inference service with token explainability | T-004 | `scripts/train.py`, `app/services/text_analyzer.py`, `app/models/text_model.joblib`, `tests/test_text_analyzer.py` | `python scripts/train.py && pytest tests/test_text_analyzer.py` | `NOT_STARTED` |
+| **T-006** | Phase 4 | P0 | Build TF-IDF + Calibrated Linear Classifier training pipeline and model inference service with token explainability | T-004 | `scripts/train.py`, `app/services/text_analyzer.py`, `app/models/text_model.joblib`, `tests/test_text_analyzer.py` | `python scripts/train.py && pytest tests/test_text_analyzer.py` | **DONE** — TF-IDF + Calibrated LogisticRegression, explainability tokens, 8 green tests |
 | **T-007** | Phase 5 | P0 | Build unified verdict arbiter, scoring policy, evidence synthesis, and action recommendation engine | T-005, T-006 | `app/services/verdict_arbiter.py`, `tests/test_verdict_arbiter.py` | `pytest tests/test_verdict_arbiter.py` | `NOT_STARTED` |
 | **T-008** | Phase 6 | P0 | Implement FastAPI application, Pydantic v2 schemas, endpoints (`/analyze`, `/health`, `/evaluation`), and API tests | T-007 | `app/main.py`, `app/api/endpoints.py`, `app/api/schemas.py`, `tests/test_api.py` | `pytest tests/test_api.py` | `NOT_STARTED` |
 | **T-009** | Phase 7 | P0 | Construct accessible, responsive Vanilla HTML/CSS/JS frontend dashboard with interactive scenario presets | T-008 | `app/static/index.html`, `app/static/css/style.css`, `app/static/js/app.js` | Manual browser check at `http://127.0.0.1:8000` | `NOT_STARTED` |
@@ -50,7 +50,7 @@ graph TD
 
 ## Status Ledger
 - **Total Tasks:** 13
-- **Completed:** 6 (T-000, T-001, T-002, T-003, T-004, T-005)
+- **Completed:** 7 (T-000, T-001, T-002, T-003, T-004, T-005, T-006)
 - **In Progress:** 0
 - **Blocked:** 0
-- **Not Started:** 7
+- **Not Started:** 6
