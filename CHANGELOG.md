@@ -2,17 +2,34 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 2: Data Curation & Dataset Pipeline (2026-10-20)
+
+### Added
+- Created data curation, PII scrubbing, and stratified splitting pipeline in `scripts/prepare_data.py`.
+- Generated 2,500 unique post-scrubbed benchmark messages (1,500 benign, 1,000 scam).
+- Created 70/15/15 stratified train/val/test splits (1,750 / 375 / 375 rows) with deterministic `random_state=42`.
+- Created automated pipeline test suite in `tests/test_data_pipeline.py` (6 tests, 100% pass) verifying split sizes, binary labels, 40.0% class ratio, and zero cross-split leakage.
+
+### Changed
+- Updated `TASKS.md`: T-004 marked **DONE** (5/13 total tasks completed).
+- Updated `MEMORY.md`: Recorded Phase 2 completion and verified test outputs.
+
+---
+
 ## [Unreleased] - Phase 1: Environment Setup & Project Scaffolding (2026-10-20)
 
 ### Added
 - Configured Python 3.11.9 virtual environment (`.venv`) and pinned 43 dependencies in `requirements.txt`.
 - Initialized Git repository in `e:/SCAM SHIELD 01/` via `git init` (branch `main`).
-- Created `.gitignore` excluding `.venv/`, `__pycache__/`, `.pytest_cache/`, `.env`, model binaries (`*.joblib`, `*.pkl`), raw and processed datasets, and IDE/OS noise.
+- Created `.gitignore` excluding `.venv/`, `__pycache__/`, `.pytest_cache/`, `.env`, model binaries, raw/processed datasets, and IDE/OS noise.
+- Scaffolded project directories: `app/`, `data/`, `scripts/`, `tests/`.
+- Created `app/config.py` with immutable typed `Settings` class and default thresholds.
+- Created `tests/test_sanity.py` with 4 environment and configuration tests (100% pass).
 
 ### Changed
 - Aligned mock evaluation `scam_threshold` from `0.70` to `0.75` in `Architecture.md` to match arbiter and configuration constants.
-- Updated `TASKS.md`: T-001 marked **DONE**, T-002 marked **DONE**, T-003 marked **IN_PROGRESS**.
-- Updated `MEMORY.md`: Removed Python blocker, verified Python 3.11.9 runtime and library availability.
+- Updated `TASKS.md`: T-001, T-002, and T-003 marked **DONE**.
+- Updated `MEMORY.md`: Removed Python blocker, verified Python 3.11.9 runtime.
 
 ---
 

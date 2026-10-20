@@ -1,8 +1,8 @@
 # Project State & Memory Ledger — ScamShield AI
 
-**Last Updated:** 2026-10-20T13:10:00+05:30  
-**Current Phase:** Phase 1 (Environment Setup & Project Scaffolding) — **COMPLETE**  
-**Next Phase:** Phase 2 (Data Curation & Dataset Pipeline) — **AWAITING APPROVAL** (Task T-004)
+**Last Updated:** 2026-10-20T13:21:00+05:30  
+**Current Phase:** Phase 2 (Data Curation & Dataset Pipeline) — **COMPLETE**  
+**Next Phase:** Phase 3 (URL Passive Lexical Analysis Engine) — **AWAITING APPROVAL** (Task T-005)
 
 ---
 
@@ -69,6 +69,8 @@
 | 2026-10-19 10:13 | `py --version` | 112 | "No installed Python found!" (exit code 112) |
 | 2026-10-19 10:14 | `py -0p` | 0 | "No installed Pythons found!" |
 | 2026-10-20 07:38 | `pytest tests/test_sanity.py -v` | 0 | 4 passed in 5.03s: python version, packages, config defaults, directories. |
+| 2026-10-20 07:49 | `python scripts/prepare_data.py` | 0 | 2500 samples generated, scrubbed, deduplicated; 70/15/15 splits (1750/375/375), zero leakage. |
+| 2026-10-20 07:49 | `pytest tests/test_data_pipeline.py -v` | 0 | 6 passed in 1.45s: files, columns, proportions, binary labels, stratification, zero leakage. |
 
 ---
 
@@ -77,22 +79,23 @@
 - **Completed (Phase 0):** All 11 governance Markdown documents authored and verified.
 - **Completed (Phase 1, T-001):** Git repository initialized; `.gitignore` created; baseline documentation committed (`8c214e9`).
 - **Completed (Phase 1, T-002):** Python 3.11.9 virtual environment (`.venv`) established; 43 pinned dependencies recorded in `requirements.txt`.
-- **Completed (Phase 1, T-003):** Directory scaffolding (`app/`, `data/`, `scripts/`, `tests/`), `app/config.py`, and `tests/test_sanity.py` created and 100% verified green with pytest.
+- **Completed (Phase 1, T-003):** Directory scaffolding (`app/`, `data/`, `scripts/`, `tests/`), `app/config.py`, and `tests/test_sanity.py` created and 100% verified green with pytest (`48cf4c8`).
+- **Completed (Phase 2, T-004):** Data curation pipeline `scripts/prepare_data.py` generating 2,500 unique post-scrubbed messages, PII scrubbing, 70/15/15 stratified splits (1750 train, 375 val, 375 test) in `data/processed/`, and `tests/test_data_pipeline.py` (6 passed).
 
 ---
 
 ## 6. Known Blockers
 
-- **None.** Host Python 3.11.9 environment is active and all required libraries (`fastapi`, `pydantic`, `sklearn`, `uvicorn`, `httpx`, `pytest`, `joblib`) are verified.
+- **None.**
 
 ---
 
 ## 7. Open Questions
 
-- None. Phase 1 complete.
+- None. Phase 2 complete.
 
 ---
 
 ## 8. Exact Next Action
 
-**Phase 2 — Task T-004:** Assemble raw datasets, implement `scripts/prepare_data.py` (PII scrubbing, deduplication, 70/15/15 stratified train/val/test splitting), and verify with `tests/test_data_pipeline.py`.
+**Phase 3 — Task T-005:** Implement passive zero-network lexical URL analysis engine (`app/services/url_analyzer.py`) and URL unit test suite (`tests/test_url_analyzer.py`).
