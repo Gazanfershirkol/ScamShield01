@@ -6,10 +6,11 @@ assets, and configures cross-origin resource sharing (CORS).
 """
 
 from pathlib import Path
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.api.endpoints import router as api_v1_router
 from app.config import settings
@@ -61,6 +62,43 @@ async def serve_index():
                 "evaluation": f"{settings.API_V1_PREFIX}/evaluation",
             },
         }
+    )
+
+
+@app.get("/privacy", include_in_schema=False)
+async def serve_privacy():
+    """Serves the Privacy Policy & Zero-Retention Guarantee page."""
+    privacy_path = settings.STATIC_DIR / "privacy.html"
+    if privacy_path.exists():
+        return FileResponse(privacy_path)
+    return JSONResponse(status_code=404, content={"detail": "Privacy policy not found"})
+
+
+@app.get("/terms", include_in_schema=False)
+async def serve_terms():
+    """Serves the Terms of Service & Acceptable Use Policy page."""
+    terms_path = settings.STATIC_DIR / "terms.html"
+    if terms_path.exists():
+        return FileResponse(terms_path)
+    return JSONResponse(status_code=404, content={"detail": "Terms of service not found"})
+
+
+@app.exception_handler(StarletteHTTPException)
+async def custom_http_exception_handler(request: Request, exc: StarletteHTTPException):
+    """Custom exception handler serving high-tech 404 HTML for browsers, and JSON for API clients."""
+    if exc.status_code == 404:
+        accept = request.headers.get("accept", "")
+        if "text/html" in accept:
+            error_404_path = settings.STATIC_DIR / "404.html"
+            if error_404_path.exists():
+                return FileResponse(error_404_path, status_code=404)
+        return JSONResponse(
+            status_code=404,
+            content={"detail": "Resource not found", "status_code": 404, "path": request.url.path},
+        )
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail, "status_code": exc.status_code},
     )
 
 

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy &amp; Zero-Retention Guarantee — ScamShield AI</title>
+  <meta name="description" content="ScamShield AI privacy policy detailing our zero data retention architecture, PII scrubbing, and passive offline URL heuristics.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <style>
+    .legal-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 5rem;
+    }
+    .legal-header {
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1.5rem;
+    }
+    .legal-back-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-link);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 1.25rem;
+      transition: color var(--transition-fast);
+    }
+    .legal-back-nav:hover {
+      color: var(--primary-hover);
+    }
+    .legal-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    .legal-meta {
+      font-size: 0.875rem;
+      color: var(--text-tertiary);
+    }
+    .legal-section {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .legal-section h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .legal-section h2 svg {
+      color: var(--primary-accent);
+    }
+    .legal-section p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+    .legal-section p:last-child {
+      margin-bottom: 0;
+    }
+    .legal-highlight-box {
+      background: rgba(14, 165, 233, 0.08);
+      border-left: 4px solid var(--primary-accent);
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: 1.25rem 0;
+    }
+    .legal-highlight-box p {
+      color: var(--text-primary);
+      font-weight: 500;
+      margin: 0;
+    }
+    .legal-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .legal-list li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+    }
+    .legal-list li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: var(--safe-text);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="legal-container">
+    <div class="legal-header">
+      <a href="/" class="legal-back-nav">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Return to ScamShield Scanner
+      </a>
+      <h1 class="legal-title">Privacy Policy &amp; Zero-Retention Guarantee</h1>
+      <div class="legal-meta">Version 1.0.0 &middot; Effective Date: October 2026 &middot; KLE BCA Coding Club</div>
+    </div>
+
+    <!-- Section 1 -->
+    <section class="legal-section">
+      <h2>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        1. The Zero-Retention Ephemeral Architecture
+      </h2>
+      <p>
+        At ScamShield AI, we operate on a fundamental cybersecurity principle: <strong>You cannot leak what you do not store.</strong>
+      </p>
+      <div class="legal-highlight-box">
+        <p>
+          We do not record, store, log, or persist the message text, SMS snippets, or suspect URLs that you submit to our inspection engine. Payloads are processed in volatile RAM (ephemeral memory) and immediately cleared once the risk assessment is dispatched.
+        </p>
+      </div>
+      <p>
+        Unlike commercial platforms that build ad-targeting profiles or train closed-source models on user communications, ScamShield AI operates as a pure stateless scanning utility.
+      </p>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="legal-section">
+      <h2>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M4.93 4.93l14.14 14.14"/>
+        </svg>
+        2. Passive Zero-Network URL Heuristics (SSRF Immunity)
+      </h2>
+      <p>
+        When you submit a suspicious link or domain name, ScamShield AI analyzes the lexical anatomy of the URL strictly offline:
+      </p>
+      <ul class="legal-list">
+        <li><strong>No Outbound Network Requests:</strong> Our servers never perform HTTP/HTTPS GET requests or TCP handshakes with submitted domains.</li>
+        <li><strong>No DNS Resolution:</strong> We do not perform DNS lookups on suspect domains, ensuring malicious host operators never receive out-of-band tracking beacons containing your IP address.</li>
+        <li><strong>SSRF Immunity:</strong> Internal IP ranges (e.g. 127.0.0.1, 10.0.0.0/8, 192.168.0.0/16, 169.254.169.254) are evaluated strictly through passive string and IP-parsing algorithms without network routing.</li>
+      </ul>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="legal-section">
+      <h2>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        3. Automated PII Scrubbing
+      </h2>
+      <p>
+        Before text analysis is passed to our calibrated machine learning model, our preprocessing pipeline scrubs personally identifiable information (PII) using regular expressions:
+      </p>
+      <ul class="legal-list">
+        <li>Phone numbers are anonymized into <code>&lt;PHONE&gt;</code> tokens.</li>
+        <li>Email addresses are converted into <code>&lt;EMAIL&gt;</code> tokens.</li>
+        <li>Monetary denominations (INR, USD, EUR, crypto) are generalized into <code>&lt;AMOUNT&gt;</code> tokens.</li>
+        <li>URLs embedded in message bodies are isolated into <code>&lt;URL&gt;</code> tokens.</li>
+      </ul>
+      <p>
+        This ensures that even during in-memory linear feature extraction, personal identifiers are never evaluated or preserved.
+      </p>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="legal-section">
+      <h2>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        </svg>
+        4. Local ML Inference (No Third-Party Cloud Leaks)
+      </h2>
+      <p>
+        Many modern AI tools route your sensitive text to third-party proprietary LLM APIs (OpenAI, Anthropic, or external cloud providers).
+      </p>
+      <p>
+        ScamShield AI executes 100% locally on our server instance using Scikit-Learn TF-IDF vectorizers and calibrated logistic regression models. Your data never touches an external commercial AI cloud API.
+      </p>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="legal-section">
+      <h2>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        5. User Rights &amp; Regulatory Alignment
+      </h2>
+      <p>
+        In accordance with the <strong>Digital Personal Data Protection Act (DPDP Act 2023)</strong> and international <strong>GDPR</strong> principles:
+      </p>
+      <ul class="legal-list">
+        <li><strong>Right to Erasure (Article 17):</strong> By default, our zero-retention policy automatically erases all scan data immediately upon completion of the HTTP response. For registered account holders, an instant "Delete Account &amp; Purge Data" action permanently deletes all associated history in 1 click.</li>
+        <li><strong>No Third-Party Trackers:</strong> We do not include third-party advertising pixels, ad beacons, or cross-site tracking cookies.</li>
+      </ul>
+    </section>
+
+    <footer class="app-footer">
+      <p class="disclaimer-text">
+        Questions regarding privacy or responsible security disclosures can be addressed to the KLE BCA Coding Club ScamShield AI Development Team.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

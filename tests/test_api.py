@@ -170,3 +170,39 @@ def test_openapi_docs(client):
     response = client.get("/docs")
     assert response.status_code == 200
 
+
+def test_privacy_page_served(client):
+    """GET /privacy returns HTTP 200 with Privacy Policy and Zero-Retention guarantee."""
+    response = client.get("/privacy")
+    assert response.status_code == 200
+    assert "text/html" in response.headers.get("content-type", "")
+    assert "Zero-Retention" in response.text
+    assert "PII Scrubbing" in response.text
+
+
+def test_terms_page_served(client):
+    """GET /terms returns HTTP 200 with Terms of Service and Acceptable Use Policy."""
+    response = client.get("/terms")
+    assert response.status_code == 200
+    assert "text/html" in response.headers.get("content-type", "")
+    assert "Acceptable Use" in response.text
+    assert "Probabilistic AI Nature" in response.text
+
+
+def test_custom_404_html_for_browser(client):
+    """Non-existent route requested with text/html returns custom branded 404 page."""
+    response = client.get("/non-existent-route-xyz", headers={"Accept": "text/html"})
+    assert response.status_code == 404
+    assert "text/html" in response.headers.get("content-type", "")
+    assert "Target Quarantined" in response.text
+    assert "404" in response.text
+
+
+def test_custom_404_json_for_api(client):
+    """Non-existent route requested with application/json returns clean 404 JSON."""
+    response = client.get("/api/v1/non-existent-endpoint", headers={"Accept": "application/json"})
+    assert response.status_code == 404
+    data = response.json()
+    assert data["status_code"] == 404
+    assert "path" in data
+
