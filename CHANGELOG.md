@@ -2,19 +2,17 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased] - Phase 1: Repository Baseline (2026-10-19)
+## [Unreleased] - Phase 1: Environment Setup & Project Scaffolding (2026-10-20)
 
 ### Added
+- Configured Python 3.11.9 virtual environment (`.venv`) and pinned 43 dependencies in `requirements.txt`.
 - Initialized Git repository in `e:/SCAM SHIELD 01/` via `git init` (branch `main`).
-- Created `.gitignore` excluding `.venv/`, `__pycache__/`, `.pytest_cache/`, `.env`, model binaries (`*.joblib`, `*.pkl`), raw and processed datasets, and IDE/OS noise. Approved Markdown documentation files are explicitly not excluded.
+- Created `.gitignore` excluding `.venv/`, `__pycache__/`, `.pytest_cache/`, `.env`, model binaries (`*.joblib`, `*.pkl`), raw and processed datasets, and IDE/OS noise.
 
 ### Changed
-- Staged and committed 12 files (11 Markdown specs + `.gitignore`) as root commit `8c214e9` with message: `chore(phase-0): add project governance documentation baseline`.
-- Updated `TASKS.md`: T-001 marked **DONE**; T-002 marked **BLOCKED**.
-- Updated `MEMORY.md`: Phase 1 command log appended with verified real outputs; blockers updated.
-
-### Blocked
-- T-002 (Python virtual environment setup) is blocked: `python --version`, `py --version`, and `py -0p` all confirm no Python interpreter is registered on the host PATH.
+- Aligned mock evaluation `scam_threshold` from `0.70` to `0.75` in `Architecture.md` to match arbiter and configuration constants.
+- Updated `TASKS.md`: T-001 marked **DONE**, T-002 marked **DONE**, T-003 marked **IN_PROGRESS**.
+- Updated `MEMORY.md`: Removed Python blocker, verified Python 3.11.9 runtime and library availability.
 
 ---
 

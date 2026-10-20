@@ -11,8 +11,8 @@ Tasks must be updated strictly upon verified execution of tests or commands.
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **T-000** | Phase 0 | P0 | Inspect workspace, check tools, and create complete Markdown governance documentation | None | `PRD.md`, `Architecture.md`, `Rules.md`, `Phases.md`, `Design.md`, `TASKS.md`, `TESTING.md`, `SECURITY.md`, `README.md`, `CHANGELOG.md`, `MEMORY.md` | `Get-ChildItem *.md` | **DONE** |
 | **T-001** | Phase 1 | P0 | Initialize Git repository, configure `.gitignore`, and commit documentation baseline | T-000 | `.gitignore`, `.git/` | `git status` | **DONE** — commit `8c214e9` on branch `main`, 2026-10-19 |
-| **T-002** | Phase 1 | P0 | Configure Python virtual environment and install pinned dependencies | T-001 | `.venv/`, `requirements.txt` | `python -m pip list` | **BLOCKED** — `python` and `py` both report no installed Python. Install Python 3.10+ first. |
-| **T-003** | Phase 1 | P0 | Scaffold directory structure and create configuration module with sanity test | T-002 | `app/config.py`, `app/__init__.py`, `tests/test_sanity.py` | `pytest tests/test_sanity.py` | `NOT_STARTED` |
+| **T-002** | Phase 1 | P0 | Configure Python virtual environment and install pinned dependencies | T-001 | `.venv/`, `requirements.txt` | `python -m pip list` | **DONE** — Python 3.11.9 in `.venv`, 43 pinned packages installed in `requirements.txt` |
+| **T-003** | Phase 1 | P0 | Scaffold directory structure and create configuration module with sanity test | T-002 | `app/config.py`, `app/__init__.py`, `tests/test_sanity.py` | `pytest tests/test_sanity.py` | **DONE** — directory tree, config, and 4 sanity tests passing |
 | **T-004** | Phase 2 | P0 | Assemble raw datasets and build preprocessing, PII scrubbing, and stratified train/val/test splitting pipeline | T-003 | `scripts/prepare_data.py`, `data/processed/*.csv`, `tests/test_data_pipeline.py` | `python scripts/prepare_data.py && pytest tests/test_data_pipeline.py` | `NOT_STARTED` |
 | **T-005** | Phase 3 | P0 | Implement passive zero-network lexical URL analysis engine and heuristic feature extraction | T-003 | `app/services/url_analyzer.py`, `tests/test_url_analyzer.py` | `pytest tests/test_url_analyzer.py` | `NOT_STARTED` |
 | **T-006** | Phase 4 | P0 | Build TF-IDF + Calibrated Linear Classifier training pipeline and model inference service with token explainability | T-004 | `scripts/train.py`, `app/services/text_analyzer.py`, `app/models/text_model.joblib`, `tests/test_text_analyzer.py` | `python scripts/train.py && pytest tests/test_text_analyzer.py` | `NOT_STARTED` |
@@ -50,7 +50,7 @@ graph TD
 
 ## Status Ledger
 - **Total Tasks:** 13
-- **Completed:** 2 (T-000, T-001)
+- **Completed:** 4 (T-000, T-001, T-002, T-003)
 - **In Progress:** 0
-- **Blocked:** 1 (T-002 — awaiting Python installation)
-- **Not Started:** 10
+- **Blocked:** 0
+- **Not Started:** 9

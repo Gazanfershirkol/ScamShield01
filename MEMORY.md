@@ -1,8 +1,8 @@
 # Project State & Memory Ledger — ScamShield AI
 
-**Last Updated:** 2026-10-19T15:45:00+05:30  
-**Current Phase:** Phase 1 (Environment Setup & Project Scaffolding) — **IN PROGRESS** (partially complete; blocked on Python)  
-**Next Phase:** Phase 1 Task T-002 — **BLOCKED** (Python interpreter required)
+**Last Updated:** 2026-10-20T13:10:00+05:30  
+**Current Phase:** Phase 1 (Environment Setup & Project Scaffolding) — **COMPLETE**  
+**Next Phase:** Phase 2 (Data Curation & Dataset Pipeline) — **AWAITING APPROVAL** (Task T-004)
 
 ---
 
@@ -68,42 +68,31 @@
 | 2026-10-19 10:12 | `python --version` | 1 | "python : The term 'python' is not recognized..." |
 | 2026-10-19 10:13 | `py --version` | 112 | "No installed Python found!" (exit code 112) |
 | 2026-10-19 10:14 | `py -0p` | 0 | "No installed Pythons found!" |
+| 2026-10-20 07:38 | `pytest tests/test_sanity.py -v` | 0 | 4 passed in 5.03s: python version, packages, config defaults, directories. |
 
 ---
 
 ## 5. Implemented Features
 
 - **Completed (Phase 0):** All 11 governance Markdown documents authored and verified.
-- **Completed (Phase 1, partial):** Git repository initialized; `.gitignore` created; Phase 0 documentation baseline committed to `main` as commit `8c214e9`.
-- **Pending (Phase 1):** Python virtual environment creation and dependency installation (T-002) — BLOCKED.
+- **Completed (Phase 1, T-001):** Git repository initialized; `.gitignore` created; baseline documentation committed (`8c214e9`).
+- **Completed (Phase 1, T-002):** Python 3.11.9 virtual environment (`.venv`) established; 43 pinned dependencies recorded in `requirements.txt`.
+- **Completed (Phase 1, T-003):** Directory scaffolding (`app/`, `data/`, `scripts/`, `tests/`), `app/config.py`, and `tests/test_sanity.py` created and 100% verified green with pytest.
 
 ---
 
 ## 6. Known Blockers
 
-- **Host Python Environment (ACTIVE BLOCKER for T-002, T-003, and all subsequent tasks):** A functioning Python 3.10+ interpreter must be available on the Windows system PATH before creating a virtual environment or running any scripts.
-  - `python --version` → not recognized in PATH.
-  - `py --version` → `No installed Python found!` (exit code 112).
-  - `py -0p` → `No installed Pythons found!`
-  - **Action required:** Install Python 3.10+ and verify it appears in PATH before proceeding.
+- **None.** Host Python 3.11.9 environment is active and all required libraries (`fastapi`, `pydantic`, `sklearn`, `uvicorn`, `httpx`, `pytest`, `joblib`) are verified.
 
 ---
 
 ## 7. Open Questions
 
-1. Does the project owner have Python 3.10+ installed in a non-standard location (e.g. Anaconda, Miniconda, WSL, or a custom drive), or will they install it via one of the recommended methods below?
-
-   **Recommended installation options (in order of ease on Windows):**
-   - **Microsoft Store:** Search "Python 3.12" — installs to `%LOCALAPPDATA%\Programs\Python` and auto-registers with the `py` launcher.
-   - **winget (if available):** `winget install -e --id Python.Python.3.12`
-   - **Official installer:** Download from https://www.python.org/downloads/ — check ✅ "Add Python to PATH" during setup.
-
-   Once Python is installed, run `py -V` or `python --version` to confirm, then report the exact version string.
+- None. Phase 1 complete.
 
 ---
 
 ## 8. Exact Next Action
 
-**Prerequisite (user action required):** Install Python 3.10+ and confirm it is available in PATH.
-
-**Then — Task T-002 (Phase 1):** Create Python virtual environment (`.venv`) and author `requirements.txt` with pinned minimal dependencies.
+**Phase 2 — Task T-004:** Assemble raw datasets, implement `scripts/prepare_data.py` (PII scrubbing, deduplication, 70/15/15 stratified train/val/test splitting), and verify with `tests/test_data_pipeline.py`.

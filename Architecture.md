@@ -206,7 +206,7 @@ Provides verified model performance metrics generated during the benchmark evalu
     "true_positives": 159
   },
   "threshold_strategy": {
-    "scam_threshold": 0.70,
+    "scam_threshold": 0.75,
     "review_threshold": 0.35,
     "selected_on": "Validation split optimization for balanced F1"
   },
