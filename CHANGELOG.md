@@ -2,6 +2,24 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 9: Security Hardening & Penetration Testing (2026-10-20)
+
+### Added
+- Implemented `tests/test_security.py` containing 8 comprehensive security tests.
+- Verified SSRF immunity: confirmed zero outbound network, TCP socket, or DNS lookups even when provided with cloud metadata (169.254.169.254), internal services, and arbitrary target URLs.
+- Verified XSS resilience: tested notorious script injection payloads in text and URLs, and audited `app/static/js/app.js` to enforce safe DOM manipulation (`textContent`).
+- Verified payload boundary controls: strict rejection with HTTP 422 for texts exceeding 10,000 chars and URLs exceeding 2,048 chars, with exact boundary acceptance.
+- Verified ReDoS immunity: tested pathological regex backtracking inputs ensuring all evaluations execute in under 50ms without catastrophic stalling.
+- Verified path traversal defense: confirmed static file endpoints reject attempts to traverse outside the designated static directory with HTTP 404/400.
+- Verified SQL and command injection neutrality: treated all injection syntax harmlessly as plain text.
+- Verified unicode normalization and null-byte resilience without uncaught 500 exceptions.
+
+### Changed
+- Updated `TASKS.md`: Task T-011 marked **DONE** (12/13 total tasks completed).
+- Updated `MEMORY.md`: Recorded Phase 9 completion and transitioned active goal to Phase 10.
+
+---
+
 ## [Unreleased] - Phase 8: Held-Out Benchmark Evaluation (2026-10-20)
 
 ### Added

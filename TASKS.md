@@ -20,7 +20,7 @@ Tasks must be updated strictly upon verified execution of tests or commands.
 | **T-008** | Phase 6 | P0 | Implement FastAPI application, Pydantic v2 schemas, endpoints (`/analyze`, `/health`, `/evaluation`), and API tests | T-007 | `app/main.py`, `app/api/endpoints.py`, `app/api/schemas.py`, `tests/test_api.py` | `pytest tests/test_api.py` | **DONE** — FastAPI v1 router, Pydantic v2 schemas, 10 integration tests passing |
 | **T-009** | Phase 7 | P0 | Construct accessible, responsive Vanilla HTML/CSS/JS frontend dashboard with interactive scenario presets | T-008 | `app/static/index.html`, `app/static/css/style.css`, `app/static/js/app.js` | Manual browser check at `http://127.0.0.1:8000` | **DONE** — cyber aesthetic, preset pills, safe DOM rendering, evaluation modal, static tests |
 | **T-010** | Phase 8 | P0 | Execute held-out test split evaluation, compute precision/recall/F1/confusion matrix, and generate error report | T-006, T-008 | `scripts/evaluate.py`, `app/models/evaluation_meta.json`, `docs/EVALUATION_REPORT.md` | `python scripts/evaluate.py && pytest tests/test_api.py -k test_evaluation` | **DONE** — 375 test samples evaluated, 100% precision/recall/F1, exported evaluation_meta.json |
-| **T-011** | Phase 9 | P1 | Conduct security validation tests (XSS, SSRF zero-network verification, ReDoS, payload limits) | T-008 | `tests/test_security.py` | `pytest tests/test_security.py` | `NOT_STARTED` |
+| **T-011** | Phase 9 | P1 | Conduct security validation tests (XSS, SSRF zero-network verification, ReDoS, payload limits) | T-008 | `tests/test_security.py` | `pytest tests/test_security.py` | **DONE** — 8 security tests passing: SSRF immunity, XSS defense, payload boundaries, ReDoS |
 | **T-012** | Phase 10 | P1 | Finalize submission package, verify reproducible setup instructions, and create presentation pitch guide | T-009, T-010, T-011 | `README.md`, `MEMORY.md`, `docs/DEMO_GUIDE.md` | `pytest` | `NOT_STARTED` |
 
 ---
@@ -40,7 +40,7 @@ graph TD
     T007 --> T008["T-008: FastAPI & REST Endpoints (DONE)"]
     T008 --> T009["T-009: Web UI Dashboard (DONE)"]
     T008 --> T010["T-010: Model Evaluation & Report (DONE)"]
-    T008 --> T011["T-011: Security Hardening Tests"]
+    T008 --> T011["T-011: Security Hardening Tests (DONE)"]
     T009 --> T012["T-012: Final Packaging & Submission"]
     T010 --> T012
     T011 --> T012
@@ -50,10 +50,11 @@ graph TD
 
 ## Status Ledger
 - **Total Tasks:** 13
-- **Completed:** 11 (T-000, T-001, T-002, T-003, T-004, T-005, T-006, T-007, T-008, T-009, T-010)
+- **Completed:** 12 (T-000, T-001, T-002, T-003, T-004, T-005, T-006, T-007, T-008, T-009, T-010, T-011)
 - **In Progress:** 0
 - **Blocked:** 0
-- **Not Started:** 2
+- **Not Started:** 1
+
 
 
 
