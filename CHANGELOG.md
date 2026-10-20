@@ -2,6 +2,21 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 5: Verdict Arbiter & Evidence Synthesis Engine (2026-10-20)
+
+### Added
+- Implemented `app/services/verdict_arbiter.py` providing multi-modal score blending, signal harmonization, and evidence synthesis.
+- Implemented composite scoring formula: `max(0.55 * Text + 0.45 * URL, 0.85 * max(Text, URL))` with single-modality fallback.
+- Added safety overrides: raw IP hostname with credential lures automatically escalates to `likely scam`, and cross-modal signal divergence (`|Text - URL| > 50`) automatically escalates to at least `needs review`.
+- Implemented accessible plain-English evidence synthesis bullet points, context-aware 1-sentence summaries, and protective action recommendations.
+- Created `tests/test_verdict_arbiter.py` with 11 automated unit tests (100% pass) verifying high-risk alignment, safe baseline, conflicting signals, critical IP override, divergence escalation, and dictionary serialization.
+
+### Changed
+- Updated `TASKS.md`: Task T-007 marked **DONE** (8/13 total tasks completed).
+- Updated `MEMORY.md`: Recorded Phase 5 completion, updated commands ledger, and transitioned active goal to Phase 6.
+
+---
+
 ## [Unreleased] - Phase 4: Text Classification Engine (2026-10-20)
 
 ### Added
