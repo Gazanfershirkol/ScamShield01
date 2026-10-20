@@ -402,5 +402,100 @@ document.addEventListener("DOMContentLoaded", () => {
   // Trigger telemetry on load and periodically
   fetchTelemetry();
   setInterval(fetchTelemetry, 15000);
+
+  // ---------------------------------------------------------------------------
+  // Interactive Onboarding Tour Controller (Item 19)
+  // ---------------------------------------------------------------------------
+  const modalTour = document.getElementById("modal-tour");
+  const btnOpenTour = document.getElementById("btn-open-tour");
+  const btnStartTour = document.getElementById("btn-start-tour");
+  const btnTourClose = document.getElementById("btn-tour-close");
+  const btnTourPrev = document.getElementById("btn-tour-prev");
+  const btnTourNext = document.getElementById("btn-tour-next");
+  const tourStepBadge = document.getElementById("tour-step-badge");
+  const tourSlides = document.querySelectorAll(".tour-slide");
+  const tourDots = document.querySelectorAll(".tour-dot");
+
+  let currentTourStep = 1;
+  const totalTourSteps = 4;
+
+  function showTourStep(step) {
+    currentTourStep = step;
+    tourSlides.forEach((slide) => {
+      slide.classList.toggle("active", parseInt(slide.dataset.step, 10) === step);
+    });
+    tourDots.forEach((dot) => {
+      dot.classList.toggle("active", parseInt(dot.dataset.dot, 10) === step);
+    });
+
+    if (tourStepBadge) {
+      tourStepBadge.textContent = `Step ${step} of ${totalTourSteps}`;
+    }
+
+    if (btnTourPrev) {
+      btnTourPrev.style.display = step > 1 ? "inline-flex" : "none";
+    }
+
+    if (btnTourNext) {
+      btnTourNext.textContent = step === totalTourSteps ? "Finish Tour" : "Next Step";
+    }
+  }
+
+  function openTour() {
+    showTourStep(1);
+    if (modalTour) modalTour.classList.add("active");
+  }
+
+  function closeTour() {
+    if (modalTour) modalTour.classList.remove("active");
+    try {
+      localStorage.setItem("scamshield_tour_seen", "true");
+    } catch {
+      // Storage unavailable fallback
+    }
+  }
+
+  if (btnOpenTour) btnOpenTour.addEventListener("click", openTour);
+  if (btnStartTour) btnStartTour.addEventListener("click", openTour);
+  if (btnTourClose) btnTourClose.addEventListener("click", closeTour);
+
+  if (btnTourPrev) {
+    btnTourPrev.addEventListener("click", () => {
+      if (currentTourStep > 1) {
+        showTourStep(currentTourStep - 1);
+      }
+    });
+  }
+
+  if (btnTourNext) {
+    btnTourNext.addEventListener("click", () => {
+      if (currentTourStep < totalTourSteps) {
+        showTourStep(currentTourStep + 1);
+      } else {
+        closeTour();
+      }
+    });
+  }
+
+  if (modalTour) {
+    modalTour.addEventListener("click", (e) => {
+      if (e.target === modalTour) closeTour();
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalTour && modalTour.classList.contains("active")) {
+      closeTour();
+    }
+  });
+
+  // Automatically offer tour on first visit
+  try {
+    if (!localStorage.getItem("scamshield_tour_seen")) {
+      setTimeout(openTour, 1000);
+    }
+  } catch {
+    // Ignored
+  }
 });
 

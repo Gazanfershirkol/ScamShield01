@@ -980,3 +980,130 @@ body {
   font-family: 'JetBrains Mono', monospace;
 }
 
+/* Onboarding Tour Modal (Item 19) */
+.tour-content {
+  max-width: 540px;
+}
+
+.tour-header-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.tour-step-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--primary-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.tour-body {
+  padding: 1.5rem 0;
+  min-height: 240px;
+}
+
+.tour-slide {
+  display: none;
+  animation: fadeIn 250ms ease-out;
+}
+
+.tour-slide.active {
+  display: block;
+}
+
+.tour-icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid var(--primary-accent);
+  color: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.tour-slide-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.tour-slide-desc {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.tour-verdict-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.tour-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-sm);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.pill-safe {
+  background: var(--safe-bg);
+  color: var(--safe-text);
+  border: 1px solid var(--safe-border);
+}
+
+.pill-review {
+  background: var(--review-bg);
+  color: var(--review-text);
+  border: 1px solid var(--review-border);
+}
+
+.pill-scam {
+  background: var(--scam-bg);
+  color: var(--scam-text);
+  border: 1px solid var(--scam-border);
+}
+
+.tour-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tour-dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tour-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--border-subtle);
+  transition: all var(--transition-fast);
+}
+
+.tour-dot.active {
+  background: var(--primary-accent);
+  box-shadow: 0 0 8px var(--primary-glow);
+  transform: scale(1.2);
+}
+
+.tour-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+
