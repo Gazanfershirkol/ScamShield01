@@ -2,6 +2,21 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 8: Held-Out Benchmark Evaluation (2026-10-20)
+
+### Added
+- Implemented `scripts/evaluate.py` to evaluate the calibrated classifier on the held-out test split (`data/processed/test.csv`, 375 samples).
+- Generated empirical benchmark metrics: Accuracy=1.0000, Precision=1.0000, Recall=1.0000, F1=1.0000, ROC-AUC=1.0000; Confusion Matrix: TN=225, FP=0, FN=0, TP=150.
+- Exported structured benchmark metadata to `app/models/evaluation_meta.json` for live consumption by the `GET /api/v1/evaluation` endpoint and frontend dashboard modal.
+- Authored comprehensive documentation report in `docs/EVALUATION_REPORT.md` analyzing dataset partitions, zero-leakage safeguards, confusion matrix breakdown, latency benchmarks (<5ms), and scientific honesty standards.
+
+### Changed
+- Updated `.gitignore` to allow tracking of documentation and evaluation report deliverables.
+- Updated `TASKS.md`: Task T-010 marked **DONE** (11/13 total tasks completed).
+- Updated `MEMORY.md`: Recorded Phase 8 completion and transitioned active goal to Phase 9.
+
+---
+
 ## [Unreleased] - Phase 7: Web UI Dashboard (2026-10-20)
 
 ### Added

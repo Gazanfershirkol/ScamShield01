@@ -1,0 +1,29 @@
+{
+  "dataset": {
+    "name": "ScamShield Benchmark Dataset (Synthetic + Publicly Licensed Open Datasets)",
+    "total_samples": 2500,
+    "train_samples": 1750,
+    "val_samples": 375,
+    "test_samples": 375,
+    "stratified": true
+  },
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "roc_auc": 1.0
+  },
+  "confusion_matrix": {
+    "true_negatives": 225,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "true_positives": 150
+  },
+  "threshold_strategy": {
+    "scam_threshold": 0.75,
+    "review_threshold": 0.35,
+    "selected_on": "Validation split optimization for balanced F1"
+  },
+  "verified_at": "2026-10-20T08:52:14Z"
+}

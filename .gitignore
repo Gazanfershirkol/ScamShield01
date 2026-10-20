@@ -34,10 +34,6 @@ app/models/*.joblib
 app/models/*.pkl
 app/models/*.bin
 
-# ── Evaluation output generated at runtime ───────────────────
-app/models/evaluation_meta.json
-docs/EVALUATION_REPORT.md
-
 # ── Raw & processed datasets (may contain PII even if scrubbed)─
 data/raw/
 data/processed/
