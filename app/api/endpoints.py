@@ -84,6 +84,25 @@ async def analyze_message_or_url(payload: AnalyzeRequest, request: Request, resp
         indicators=indicators,
     )
 
+    # If user is authenticated, record into their private history (Item 10)
+    from app.api.auth_endpoints import get_current_user_optional
+    from app.services.auth_service import auth_service
+    user = await get_current_user_optional(request)
+    if user:
+        risk_band = (
+            "low" if verdict.risk_score <= settings.VERDICT_REVIEW_THRESHOLD
+            else ("medium" if verdict.risk_score <= settings.VERDICT_SCAM_THRESHOLD else "high")
+        )
+        auth_service.record_scan(
+            user_id=user["id"],
+            preview_text=payload.text,
+            preview_url=payload.url,
+            verdict=verdict.verdict,
+            risk_score=verdict.risk_score,
+            confidence=verdict.confidence,
+            risk_band=risk_band,
+        )
+
     return AnalyzeResponse(**verdict.to_dict())
 
 

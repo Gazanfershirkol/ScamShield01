@@ -52,6 +52,11 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
+# ── Databases & local snapshots ───────────────────────────────
+*.db
+*.sqlite3
+data/backups/
+
 # ── Misc ──────────────────────────────────────────────────────
 *.DS_Store
 *.bak
@@ -60,3 +65,4 @@ $RECYCLE.BIN/
 dist/
 build/
 *.egg-info/
+

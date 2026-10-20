@@ -497,5 +497,342 @@ document.addEventListener("DOMContentLoaded", () => {
   } catch {
     // Ignored
   }
+
+  // ---------------------------------------------------------------------------
+  // Authentication & Account Lifecycle Controller (Items 1, 2, 3, 10, 18)
+  // ---------------------------------------------------------------------------
+  const modalAuth = document.getElementById("modal-auth");
+  const modalHistory = document.getElementById("modal-history");
+  const authGuestSection = document.getElementById("auth-guest-section");
+  const authUserSection = document.getElementById("auth-user-section");
+  const btnOpenAuth = document.getElementById("btn-open-auth");
+  const btnAuthClose = document.getElementById("btn-auth-close");
+  const btnOpenHistory = document.getElementById("btn-open-history");
+  const btnHistoryClose = document.getElementById("btn-history-close");
+  const btnOpenSettings = document.getElementById("btn-open-settings");
+  const btnLogout = document.getElementById("btn-logout");
+  const userDisplayEmail = document.getElementById("user-display-email");
+  const settingsDisplayEmail = document.getElementById("settings-display-email");
+  const settingsVerifiedBadge = document.getElementById("settings-verified-badge");
+  const authMsgBanner = document.getElementById("auth-msg-banner");
+  const tabSettingsBtn = document.getElementById("tab-settings-btn");
+  const historyItemsList = document.getElementById("history-items-list");
+  const historyEmpty = document.getElementById("history-empty");
+
+  // Auth Tabs
+  const authTabs = document.querySelectorAll(".auth-tab");
+  const authPanes = document.querySelectorAll(".auth-tab-pane");
+
+  function switchAuthTab(tabName) {
+    authTabs.forEach(t => t.classList.toggle("active", t.dataset.tab === tabName));
+    authPanes.forEach(p => p.classList.toggle("active", p.id === `pane-${tabName}`));
+    clearAuthMsg();
+  }
+
+  authTabs.forEach(tab => {
+    tab.addEventListener("click", () => switchAuthTab(tab.dataset.tab));
+  });
+
+  function showAuthMsg(msg, isSuccess = false) {
+    if (!authMsgBanner) return;
+    authMsgBanner.textContent = msg;
+    authMsgBanner.className = `auth-msg-banner ${isSuccess ? 'auth-msg-success' : 'auth-msg-error'}`;
+    authMsgBanner.style.display = "block";
+  }
+
+  function clearAuthMsg() {
+    if (!authMsgBanner) return;
+    authMsgBanner.style.display = "none";
+    authMsgBanner.textContent = "";
+  }
+
+  function openAuthModal(defaultTab = "login") {
+    switchAuthTab(defaultTab);
+    if (modalAuth) modalAuth.classList.add("active");
+  }
+
+  function closeAuthModal() {
+    if (modalAuth) modalAuth.classList.remove("active");
+    clearAuthMsg();
+  }
+
+  if (btnOpenAuth) btnOpenAuth.addEventListener("click", () => openAuthModal("login"));
+  if (btnAuthClose) btnAuthClose.addEventListener("click", closeAuthModal);
+  if (btnOpenSettings) btnOpenSettings.addEventListener("click", () => openAuthModal("settings"));
+
+  // Check Current Session Status
+  let currentUser = null;
+
+  async function checkAuthStatus() {
+    try {
+      const res = await fetch("/api/v1/auth/me");
+      if (res.ok) {
+        const data = await res.json();
+        currentUser = data.user;
+        renderLoggedInState(currentUser);
+      } else {
+        currentUser = null;
+        renderLoggedOutState();
+      }
+    } catch {
+      currentUser = null;
+      renderLoggedOutState();
+    }
+  }
+
+  function renderLoggedInState(user) {
+    if (authGuestSection) authGuestSection.style.display = "none";
+    if (authUserSection) authUserSection.style.display = "flex";
+    if (userDisplayEmail) {
+      const name = user.email.split("@")[0];
+      userDisplayEmail.textContent = name.length > 12 ? name.substring(0, 10) + ".." : name;
+    }
+    if (settingsDisplayEmail) settingsDisplayEmail.textContent = user.email;
+    if (settingsVerifiedBadge) {
+      settingsVerifiedBadge.textContent = user.is_verified ? "Verified User" : "Unverified (Check Code)";
+      settingsVerifiedBadge.style.color = user.is_verified ? "var(--safe-text)" : "var(--review-text)";
+    }
+    if (tabSettingsBtn) tabSettingsBtn.style.display = "inline-block";
+  }
+
+  function renderLoggedOutState() {
+    if (authGuestSection) authGuestSection.style.display = "flex";
+    if (authUserSection) authUserSection.style.display = "none";
+    if (tabSettingsBtn) tabSettingsBtn.style.display = "none";
+  }
+
+  // Handle Login Form
+  const formLogin = document.getElementById("form-login");
+  if (formLogin) {
+    formLogin.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("login-email").value.trim();
+      const password = document.getElementById("login-password").value;
+      try {
+        const res = await fetch("/api/v1/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Login failed");
+        showAuthMsg("Login successful! Welcome back.", true);
+        setTimeout(() => {
+          closeAuthModal();
+          checkAuthStatus();
+        }, 600);
+      } catch (err) {
+        showAuthMsg(err.message, false);
+      }
+    });
+  }
+
+  // Handle Register Form (Item 1 & 3)
+  const formRegister = document.getElementById("form-register");
+  const sectionVerify = document.getElementById("section-verify-email");
+  let pendingVerifyEmail = "";
+
+  if (formRegister) {
+    formRegister.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("reg-email").value.trim();
+      const password = document.getElementById("reg-password").value;
+      try {
+        const res = await fetch("/api/v1/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Registration failed");
+
+        pendingVerifyEmail = email;
+        showAuthMsg(`Account created! Simulated verification code: ${data.verification_code}`, true);
+        if (sectionVerify) {
+          sectionVerify.style.display = "block";
+          const codeInput = document.getElementById("verify-code-input");
+          if (codeInput) codeInput.value = data.verification_code;
+        }
+      } catch (err) {
+        showAuthMsg(err.message, false);
+      }
+    });
+  }
+
+  // Handle Verify Email Code
+  const btnSubmitVerify = document.getElementById("btn-submit-verify");
+  if (btnSubmitVerify) {
+    btnSubmitVerify.addEventListener("click", async () => {
+      const code = document.getElementById("verify-code-input").value.trim();
+      if (!code || !pendingVerifyEmail) {
+        showAuthMsg("Please enter the verification code.", false);
+        return;
+      }
+      try {
+        const res = await fetch("/api/v1/auth/verify-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: pendingVerifyEmail, code }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Verification failed");
+        showAuthMsg("Email verified successfully! You are now logged in.", true);
+        setTimeout(() => {
+          closeAuthModal();
+          checkAuthStatus();
+        }, 800);
+      } catch (err) {
+        showAuthMsg(err.message, false);
+      }
+    });
+  }
+
+  // Handle Forgot Password (Item 2)
+  const formForgot = document.getElementById("form-forgot");
+  const sectionReset = document.getElementById("section-reset-pwd");
+  if (formForgot) {
+    formForgot.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("forgot-email").value.trim();
+      try {
+        const res = await fetch("/api/v1/auth/forgot-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+        showAuthMsg(data.message, true);
+        if (data.reset_token && sectionReset) {
+          sectionReset.style.display = "block";
+          const tokenInput = document.getElementById("reset-token-input");
+          if (tokenInput) tokenInput.value = data.reset_token;
+        }
+      } catch (err) {
+        showAuthMsg(err.message, false);
+      }
+    });
+  }
+
+  // Handle Reset Password Submit
+  const btnSubmitReset = document.getElementById("btn-submit-reset");
+  if (btnSubmitReset) {
+    btnSubmitReset.addEventListener("click", async () => {
+      const token = document.getElementById("reset-token-input").value.trim();
+      const new_password = document.getElementById("reset-new-password").value;
+      if (!token || !new_password) {
+        showAuthMsg("Please provide both the reset token and new password.", false);
+        return;
+      }
+      try {
+        const res = await fetch("/api/v1/auth/reset-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token, new_password }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Password reset failed");
+        showAuthMsg("Password updated! You can now sign in.", true);
+        setTimeout(() => switchAuthTab("login"), 1000);
+      } catch (err) {
+        showAuthMsg(err.message, false);
+      }
+    });
+  }
+
+  // Handle Logout
+  if (btnLogout) {
+    btnLogout.addEventListener("click", async () => {
+      await fetch("/api/v1/auth/logout", { method: "POST" });
+      currentUser = null;
+      renderLoggedOutState();
+    });
+  }
+
+  // Handle Delete Account (Item 18)
+  const btnDeleteAccount = document.getElementById("btn-delete-account");
+  if (btnDeleteAccount) {
+    btnDeleteAccount.addEventListener("click", async () => {
+      const confirmPurge = confirm("WARNING: This will permanently delete your account and all associated scan history from the database in compliance with GDPR Right to Erasure. Proceed?");
+      if (!confirmPurge) return;
+
+      try {
+        const res = await fetch("/api/v1/auth/account", { method: "DELETE" });
+        if (res.ok) {
+          closeAuthModal();
+          currentUser = null;
+          renderLoggedOutState();
+          showAlert("Account and private scan records permanently purged (GDPR Art. 17).");
+        }
+      } catch (err) {
+        showAuthMsg(err.message, false);
+      }
+    });
+  }
+
+  // Handle User Scan History Modal (Item 10)
+  if (btnOpenHistory) {
+    btnOpenHistory.addEventListener("click", async () => {
+      if (modalHistory) modalHistory.classList.add("active");
+      if (historyItemsList) historyItemsList.innerHTML = "<div style='color:var(--text-tertiary); text-align:center; padding:1.5rem;'>Loading scans...</div>";
+
+      try {
+        const res = await fetch("/api/v1/auth/history");
+        if (!res.ok) throw new Error("Failed to load history");
+        const data = await res.json();
+        const scans = data.scans || [];
+
+        if (scans.length === 0) {
+          if (historyEmpty) historyEmpty.style.display = "block";
+          if (historyItemsList) historyItemsList.innerHTML = "";
+        } else {
+          if (historyEmpty) historyEmpty.style.display = "none";
+          if (historyItemsList) {
+            historyItemsList.innerHTML = scans.map(s => {
+              const dateStr = new Date(s.timestamp * 1000).toLocaleString();
+              let pillClass = "pill-safe";
+              if (s.verdict === "needs review") pillClass = "pill-review";
+              if (s.verdict === "likely scam") pillClass = "pill-scam";
+
+              const preview = s.preview_text || s.preview_url || "Empty scan";
+              // Escape HTML for XSS prevention
+              const safePreview = preview.replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+              })[m]);
+
+              return `
+                <div class="history-card">
+                  <div class="history-info">
+                    <span class="history-preview">${safePreview}</span>
+                    <span class="history-date">${dateStr} &middot; Risk Score: ${s.risk_score}</span>
+                  </div>
+                  <span class="tour-pill ${pillClass}">${s.verdict.toUpperCase()}</span>
+                </div>
+              `;
+            }).join("");
+          }
+        }
+      } catch {
+        if (historyItemsList) historyItemsList.innerHTML = "<div style='color:var(--danger); text-align:center;'>Unable to load scan history.</div>";
+      }
+    });
+  }
+
+  if (btnHistoryClose) {
+    btnHistoryClose.addEventListener("click", () => {
+      if (modalHistory) modalHistory.classList.remove("active");
+    });
+  }
+
+  // Close modals on escape or backdrop
+  [modalAuth, modalHistory].forEach(m => {
+    if (!m) return;
+    m.addEventListener("click", (e) => {
+      if (e.target === m) m.classList.remove("active");
+    });
+  });
+
+  // Check auth session on startup
+  checkAuthStatus();
 });
+
 

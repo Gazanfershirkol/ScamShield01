@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
+from app.api.auth_endpoints import router as auth_router
 from app.api.endpoints import router as api_v1_router
 from app.config import settings
 
@@ -36,8 +37,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register API v1 endpoints router
+# Register API v1 endpoints routers
 app.include_router(api_v1_router)
+app.include_router(auth_router)
 
 # Mount static asset directory if it exists
 if settings.STATIC_DIR.exists():
