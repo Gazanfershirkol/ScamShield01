@@ -2,6 +2,20 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 6: FastAPI Application & REST Endpoints (2026-10-20)
+
+### Added
+- Implemented `app/api/schemas.py` defining Pydantic v2 data models for `AnalyzeRequest` (with input length boundaries and whitespace checks), `AnalyzeResponse`, `HealthResponse`, and `EvaluationResponse`.
+- Implemented `app/api/endpoints.py` providing `POST /api/v1/analyze`, `GET /api/v1/health`, and `GET /api/v1/evaluation`.
+- Implemented `app/main.py` configuring FastAPI bootstrap, CORS middleware, API v1 routing, and static file asset serving.
+- Created `tests/test_api.py` with 10 integration tests (100% pass) verifying health checks, dual modality analysis, single-mode analysis, 422 validation on empty/whitespace/oversized inputs, evaluation metrics, and OpenAPI `/docs`.
+
+### Changed
+- Updated `TASKS.md`: Task T-008 marked **DONE** (9/13 total tasks completed).
+- Updated `MEMORY.md`: Recorded Phase 6 completion and transitioned active goal to Phase 7.
+
+---
+
 ## [Unreleased] - Phase 5: Verdict Arbiter & Evidence Synthesis Engine (2026-10-20)
 
 ### Added

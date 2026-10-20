@@ -59,6 +59,10 @@ class TextAnalyzer:
         self.feature_names = self._bundle["feature_names"]
         self.coef = self.base_classifier.coef_[0]
 
+    def is_loaded(self) -> bool:
+        """Returns True if model bundle is loaded and ready for inference."""
+        return self._bundle is not None and self.calibrated_model is not None
+
     def _extract_patterns(self, text: str) -> List[str]:
         """Categorizes flagged language into understandable semantic pattern tags."""
         patterns = []

@@ -17,7 +17,7 @@ Tasks must be updated strictly upon verified execution of tests or commands.
 | **T-005** | Phase 3 | P0 | Implement passive zero-network lexical URL analysis engine and heuristic feature extraction | T-003 | `app/services/url_analyzer.py`, `tests/test_url_analyzer.py` | `pytest tests/test_url_analyzer.py` | **DONE** — lexical heuristics, Shannon entropy, SSRF zero-network guarantee (10 green tests) |
 | **T-006** | Phase 4 | P0 | Build TF-IDF + Calibrated Linear Classifier training pipeline and model inference service with token explainability | T-004 | `scripts/train.py`, `app/services/text_analyzer.py`, `app/models/text_model.joblib`, `tests/test_text_analyzer.py` | `python scripts/train.py && pytest tests/test_text_analyzer.py` | **DONE** — TF-IDF + Calibrated LogisticRegression, explainability tokens, 8 green tests |
 | **T-007** | Phase 5 | P0 | Build unified verdict arbiter, scoring policy, evidence synthesis, and action recommendation engine | T-005, T-006 | `app/services/verdict_arbiter.py`, `tests/test_verdict_arbiter.py` | `pytest tests/test_verdict_arbiter.py` | **DONE** — multi-modal blending, critical overrides, divergence escalation, 11 green tests |
-| **T-008** | Phase 6 | P0 | Implement FastAPI application, Pydantic v2 schemas, endpoints (`/analyze`, `/health`, `/evaluation`), and API tests | T-007 | `app/main.py`, `app/api/endpoints.py`, `app/api/schemas.py`, `tests/test_api.py` | `pytest tests/test_api.py` | `NOT_STARTED` |
+| **T-008** | Phase 6 | P0 | Implement FastAPI application, Pydantic v2 schemas, endpoints (`/analyze`, `/health`, `/evaluation`), and API tests | T-007 | `app/main.py`, `app/api/endpoints.py`, `app/api/schemas.py`, `tests/test_api.py` | `pytest tests/test_api.py` | **DONE** — FastAPI v1 router, Pydantic v2 schemas, 10 integration tests passing |
 | **T-009** | Phase 7 | P0 | Construct accessible, responsive Vanilla HTML/CSS/JS frontend dashboard with interactive scenario presets | T-008 | `app/static/index.html`, `app/static/css/style.css`, `app/static/js/app.js` | Manual browser check at `http://127.0.0.1:8000` | `NOT_STARTED` |
 | **T-010** | Phase 8 | P0 | Execute held-out test split evaluation, compute precision/recall/F1/confusion matrix, and generate error report | T-006, T-008 | `scripts/evaluate.py`, `app/models/evaluation_meta.json`, `docs/EVALUATION_REPORT.md` | `python scripts/evaluate.py && pytest tests/test_api.py -k test_evaluation` | `NOT_STARTED` |
 | **T-011** | Phase 9 | P1 | Conduct security validation tests (XSS, SSRF zero-network verification, ReDoS, payload limits) | T-008 | `tests/test_security.py` | `pytest tests/test_security.py` | `NOT_STARTED` |
@@ -37,7 +37,7 @@ graph TD
     T004 --> T006["T-006: Text Classifier Engine"]
     T005 --> T007["T-007: Verdict Arbiter Engine (DONE)"]
     T006 --> T007
-    T007 --> T008["T-008: FastAPI & REST Endpoints"]
+    T007 --> T008["T-008: FastAPI & REST Endpoints (DONE)"]
     T008 --> T009["T-009: Web UI Dashboard"]
     T008 --> T010["T-010: Model Evaluation & Report"]
     T008 --> T011["T-011: Security Hardening Tests"]
@@ -50,8 +50,8 @@ graph TD
 
 ## Status Ledger
 - **Total Tasks:** 13
-- **Completed:** 8 (T-000, T-001, T-002, T-003, T-004, T-005, T-006, T-007)
+- **Completed:** 9 (T-000, T-001, T-002, T-003, T-004, T-005, T-006, T-007, T-008)
 - **In Progress:** 0
 - **Blocked:** 0
-- **Not Started:** 5
+- **Not Started:** 4
 
