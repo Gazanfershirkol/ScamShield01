@@ -146,12 +146,27 @@ def test_evaluation_metrics(client):
 
 
 def test_root_endpoint(client):
-    """GET / returns HTTP 200 with discovery or dashboard information."""
+    """GET / returns HTTP 200 serving the frontend dashboard index.html."""
     response = client.get("/")
     assert response.status_code == 200
+    assert "text/html" in response.headers.get("content-type", "")
+    assert "ScamShield AI" in response.text
+    assert "Inspection Workspace" in response.text
+
+
+def test_static_assets_served(client):
+    """Static CSS and JS files must be accessible via /static/ mount."""
+    css_res = client.get("/static/css/style.css")
+    assert css_res.status_code == 200
+    assert "--bg-primary" in css_res.text
+
+    js_res = client.get("/static/js/app.js")
+    assert js_res.status_code == 200
+    assert "PRESETS" in js_res.text
 
 
 def test_openapi_docs(client):
     """GET /docs returns HTTP 200 serving Swagger UI."""
     response = client.get("/docs")
     assert response.status_code == 200
+

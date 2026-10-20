@@ -2,6 +2,20 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 7: Web UI Dashboard (2026-10-20)
+
+### Added
+- Created responsive dark-slate cybersecurity UI stylesheet in `app/static/css/style.css` with CSS custom property tokens, WCAG 2.1 AA contrast levels, glassmorphism, animated score gauges, and mobile breakpoints.
+- Implemented frontend client logic in `app/static/js/app.js` with real-time character counters, `Ctrl+Enter` shortcut support, 4 interactive scenario presets (Bank KYC, Job Task Scam, Raw IP Link, Legitimate Order), safe DOM node rendering (SSRF/XSS immune), and an interactive benchmark metrics modal dialog.
+- Created semantic HTML5 single-page application in `app/static/index.html` with Google Fonts (`Inter` and `JetBrains Mono`), accessible SVG status badges, and academic responsible use disclaimers.
+- Enhanced `tests/test_api.py` with integration tests verifying static asset mounts and HTML serving at `GET /`.
+
+### Changed
+- Updated `TASKS.md`: Task T-009 marked **DONE** (10/13 total tasks completed).
+- Updated `MEMORY.md`: Recorded Phase 7 completion and transitioned active goal to Phase 8.
+
+---
+
 ## [Unreleased] - Phase 6: FastAPI Application & REST Endpoints (2026-10-20)
 
 ### Added
