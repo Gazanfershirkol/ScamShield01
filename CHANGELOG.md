@@ -2,6 +2,19 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Phase 3: URL Passive Lexical Analysis Engine (2026-10-20)
+
+### Added
+- Implemented `app/services/url_analyzer.py` providing 100% passive, offline lexical and structural URL evaluation.
+- Added 10 explicit heuristic indicators: IP address host (+45), `@` credential deception (+35), brand in subdomain (+35), punycode/homoglyphs (+30), high-risk TLDs (+20), suspicious path keywords (+15), high domain Shannon entropy (+15), insecure HTTP (+20), and trusted canonical domain safeguards (-30).
+- Created `tests/test_url_analyzer.py` with 10 unit and security tests (100% pass in 0.16s), including a monkeypatch socket/HTTP test guaranteeing zero network calls (SSRF immunity).
+
+### Changed
+- Updated `TASKS.md`: T-005 marked **DONE** (6/13 total tasks completed).
+- Updated `MEMORY.md`: Recorded Phase 3 completion and verified test outputs.
+
+---
+
 ## [Unreleased] - Phase 2: Data Curation & Dataset Pipeline (2026-10-20)
 
 ### Added
