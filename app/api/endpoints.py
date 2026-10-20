@@ -10,9 +10,10 @@ Implements the official v1 REST API specifications:
 from datetime import datetime, timezone
 import json
 from pathlib import Path
-from typing import Optional
+import time
+from typing import Any, Dict, Optional
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, Request, Response, status
 
 from app.api.schemas import (
     AnalyzeRequest,
@@ -21,6 +22,8 @@ from app.api.schemas import (
     HealthResponse,
 )
 from app.config import settings
+from app.services.analytics import analytics_engine
+from app.services.rate_limiter import rate_limiter
 from app.services.text_analyzer import analyze_text, get_text_analyzer
 from app.services.url_analyzer import analyze_url
 from app.services.verdict_arbiter import synthesize_verdict
@@ -39,8 +42,21 @@ router = APIRouter(prefix="/api/v1", tags=["scam-detection"])
         "plain-English evidence, and defense recommendations."
     ),
 )
-async def analyze_message_or_url(payload: AnalyzeRequest) -> AnalyzeResponse:
-    """Core fraud and phishing analysis endpoint."""
+async def analyze_message_or_url(payload: AnalyzeRequest, request: Request, response: Response) -> AnalyzeResponse:
+    """Core fraud and phishing analysis endpoint protected by sliding-window rate limiting."""
+    # Enforce sliding-window rate limiting per client IP (Item 8)
+    client_ip = request.client.host if request.client else "127.0.0.1"
+    allowed, retry_after = rate_limiter.is_allowed(client_ip)
+    if not allowed:
+        response.headers["Retry-After"] = str(retry_after)
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=f"Rate limit exceeded. Please wait {retry_after} seconds before scanning again.",
+            headers={"Retry-After": str(retry_after)},
+        )
+
+    start_time = time.perf_counter()
+
     text_res = None
     if payload.text and payload.text.strip():
         text_res = analyze_text(payload.text.strip())
@@ -50,7 +66,35 @@ async def analyze_message_or_url(payload: AnalyzeRequest) -> AnalyzeResponse:
         url_res = analyze_url(payload.url.strip())
 
     verdict = synthesize_verdict(text_res, url_res)
+
+    # Compute execution latency
+    latency_ms = (time.perf_counter() - start_time) * 1000.0
+
+    # Collect indicators for anonymous analytics (Item 14)
+    indicators = []
+    if text_res:
+        indicators.extend(text_res.detected_patterns)
+    if url_res:
+        indicators.extend(url_res.flagged_indicators)
+
+    analytics_engine.record_scan(
+        verdict=verdict.verdict,
+        risk_score=verdict.risk_score,
+        latency_ms=latency_ms,
+        indicators=indicators,
+    )
+
     return AnalyzeResponse(**verdict.to_dict())
+
+
+@router.get(
+    "/analytics",
+    summary="Anonymous Threat Analytics & System Telemetry",
+    description="Returns public aggregate threat statistics, scan volumes, and latency KPIs.",
+)
+async def get_analytics() -> Dict[str, Any]:
+    """Returns anonymous real-time telemetry snapshot without retaining personal data."""
+    return analytics_engine.get_summary()
 
 
 @router.get(

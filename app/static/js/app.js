@@ -180,14 +180,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!response.ok) {
+        if (response.status === 429) {
+          const retryAfter = response.headers.get("Retry-After") || 60;
+          throw new Error(`Rate limit reached (Protection Policy). Please wait ${retryAfter}s before scanning again.`);
+        }
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.detail || "Analysis request failed.");
       }
 
       const result = await response.json();
       renderVerdict(result);
+      fetchTelemetry();
     } catch (err) {
-      showAlert(`Analysis Error: ${err.message}`);
+      showAlert(`Notice: ${err.message}`);
       loadingState.classList.remove("visible");
       emptyState.style.display = "flex";
     } finally {
@@ -370,4 +375,32 @@ document.addEventListener("DOMContentLoaded", () => {
       modalEvaluation.classList.remove("active");
     }
   });
+
+  // ---------------------------------------------------------------------------
+  // Real-Time Telemetry HUD Polling & Fetching (Item 14)
+  // ---------------------------------------------------------------------------
+  const hudTotal = document.getElementById("hud-total-scans");
+  const hudThreats = document.getElementById("hud-threats-intercepted");
+  const hudSafe = document.getElementById("hud-safe-verified");
+  const hudLatency = document.getElementById("hud-avg-latency");
+
+  async function fetchTelemetry() {
+    try {
+      const res = await fetch("/api/v1/analytics");
+      if (res.ok) {
+        const data = await res.json();
+        if (hudTotal) hudTotal.textContent = Number(data.total_scans).toLocaleString();
+        if (hudThreats) hudThreats.textContent = Number(data.scams_intercepted + data.suspicious_flagged).toLocaleString();
+        if (hudSafe) hudSafe.textContent = Number(data.safe_verified).toLocaleString();
+        if (hudLatency) hudLatency.textContent = `${data.avg_latency_ms}ms`;
+      }
+    } catch {
+      // Gracefully silent on connection hiccup
+    }
+  }
+
+  // Trigger telemetry on load and periodically
+  fetchTelemetry();
+  setInterval(fetchTelemetry, 15000);
 });
+

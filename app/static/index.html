@@ -39,6 +39,30 @@
       </div>
     </header>
 
+    <!-- Real-Time Threat Intelligence & Telemetry HUD Bar (Item 14) -->
+    <div class="hud-ticker-bar" aria-label="Real-time threat detection metrics">
+      <div class="hud-metric">
+        <span class="hud-label">TOTAL INSPECTED</span>
+        <span id="hud-total-scans" class="hud-value">0</span>
+      </div>
+      <div class="hud-metric">
+        <span class="hud-label">THREATS INTERCEPTED</span>
+        <span id="hud-threats-intercepted" class="hud-value hud-threat">0</span>
+      </div>
+      <div class="hud-metric">
+        <span class="hud-label">VERIFIED SAFE</span>
+        <span id="hud-safe-verified" class="hud-value hud-safe">0</span>
+      </div>
+      <div class="hud-metric">
+        <span class="hud-label">AVG ENGINE LATENCY</span>
+        <span id="hud-avg-latency" class="hud-value hud-accent">&lt; 4ms</span>
+      </div>
+      <div class="hud-metric hud-status-pill">
+        <span class="pulse-dot"></span>
+        <span class="hud-status-text">DEFENSE ACTIVE</span>
+      </div>
+    </div>
+
     <!-- Main Workspace Grid -->
     <main class="main-grid">
       <!-- Left Column: Input Panel -->

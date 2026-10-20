@@ -206,6 +206,72 @@ body {
   color: #FFFFFF;
 }
 
+/* Real-Time Telemetry HUD Bar (Item 14) */
+.hud-ticker-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hud-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.hud-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.hud-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.hud-threat {
+  color: var(--scam-text);
+}
+
+.hud-safe {
+  color: var(--safe-text);
+}
+
+.hud-accent {
+  color: var(--primary-accent);
+}
+
+.hud-status-pill {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.hud-status-text {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--safe-text);
+  font-family: 'JetBrains Mono', monospace;
+}
+
 /* Two-Column Grid Layout */
 .main-grid {
   display: grid;

@@ -95,10 +95,31 @@ async def custom_http_exception_handler(request: Request, exc: StarletteHTTPExce
         return JSONResponse(
             status_code=404,
             content={"detail": "Resource not found", "status_code": 404, "path": request.url.path},
+            headers=exc.headers,
         )
     return JSONResponse(
         status_code=exc.status_code,
         content={"detail": exc.detail, "status_code": exc.status_code},
+        headers=exc.headers,
+    )
+
+
+@app.exception_handler(Exception)
+async def unhandled_exception_handler(request: Request, exc: Exception):
+    """Global error tracking boundary (Item 15) capturing exceptions and returning sanitized incident IDs."""
+    from app.services.analytics import analytics_engine
+    incident_id = analytics_engine.record_error(
+        error_type=type(exc).__name__,
+        path=request.url.path,
+        detail=str(exc),
+    )
+    return JSONResponse(
+        status_code=500,
+        content={
+            "detail": "Internal server security exception occurred.",
+            "status_code": 500,
+            "incident_id": incident_id,
+        },
     )
 
 

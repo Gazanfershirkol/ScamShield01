@@ -206,3 +206,59 @@ def test_custom_404_json_for_api(client):
     assert data["status_code"] == 404
     assert "path" in data
 
+
+def test_analytics_endpoint(client):
+    """GET /api/v1/analytics returns telemetry and threat intelligence KPIs (Item 14)."""
+    response = client.get("/api/v1/analytics")
+    assert response.status_code == 200
+    data = response.json()
+    assert "total_scans" in data
+    assert "scams_intercepted" in data
+    assert "avg_latency_ms" in data
+    assert "top_indicators" in data
+    assert isinstance(data["total_scans"], int)
+
+
+def test_rate_limiter_enforcement(client):
+    """Rate limiter blocks rapid spam with HTTP 429 and Retry-After header (Item 8)."""
+    import time
+    from app.services.rate_limiter import rate_limiter
+
+    rate_limiter.reset()
+    now = time.time()
+    # TestClient requests typically originate from 'testclient'
+    rate_limiter._clients["testclient"].timestamps = [now] * 65
+
+    payload = {"text": "Rate limit verification message"}
+    response = client.post("/api/v1/analyze", json=payload)
+    assert response.status_code == 429
+    assert "Retry-After" in response.headers
+    data = response.json()
+    assert "Rate limit exceeded" in data["detail"]
+
+    # Reset so other tests are not blocked
+    rate_limiter.reset()
+
+
+def test_error_tracking_incident_id(monkeypatch):
+    """Unhandled internal exceptions return sanitized 500 response with incident ID (Item 15)."""
+    from app.api import endpoints
+    from app.services.rate_limiter import rate_limiter
+
+    rate_limiter.reset()
+
+    def raise_simulated_error(*args, **kwargs):
+        raise RuntimeError("Simulated crash")
+
+    monkeypatch.setattr(endpoints, "synthesize_verdict", raise_simulated_error)
+
+    # Create client that captures 500 rather than re-raising in test process
+    safe_client = TestClient(app, raise_server_exceptions=False)
+    response = safe_client.post("/api/v1/analyze", json={"text": "Hello error test"})
+    assert response.status_code == 500
+    data = response.json()
+    assert data["status_code"] == 500
+    assert "incident_id" in data
+    assert data["incident_id"].startswith("INC-")
+
+
