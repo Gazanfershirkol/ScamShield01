@@ -31,6 +31,11 @@ class Settings:
     VERDICT_SCAM_THRESHOLD: int = int(os.getenv("VERDICT_SCAM_THRESHOLD", "75"))
     VERDICT_REVIEW_THRESHOLD: int = int(os.getenv("VERDICT_REVIEW_THRESHOLD", "35"))
 
+    # Production SaaS Settings (Items 1, 8, 9)
+    RATE_LIMIT_PER_MINUTE: int = int(os.getenv("RATE_LIMIT_PER_MINUTE", "60"))
+    AUTH_SECRET_KEY: str = os.getenv("AUTH_SECRET_KEY", "scamshield_production_secret_key_2026")
+    TOKEN_EXPIRY_SECONDS: int = int(os.getenv("TOKEN_EXPIRY_SECONDS", "86400"))
+
     # Filesystem paths
     BASE_DIR: Path = BASE_DIR
     MODEL_DIR: Path = BASE_DIR / "app" / "models"
@@ -38,6 +43,9 @@ class Settings:
     EVALUATION_META_PATH: Path = BASE_DIR / "app" / "models" / "evaluation_meta.json"
     STATIC_DIR: Path = BASE_DIR / "app" / "static"
     DATA_DIR: Path = BASE_DIR / "data"
+    DB_PATH: Path = BASE_DIR / "data" / "scamshield.db"
+    BACKUP_DIR: Path = BASE_DIR / "data" / "backups"
+
 
 
 # Singleton configuration instance

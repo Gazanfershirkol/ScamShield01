@@ -18,8 +18,8 @@ from app.db.database import get_db_connection
 
 # PBKDF2 configuration
 PBKDF2_ITERATIONS = 100_000
-TOKEN_SECRET = getattr(settings, "AUTH_SECRET_KEY", "scamshield_production_secret_key_2026")
-TOKEN_EXPIRY_SECONDS = 86400  # 24 hours
+TOKEN_SECRET = settings.AUTH_SECRET_KEY
+TOKEN_EXPIRY_SECONDS = settings.TOKEN_EXPIRY_SECONDS
 
 
 def hash_password(password: str, salt: Optional[str] = None) -> Tuple[str, str]:

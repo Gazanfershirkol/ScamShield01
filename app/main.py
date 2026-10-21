@@ -15,6 +15,24 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.api.auth_endpoints import router as auth_router
 from app.api.endpoints import router as api_v1_router
 from app.config import settings
+from app.services.analytics import analytics_engine
+
+from contextlib import asynccontextmanager
+import logging
+
+logger = logging.getLogger("scamshield")
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Pre-warms ML model and underlying subsystems on startup to ensure zero-latency first requests."""
+    try:
+        from app.services.text_analyzer import get_text_analyzer
+        get_text_analyzer()
+    except Exception as exc:
+        logger.warning(f"ML engine pre-warmup deferred: {exc}")
+    yield
+
 
 # Instantiate FastAPI application
 app = FastAPI(
@@ -26,6 +44,7 @@ app = FastAPI(
     ),
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # Configure Cross-Origin Resource Sharing (CORS) for local and competition UI access
@@ -109,7 +128,6 @@ async def custom_http_exception_handler(request: Request, exc: StarletteHTTPExce
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
     """Global error tracking boundary (Item 15) capturing exceptions and returning sanitized incident IDs."""
-    from app.services.analytics import analytics_engine
     incident_id = analytics_engine.record_error(
         error_type=type(exc).__name__,
         path=request.url.path,

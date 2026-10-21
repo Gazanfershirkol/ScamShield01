@@ -12,7 +12,9 @@ ScamShield AI is engineered as an ultra-lightweight, local, deterministic, and e
 - **Server Runner:** **Uvicorn** ASGI server running locally on `http://127.0.0.1:8000`.
 
 ### Architectural Constraints & Decisions
-1. **No External Database:** Submissions are evaluated ephemerally in RAM. There is zero database overhead (SQLite/PostgreSQL/MongoDB omitted) to guarantee zero data retention and maximum speed.
+1. **Dual-Mode Privacy Architecture:** 
+   - **Guest Mode:** Submissions are evaluated ephemerally in RAM with 100% zero data retention and maximum speed (< 5ms).
+   - **Authenticated User Mode:** Registered users enjoy private scan history stored in a local, embedded SQLite database configured in WAL (Write-Ahead Logging) mode, protected with strict Row Level Security (RLS) tenant isolation and one-click GDPR Article 17 "Right to Erasure".
 2. **No Third-Party Cloud LLM APIs:** Eliminates recurring API costs, vendor lock-in, rate limits, latency spikes, and privacy leaks of sensitive user messages.
 3. **No Heavy Deep Learning Runtimes:** Avoids massive PyTorch/TensorFlow multi-gigabyte wheels. The scikit-learn pipeline runs in < 25MB RAM and provides instant cold starts (< 1 second).
 4. **Passive URL Analysis Only:** Under no circumstances does the server resolve DNS or initiate an HTTP/TCP handshake to any user-submitted URL, preventing Server-Side Request Forgery (SSRF) and malicious infrastructure callbacks.
@@ -356,7 +358,7 @@ e:/SCAM SHIELD 01/
 ---
 
 ## 9. Configuration & Environment Strategy
-- Core configurations stored in `app/config.py` using `pydantic-settings` or simple typed class.
+- Core configurations stored in `app/config.py` using typed Python settings.
 - Settings include:
   - `APP_ENV`: `"development"` | `"production"`
   - `API_V1_PREFIX`: `"/api/v1"`
@@ -364,7 +366,11 @@ e:/SCAM SHIELD 01/
   - `MAX_URL_LENGTH`: `2048`
   - `VERDICT_SCAM_THRESHOLD`: `75`
   - `VERDICT_REVIEW_THRESHOLD`: `35`
-- No secrets or credentials required to operate the core system.
+  - `RATE_LIMIT_PER_MINUTE`: `60` (Sliding window rate limit)
+  - `AUTH_SECRET_KEY`: Cryptographic secret for session token signing
+  - `TOKEN_EXPIRY_SECONDS`: `86400` (24-hour session lifetime)
+  - `DB_PATH`: SQLite database file path (`data/scamshield.db`)
+  - `BACKUP_DIR`: Snapshot backup directory (`data/backups`)
 
 ---
 
@@ -377,9 +383,36 @@ e:/SCAM SHIELD 01/
 ### Error Handling Policy:
 - Custom exception handlers for `RequestValidationError`, `HTTPException`, and uncaught errors.
 - Clean JSON error responses: `{"error": "descriptive_error_code", "message": "Human-friendly explanation", "status_code": 400}`.
-- Never leak stack traces to client responses.
+- Global 500 error boundary with incident tracking codes (`INC-XXXXXXXX`) to permit diagnostic audit without leaking internal stack traces.
 
 ### Security Boundaries:
 1. **Zero-Trust Input:** All incoming string buffers are treated as untrusted data.
 2. **SSRF Hardening:** No network socket is opened to examine the destination of any user-submitted URL.
 3. **XSS Mitigation:** Web UI renders all analysis outputs via `element.textContent` or safe DOM text nodes, never `innerHTML` with unsanitized data.
+
+---
+
+## 11. Production SaaS Architecture & Enterprise Controls (19-Point Checklist)
+
+ScamShield AI incorporates a complete production SaaS architecture fulfilling the 19 standard operational readiness items:
+
+1. **Authentication & Session Management:** PBKDF2-HMAC-SHA256 password hashing (100k rounds) with cryptographic session tokens (`POST /api/v1/auth/login`, `POST /api/v1/auth/logout`, `GET /api/v1/auth/me`).
+2. **Cryptographic Password Reset:** One-way salted hash reset tokens with 15-minute TTL (`POST /api/v1/auth/forgot-password`, `POST /api/v1/auth/reset-password`).
+3. **Email Verification:** 6-digit OTP verification system (`POST /api/v1/auth/verify-email`).
+4. **Interactive Loading States:** Real-time scanning animations, button disabling, and dynamic status updates.
+5. **Contextual Empty States:** Clean initial input prompts and 4 real-world test preset chips.
+6. **Granular Error Handling:** Distinct warning/danger banners for payload boundary violations, 429 rate limits, and network issues.
+7. **Client-Side & Server-Side Validation:** Real-time character counters, Pydantic v2 schemas, and strict boundary checks.
+8. **Sliding-Window Rate Limiting:** 60 requests/minute per client IP with standard HTTP 429 and `Retry-After` header. Reverse proxy IP extraction (`X-Forwarded-For`, `X-Real-IP`) prevents proxy contention.
+9. **Automated Database Backups:** Online SQLite snapshot backup script (`scripts/backup_db.py`) with automatic 10-snapshot rotation.
+10. **Row Level Security (RLS):** Strict tenant isolation (`WHERE user_id = ?`) for scan history.
+11. **API Keys Off Frontend:** 100% offline, local ML & lexical heuristics execution; zero client keys or third-party API exposure.
+12. **Responsive Mobile Layout:** Responsive CSS Grid & Flexbox layouts with `@media (max-width: 960px)` breakpoint.
+13. **High-Tech 404 Page:** Dedicated cyber-themed 404 page (`app/static/404.html`) and Starlette exception routing.
+14. **Anonymous Telemetry HUD:** Public real-time telemetry ticker (`GET /api/v1/analytics`) recording aggregate threat metrics without retaining PII or messages.
+15. **Incident Error Tracking:** Global 500 handler generating incident reference IDs (`INC-XXXXXXXX`) without stack trace leakage.
+16. **Privacy Policy:** Dedicated legal disclosure (`app/static/privacy.html`) covering DPDP Act, GDPR, zero retention, and PII scrubbing.
+17. **Terms of Service:** Academic use, acceptable use, and safe harbor documentation (`app/static/terms.html`).
+18. **Right to Erasure (GDPR Art. 17):** Permanent account and scan history deletion button (`POST /api/v1/auth/delete-account`).
+19. **Onboarding Walkthrough:** 4-step interactive guided orientation modal (`modal-tour`) with navigation controls.
+

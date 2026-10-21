@@ -73,5 +73,7 @@ class SlidingWindowRateLimiter:
             self._clients.clear()
 
 
-# Global default rate limiter instance (60 requests/minute)
-rate_limiter = SlidingWindowRateLimiter(requests_per_minute=60, window_seconds=60)
+from app.config import settings
+
+# Global default rate limiter instance
+rate_limiter = SlidingWindowRateLimiter(requests_per_minute=settings.RATE_LIMIT_PER_MINUTE, window_seconds=60)

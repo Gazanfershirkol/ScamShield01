@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Optional
 from app.config import settings
 
 # Database file location
-DB_PATH = settings.BASE_DIR / "data" / "scamshield.db"
+DB_PATH = settings.DB_PATH
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 

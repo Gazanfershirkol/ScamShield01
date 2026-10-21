@@ -3,10 +3,10 @@
 [![Competition](https://img.shields.io/badge/Competition-KLE_BCA_Coding_Club-0EA5E9)](#)
 [![Track](https://img.shields.io/badge/Department-AI%20%2F%20ML-10B981)](#)
 [![Problem Code](https://img.shields.io/badge/Problem-AI%20%C2%B7%2003-F59E0B)](#)
-[![Status](https://img.shields.io/badge/Status-Complete%20%26%20Verified%20(58%2F58%20Tests)-10B981)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20%26%20Verified%20(71%2F71%20Tests)-10B981)](#)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](#)
 
-> **ScamShield AI** is an ultra-fast (<5ms), explainable, multi-modal fraud and phishing detection system. It combines passive lexical URL analysis with calibrated linear machine learning text classification to evaluate suspicious messages and links with **100% offline SSRF immunity**. Built for the **KLE BCA Coding Club Interdepartmental Challenge**.
+> **ScamShield AI** is an ultra-fast (<5ms), explainable, multi-modal fraud and phishing detection system. It combines passive lexical URL analysis with calibrated linear machine learning text classification to evaluate suspicious messages and links with **100% offline SSRF immunity**. Built for the **KLE BCA Coding Club Interdepartmental Challenge** and upgraded with a complete **19-Point Production SaaS Architecture**.
 
 ---
 
@@ -19,8 +19,9 @@ Digital fraud delivered via SMS, WhatsApp, email, and instant messaging poses an
 2. Synthesizes a standardized three-state verdict: `likely safe`, `needs review`, or `likely scam`.
 3. Outputs a normalized `0–100` composite risk score and plain-English evidence bullet points.
 4. Exposes an interactive web dashboard with one-click scenario presets.
-5. Provides a documented REST API (`/api/v1/analyze`, `/api/v1/health`, `/api/v1/evaluation`).
+5. Provides a documented REST API (`/api/v1/analyze`, `/api/v1/health`, `/api/v1/evaluation`, `/api/v1/analytics`, `/api/v1/auth/*`).
 6. Enforces strict scientific rigor with zero data leakage and a formal held-out benchmark evaluation report.
+7. Complies with complete 19-point SaaS production operational readiness (PBKDF2 auth, rate limiting, backups, GDPR right-to-erasure).
 
 ---
 
@@ -31,8 +32,11 @@ Digital fraud delivered via SMS, WhatsApp, email, and instant messaging poses an
 - **Zero-Network URL Inspection (SSRF Immunity):** Operates 100% passively using local CPU string algorithms (Shannon entropy, structural heuristics, brand impersonation, and homoglyph checks). The server **never** fetches submitted URLs or queries external DNS.
 - **Microsecond Latency:** Complete analysis completes in **under 4 milliseconds**—over 500x faster than cloud LLMs.
 - **Explainable by Design:** Extracts exact mathematical feature coefficient tokens and human-readable pattern tags.
-- **Responsive Web Dashboard:** Modern dark-slate cybersecurity interface built in standards-compliant Vanilla HTML5/CSS3/JavaScript (no node/npm build step).
-- **Comprehensive Test Suite:** 58 automated unit, integration, and security tests with 100% pass rate.
+- **Dual-Mode Privacy Architecture:**
+  - *Guest Mode:* Instant zero-friction scanning with zero data retention.
+  - *Authenticated Mode:* Private scan history with Row Level Security (RLS) and GDPR Art. 17 permanent deletion.
+- **Enterprise SaaS Controls (19-Point Checklist):** Sliding-window rate limiting with proxy IP extraction, automated SQLite snapshot backups with 10-snapshot rotation, anonymous real-time telemetry HUD, incident error boundaries (`INC-XXXXXXXX`), 4-step onboarding tour, custom cyber 404, Privacy Policy, and Terms of Service.
+- **Comprehensive Test Suite:** 71 automated unit, integration, and security tests with 100% pass rate and zero warnings.
 
 ---
 
@@ -41,9 +45,11 @@ Digital fraud delivered via SMS, WhatsApp, email, and instant messaging poses an
 - **Backend Framework:** Python 3.11 & FastAPI
 - **Machine Learning Core:** scikit-learn (`TfidfVectorizer` + calibrated `LogisticRegression` with 5-fold Platt scaling)
 - **URL Inspection Engine:** Pure Python lexical heuristics (`urllib.parse`, Shannon entropy, homoglyph detection)
+- **Database & Storage:** Local SQLite (WAL mode) with automated snapshot backups
+- **Security & Cryptography:** PBKDF2-HMAC-SHA256 (100k rounds), HMAC-SHA256 session tokens, sliding-window rate limiting
 - **Web Interface:** Vanilla HTML5, CSS3 Custom Properties (WCAG 2.1 AA compliant), Vanilla JavaScript
-- **ASGI Server:** Uvicorn
-- **Testing & Verification:** pytest, HTTPX TestClient
+- **ASGI Server:** Uvicorn with FastAPI Lifespan pre-warmup
+- **Testing & Verification:** pytest, pytest-asyncio, HTTPX TestClient
 
 ---
 
@@ -83,9 +89,9 @@ cd "e:\SCAM SHIELD 01"
 .\.venv\Scripts\Activate.ps1
 ```
 
-### Step 3: Verify the Full Test Suite (58 Tests)
+### Step 3: Verify the Full Test Suite (71 Tests)
 ```powershell
-pytest tests/ -v
+pytest -q
 ```
 
 ### Step 4: Launch the Local Web Service
@@ -152,11 +158,19 @@ Submits message text, URL, or both for fraud analysis.
 }
 ```
 
-### 6.2 `GET /api/v1/health`
-Health check and runtime status. Returns `model_loaded: true`.
-
-### 6.3 `GET /api/v1/evaluation`
-Returns the verified benchmark metrics, confusion matrix, and threshold strategy.
+### 6.2 SaaS Operational Endpoints
+- **`GET /api/v1/health`** — System health check & model runtime status.
+- **`GET /api/v1/evaluation`** — Returns verified held-out benchmark metrics.
+- **`GET /api/v1/analytics`** — Public anonymous real-time telemetry snapshot (scan volume, avg latency, top threat indicators).
+- **`POST /api/v1/auth/register`** — Creates a new account with PBKDF2-HMAC-SHA256 password hashing.
+- **`POST /api/v1/auth/login`** — Authenticates user and issues cryptographic session token.
+- **`POST /api/v1/auth/logout`** — Invalidates current session token.
+- **`GET /api/v1/auth/me`** — Returns authenticated user profile.
+- **`POST /api/v1/auth/verify-email`** — Confirms account via 6-digit email OTP.
+- **`POST /api/v1/auth/forgot-password`** — Generates secure 15-minute password reset token.
+- **`POST /api/v1/auth/reset-password`** — Resets password using valid token.
+- **`GET /api/v1/auth/scans`** — Returns private scan history protected by Row Level Security (`WHERE user_id = ?`).
+- **`POST /api/v1/auth/delete-account`** — Permanently purges user account and scan history (GDPR Art. 17).
 
 ---
 
@@ -165,17 +179,29 @@ Returns the verified benchmark metrics, confusion matrix, and threshold strategy
 ```text
 e:/SCAM SHIELD 01/
 ├── app/
-│   ├── main.py                  # FastAPI application entrypoint & static mounting
-│   ├── config.py                # Typed application settings & threshold boundaries
+│   ├── main.py                  # FastAPI application entrypoint, lifespan & static mounting
+│   ├── config.py                # Typed application settings, secrets & threshold boundaries
 │   ├── api/
-│   │   ├── endpoints.py         # REST route handlers (/analyze, /health, /evaluation)
+│   │   ├── endpoints.py         # Analysis (/analyze), /health, /evaluation, /analytics
+│   │   ├── auth_endpoints.py    # Authentication, OTP, reset, history & GDPR erasure
 │   │   └── schemas.py           # Pydantic v2 request & response data contracts
+│   ├── db/
+│   │   └── database.py          # SQLite WAL-mode connection provider & schema migrations
 │   ├── services/
 │   │   ├── text_analyzer.py     # TF-IDF inference & explainability engine
 │   │   ├── url_analyzer.py      # Passive zero-network lexical URL inspection
-│   │   └── verdict_arbiter.py   # Multi-modal scoring policy & evidence synthesis
+│   │   ├── verdict_arbiter.py   # Multi-modal scoring policy & evidence synthesis
+│   │   ├── auth_service.py      # PBKDF2 authentication, token signing & RLS queries
+│   │   ├── rate_limiter.py      # In-memory sliding-window IP rate limiter
+│   │   └── analytics.py         # Zero-retention telemetry & incident error tracker
 │   ├── models/                  # Serialized ML artifacts & evaluation metadata
-│   └── static/                  # Vanilla frontend dashboard (HTML / CSS / JS)
+│   └── static/                  # Responsive cybersecurity dashboard & SaaS views
+│       ├── index.html           # Core single-page application dashboard
+│       ├── privacy.html         # Privacy Policy (DPDP Act & GDPR compliant)
+│       ├── terms.html           # Terms of Service & acceptable use policy
+│       ├── 404.html             # High-tech cybersecurity 404 error page
+│       ├── css/style.css        # Vanilla CSS3 design system & glassmorphic tokens
+│       └── js/app.js            # Vanilla JS frontend client & onboarding tour
 ├── data/
 │   ├── processed/               # Stratified train/val/test splits (70/15/15)
 │   └── synthetic/               # Seed dataset fixtures
@@ -185,7 +211,8 @@ e:/SCAM SHIELD 01/
 ├── scripts/
 │   ├── prepare_data.py          # Data curation, PII scrubbing & splitting
 │   ├── train.py                 # Model training & Platt probability calibration
-│   └── evaluate.py              # Test set evaluation & confusion matrix generator
+│   ├── evaluate.py              # Test set evaluation & confusion matrix generator
+│   └── backup_db.py             # SQLite online snapshot backup & rotation utility
 ├── tests/
 │   ├── test_sanity.py           # Environment & configuration sanity checks
 │   ├── test_data_pipeline.py    # Stratification & zero-leakage verification
@@ -193,13 +220,15 @@ e:/SCAM SHIELD 01/
 │   ├── test_text_analyzer.py    # Classifier accuracy & explainability tests
 │   ├── test_verdict_arbiter.py  # Multi-modal scoring policy & override tests
 │   ├── test_api.py              # REST API integration & static asset tests
-│   └── test_security.py         # SSRF immunity, XSS, payload boundary tests
+│   ├── test_auth.py             # User authentication, OTP, RLS & GDPR tests
+│   └── test_security.py         # SSRF immunity, XSS, payload boundary & ReDoS tests
+├── pytest.ini                   # Pytest testpaths and warning filter configuration
 ├── PRD.md                       # Product Requirements Document
 ├── Architecture.md              # Technical Architecture & System Design
 ├── Rules.md                     # Operational & Engineering Rules
-├── Phases.md                    # Implementation Roadmap (Phases 0–10)
+├── Phases.md                    # Implementation Roadmap (Phases 0–11)
 ├── Design.md                    # UI/UX Design System Specification
-├── TASKS.md                     # Task Tracker (13/13 Completed)
+├── TASKS.md                     # Task Tracker (14/14 Completed)
 ├── TESTING.md                   # QA & Validation Framework
 ├── SECURITY.md                  # Security Policy & Threat Model (STRIDE)
 ├── CHANGELOG.md                 # Chronological Change Log
@@ -213,3 +242,4 @@ e:/SCAM SHIELD 01/
 ## 8. Presentation & Pitch Guide
 
 For the competition demonstration script, timing breakdown, live scenario walk-throughs, and judge Q&A defenses, refer to [docs/DEMO_GUIDE.md](file:///e:/SCAM%20SHIELD%2001/docs/DEMO_GUIDE.md).
+

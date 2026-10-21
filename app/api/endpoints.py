@@ -15,6 +15,7 @@ from typing import Any, Dict, Optional
 
 from fastapi import APIRouter, HTTPException, Request, Response, status
 
+from app.api.auth_endpoints import get_current_user_optional
 from app.api.schemas import (
     AnalyzeRequest,
     AnalyzeResponse,
@@ -23,12 +24,28 @@ from app.api.schemas import (
 )
 from app.config import settings
 from app.services.analytics import analytics_engine
+from app.services.auth_service import auth_service
 from app.services.rate_limiter import rate_limiter
 from app.services.text_analyzer import analyze_text, get_text_analyzer
 from app.services.url_analyzer import analyze_url
 from app.services.verdict_arbiter import synthesize_verdict
 
 router = APIRouter(prefix="/api/v1", tags=["scam-detection"])
+
+
+def extract_client_ip(request: Request) -> str:
+    """Extracts client IP address respecting reverse proxy headers (X-Forwarded-For, X-Real-IP)."""
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        parts = forwarded.split(",")
+        if parts and parts[0].strip():
+            return parts[0].strip()
+    real_ip = request.headers.get("x-real-ip")
+    if real_ip and real_ip.strip():
+        return real_ip.strip()
+    if request.client and request.client.host:
+        return request.client.host
+    return "127.0.0.1"
 
 
 @router.post(
@@ -45,7 +62,7 @@ router = APIRouter(prefix="/api/v1", tags=["scam-detection"])
 async def analyze_message_or_url(payload: AnalyzeRequest, request: Request, response: Response) -> AnalyzeResponse:
     """Core fraud and phishing analysis endpoint protected by sliding-window rate limiting."""
     # Enforce sliding-window rate limiting per client IP (Item 8)
-    client_ip = request.client.host if request.client else "127.0.0.1"
+    client_ip = extract_client_ip(request)
     allowed, retry_after = rate_limiter.is_allowed(client_ip)
     if not allowed:
         response.headers["Retry-After"] = str(retry_after)
@@ -85,8 +102,6 @@ async def analyze_message_or_url(payload: AnalyzeRequest, request: Request, resp
     )
 
     # If user is authenticated, record into their private history (Item 10)
-    from app.api.auth_endpoints import get_current_user_optional
-    from app.services.auth_service import auth_service
     user = await get_current_user_optional(request)
     if user:
         risk_band = (

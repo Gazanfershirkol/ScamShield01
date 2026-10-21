@@ -22,6 +22,7 @@ Tasks must be updated strictly upon verified execution of tests or commands.
 | **T-010** | Phase 8 | P0 | Execute held-out test split evaluation, compute precision/recall/F1/confusion matrix, and generate error report | T-006, T-008 | `scripts/evaluate.py`, `app/models/evaluation_meta.json`, `docs/EVALUATION_REPORT.md` | `python scripts/evaluate.py && pytest tests/test_api.py -k test_evaluation` | **DONE** — 375 test samples evaluated, 100% precision/recall/F1, exported evaluation_meta.json |
 | **T-011** | Phase 9 | P1 | Conduct security validation tests (XSS, SSRF zero-network verification, ReDoS, payload limits) | T-008 | `tests/test_security.py` | `pytest tests/test_security.py` | **DONE** — 8 security tests passing: SSRF immunity, XSS defense, payload boundaries, ReDoS |
 | **T-012** | Phase 10 | P1 | Finalize submission package, verify reproducible setup instructions, and create presentation pitch guide | T-009, T-010, T-011 | `README.md`, `MEMORY.md`, `docs/DEMO_GUIDE.md` | `pytest` | **DONE** — presentation guide created, README updated, 58/58 tests passing |
+| **T-013** | Phase 11 | P0 | Implement 19-Point Production SaaS Architecture (Auth, PBKDF2, Password Reset, OTP Email Verification, Sliding Rate Limiting, RLS Scan History, SQLite Automated Backups, Anonymous Analytics HUD, Incident Error Boundary, Tour Onboarding, GDPR Right-to-Erasure, Privacy & Terms, Custom 404, Lifespan Pre-Warmup) | T-012 | `app/services/auth_service.py`, `app/api/auth_endpoints.py`, `app/services/rate_limiter.py`, `app/services/analytics.py`, `app/db/database.py`, `scripts/backup_db.py`, `tests/test_auth.py`, `pytest.ini` | `pytest` | **DONE** — all 19 SaaS checklist items completed, 71/71 tests passing with zero warnings |
 
 ---
 
@@ -44,13 +45,14 @@ graph TD
     T009 --> T012["T-012: Final Packaging & Submission (DONE)"]
     T010 --> T012
     T011 --> T012
+    T012 --> T013["T-013: Production SaaS 19-Item Hardening (DONE)"]
 ```
 
 ---
 
 ## Status Ledger
-- **Total Tasks:** 13
-- **Completed:** 13 (T-000, T-001, T-002, T-003, T-004, T-005, T-006, T-007, T-008, T-009, T-010, T-011, T-012)
+- **Total Tasks:** 14
+- **Completed:** 14 (T-000, T-001, T-002, T-003, T-004, T-005, T-006, T-007, T-008, T-009, T-010, T-011, T-012, T-013)
 - **In Progress:** 0
 - **Blocked:** 0
 - **Not Started:** 0
