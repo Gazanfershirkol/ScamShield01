@@ -3,8 +3,8 @@
 [![Competition](https://img.shields.io/badge/Competition-KLE_BCA_Coding_Club-0EA5E9)](#)
 [![Track](https://img.shields.io/badge/Department-AI%20%2F%20ML-10B981)](#)
 [![Problem Code](https://img.shields.io/badge/Problem-AI%20%C2%B7%2003-F59E0B)](#)
-[![Status](https://img.shields.io/badge/Status-Complete%20%26%20Verified%20(71%2F71%20Tests)-10B981)](#)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](#)
+[![Status](https://img.shields.io/badge/Status-Complete%20%26%20Verified%20(83%2F83%20Tests)-10B981)](#)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 > **ScamShield AI** is an ultra-fast (<5ms), explainable, multi-modal fraud and phishing detection system. It combines passive lexical URL analysis with calibrated linear machine learning text classification to evaluate suspicious messages and links with **100% offline SSRF immunity**. Built for the **KLE BCA Coding Club Interdepartmental Challenge** and upgraded with a complete **19-Point Production SaaS Architecture**.
 
@@ -36,7 +36,7 @@ Digital fraud delivered via SMS, WhatsApp, email, and instant messaging poses an
   - *Guest Mode:* Instant zero-friction scanning with zero data retention.
   - *Authenticated Mode:* Private scan history with Row Level Security (RLS) and GDPR Art. 17 permanent deletion.
 - **Enterprise SaaS Controls (19-Point Checklist):** Sliding-window rate limiting with proxy IP extraction, automated SQLite snapshot backups with 10-snapshot rotation, anonymous real-time telemetry HUD, incident error boundaries (`INC-XXXXXXXX`), 4-step onboarding tour, custom cyber 404, Privacy Policy, and Terms of Service.
-- **Comprehensive Test Suite:** 71 automated unit, integration, and security tests with 100% pass rate and zero warnings.
+- **Comprehensive Test Suite:** 83 automated unit, integration, and security tests across 8 suites with 100% pass rate and zero warnings.
 
 ---
 
@@ -79,23 +79,36 @@ Actual Scam (1)                  0                    150
 
 ## 5. Quickstart & Setup Guide
 
-### Step 1: Navigate to the Repository Root
-```powershell
-cd "e:\SCAM SHIELD 01"
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/Gazanfershirkol/ScamShield01.git
+cd ScamShield01
 ```
 
-### Step 2: Activate the Virtual Environment
-```powershell
+### Step 2: Create & Activate Virtual Environment
+```bash
+# Create virtual environment
+python -m venv .venv
+
+# Activate on Windows (PowerShell):
 .\.venv\Scripts\Activate.ps1
+
+# Activate on macOS / Linux:
+source .venv/bin/activate
 ```
 
-### Step 3: Verify the Full Test Suite (71 Tests)
-```powershell
-pytest -q
+### Step 3: Install Pinned Dependencies
+```bash
+pip install -r requirements.txt
 ```
 
-### Step 4: Launch the Local Web Service
-```powershell
+### Step 4: Verify the Full Test Suite (83 Tests)
+```bash
+pytest -v
+```
+
+### Step 5: Launch the Local Web Service
+```bash
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
@@ -158,8 +171,10 @@ Submits message text, URL, or both for fraud analysis.
 }
 ```
 
-### 6.2 SaaS Operational Endpoints
-- **`GET /api/v1/health`** — System health check & model runtime status.
+### 6.2 SaaS Operational & Telemetry Endpoints
+- **`GET /api/v1/health`** — Deep system health check & model runtime status.
+- **`GET /api/v1/health/live`** — Process liveness heartbeat probe.
+- **`GET /api/v1/health/ready`** — Operational readiness probe (evaluates model & database connectivity).
 - **`GET /api/v1/evaluation`** — Returns verified held-out benchmark metrics.
 - **`GET /api/v1/analytics`** — Public anonymous real-time telemetry snapshot (scan volume, avg latency, top threat indicators).
 - **`POST /api/v1/auth/register`** — Creates a new account with PBKDF2-HMAC-SHA256 password hashing.
@@ -167,10 +182,10 @@ Submits message text, URL, or both for fraud analysis.
 - **`POST /api/v1/auth/logout`** — Invalidates current session token.
 - **`GET /api/v1/auth/me`** — Returns authenticated user profile.
 - **`POST /api/v1/auth/verify-email`** — Confirms account via 6-digit email OTP.
-- **`POST /api/v1/auth/forgot-password`** — Generates secure 15-minute password reset token.
+- **`POST /api/v1/auth/forgot-password`** — Generates secure 1-hour password reset token.
 - **`POST /api/v1/auth/reset-password`** — Resets password using valid token.
-- **`GET /api/v1/auth/scans`** — Returns private scan history protected by Row Level Security (`WHERE user_id = ?`).
-- **`POST /api/v1/auth/delete-account`** — Permanently purges user account and scan history (GDPR Art. 17).
+- **`GET /api/v1/auth/history`** — Returns private scan history protected by Row Level Security (`WHERE user_id = ?`).
+- **`DELETE /api/v1/auth/account`** — Permanently purges user account and scan history (GDPR Art. 17).
 
 ---
 

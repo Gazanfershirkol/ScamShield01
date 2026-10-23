@@ -11,7 +11,7 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
-echo Running full automated test suite (58 tests)...
+echo Running full automated test suite (83 tests)...
 pytest tests/ -v
 echo.
 pause
