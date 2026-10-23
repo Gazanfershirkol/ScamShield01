@@ -1,0 +1,376 @@
+id,text,label,category
+MSG-BENIGN-00685,272172 is your one-time verification password to confirm your mobile number on Zomato. Expires in 5 minutes.,0,transactional_otp
+MSG-BENIGN-00275,Your IndusInd Bank credit card ending XX2879 statement is ready. Minimum due: Rs 5600. Due date: 2-Oct-2026. Pay via mobile banking.,0,bank_transaction
+MSG-SCAM-00657,"Earn Rs 2,500 to Rs 8,000 daily from home! Part-time online job liking YouTube videos and rating hotels on Google Maps. No experience needed. Contact HR manager on WhatsApp: https://wa.me/<PHONE>20?text=JOB",1,job_offer
+MSG-SCAM-00744,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_3014",1,job_offer
+MSG-BENIGN-00821,"Great presentation today in Cloud Computing Architecture, Naveen! You explained the architecture very clearly.",0,personal_chat
+MSG-BENIGN-01423,"Hi Suresh, the professor rescheduled tomorrow's Machine Learning Fundamentals test to next Monday at 8:30 AM.",0,personal_chat
+MSG-BENIGN-00167,"Hey Michael, I will be arriving 15 minutes late to Seminar Room A due to traffic on Jayanagar.",0,personal_chat
+MSG-BENIGN-01019,"Your two-factor authentication code for account recovery is 660967. If you did not request this, secure your account.",0,transactional_otp
+MSG-SCAM-00413,SpeedPost Alert: Your document consignment #SP9033 requires signature verification. Verify your identity at http://speedpost-delivery-update.online/verify or visit depot.,1,delivery_phishing
+MSG-BENIGN-00780,Your ICICI Bank account ending in XX7099 was debited by Rs 3850.00 on 23-Oct-2026 for UPI ref 85667851. Available balance: Rs 72500.,0,bank_transaction
+MSG-SCAM-00811,DHL Express: Package #9821396 is pending dispatch. Confirm your contact details and postal code at http://dhl-express-dispatch.live/confirm to avoid cancellation.,1,delivery_phishing
+MSG-BENIGN-01032,HDFC Bank Alert: ATM cash withdrawal of Rs 14500 carried out from ATM located at Electronic City on 10-Oct-2026. Balance: Rs 48000.,0,bank_transaction
+MSG-BENIGN-01490,Your fixed deposit with Axis Bank for Rs 5800 has been renewed automatically for 1 year at 7.1% interest.,0,bank_transaction
+MSG-BENIGN-00680,Your Bank of Baroda credit card ending XX5889 statement is ready. Minimum due: Rs 99. Due date: 20-Oct-2026. Pay via mobile banking.,0,bank_transaction
+MSG-SCAM-00914,"Dear SBI customer, Rs 50,000 reward has been credited to your reward wallet. Click http://sbi-cashback-wallet.live/claim to deposit into your bank account immediately.",1,kyc_bank_phishing
+MSG-BENIGN-01161,Transaction successful: Rs 1250.00 paid to BookMyShow from your Axis Bank A/C XX2393 on 14-Oct-2026 at 1:45 PM.,0,bank_transaction
+MSG-BENIGN-00976,The scheduled seminar on Cybersecurity Basics will take place on 8-Oct-2026 in the Academic Block 3. Attendance is mandatory.,0,college_notice
+MSG-BENIGN-00612,Notice from Auditorium: All students must submit Operating Systems lab practical records by Friday 4 PM.,0,college_notice
+MSG-SCAM-00462,SpeedPost Alert: Your document consignment #SP6864 requires signature verification. Verify your identity at http://speedpost-delivery-update.top/verify or visit depot.,1,delivery_phishing
+MSG-SCAM-00388,"Congratulations! Your mobile number won cash prize of Rs 1,25,000 in KBC Season 16 Lucky Draw. Call lottery manager Mr. Singh on <PHONE> with your winning code 348384.",1,lottery_reward
+MSG-BENIGN-00298,Use OTP 678923 to authenticate your transaction of Rs 14500.00 on IRCTC. Valid for 3 mins. Never disclose OTP.,0,transactional_otp
+MSG-BENIGN-01275,Your table reservation at the restaurant in MG Road for party of 4 is confirmed for today at 9:45 AM.,0,delivery_update
+MSG-SCAM-00083,Gas supply warning: Your LPG pipeline connection will be terminated within 2 hours. Update Aadhaar details on http://lpg-subsidy-update.rest/kyc immediately.,1,electricity_threat
+MSG-SCAM-00437,"Dear Union Bank customer, Rs 15,00,000 reward has been credited to your reward wallet. Click http://unionbank-cashback-wallet.rest/claim to deposit into your bank account immediately.",1,kyc_bank_phishing
+MSG-BENIGN-00998,Coding Club Hackathon Announcement: Round 1 evaluation starts at 7:45 AM sharp in Electronics Lab.,0,college_notice
+MSG-BENIGN-00488,"Hi Sneha, the professor rescheduled tomorrow's Software Engineering Principles test to next Monday at 4:45 PM.",0,personal_chat
+MSG-SCAM-00472,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-3923. Pay immediately at http://echallan-parivahan-traffic.click/pay to avoid court warrant.",1,extortion_tech_support
+MSG-BENIGN-01456,"Varun, did the department share the submission deadline for the Operating Systems project?",0,personal_chat
+MSG-SCAM-00545,"URGENT: Dear customer, your HDFC account has been suspended due to pending KYC verification. Update PAN card details immediately at http://hdfc-kyc-update.rest/login to avoid permanent block.",1,kyc_bank_phishing
+MSG-BENIGN-00913,Delivery code: 568795 for order #6344. Please share this secret code with your delivery partner upon package handover.,0,transactional_otp
+MSG-BENIGN-00578,"Your two-factor authentication code for account recovery is 367657. If you did not request this, secure your account.",0,transactional_otp
+MSG-BENIGN-00826,"Thanks for helping with the assignment yesterday, Rohan! Really appreciate your time.",0,personal_chat
+MSG-BENIGN-01434,Your OTP for SBI NetBanking login is 603576. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-00385,Enter 556329 to complete payment of Rs 22000.00 to Blinkit. Do not share this OTP with anyone to avoid fraud.,0,transactional_otp
+MSG-BENIGN-00874,"Thanks for helping with the assignment yesterday, Gaurav! Really appreciate your time.",0,personal_chat
+MSG-BENIGN-00331,Delivery code: 971733 for order #3539. Please share this secret code with your delivery partner upon package handover.,0,transactional_otp
+MSG-SCAM-00156,"Jio 5G Lucky Winner: Your SIM card won Rs 2,50,000 cash prize! Contact lottery officer on WhatsApp at <PHONE> to claim your prize cheque today.",1,lottery_reward
+MSG-SCAM-00645,Your SBI debit card has been blocked due to suspicious activity. Unblock immediately by confirming OTP and PIN at http://sbi-card-unblock.buzz/auth,1,kyc_bank_phishing
+MSG-BENIGN-00668,"Your two-factor authentication code for account recovery is 575745. If you did not request this, secure your account.",0,transactional_otp
+MSG-SCAM-00610,SpeedPost Alert: Your document consignment #SP6129 requires signature verification. Verify your identity at http://speedpost-delivery-update.surf/verify or visit depot.,1,delivery_phishing
+MSG-SCAM-00995,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_2775",1,job_offer
+MSG-SCAM-00210,Courier delivery attempt failed! Delivery partner was unable to locate you. Reschedule free delivery now: http://express-parcel-reschedule.buzz/book,1,delivery_phishing
+MSG-SCAM-00442,India Post Alert: Your parcel #IN1789 could not be delivered due to incomplete street address. Please update address details within 24 hours at http://indiapost-parcel-redirection.buzz/tracking or parcel will be returned.,1,delivery_phishing
+MSG-BENIGN-01028,Transaction successful: Rs 99.00 paid to Flipkart from your IndusInd Bank A/C XX9741 on 2-Oct-2026 at 8:45 AM.,0,bank_transaction
+MSG-BENIGN-01491,Your OTP for Canara Bank NetBanking login is 359458. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-SCAM-00556,"Alert: Unusual transaction attempt of Rs 48,990 detected on your Bank of Baroda account. If you did not authorize, stop payment immediately at http://bankofbaroda-fraud-dispute.cfd/cancel",1,kyc_bank_phishing
+MSG-BENIGN-01125,Enter 589966 to complete payment of Rs 14500.00 to Swiggy. Do not share this OTP with anyone to avoid fraud.,0,transactional_otp
+MSG-BENIGN-01346,Your OTP for ICICI Bank NetBanking login is 963451. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-01224,Can you share the PDF textbook for Web Technologies and Frameworks? I cannot find it on the college portal.,0,personal_chat
+MSG-BENIGN-00447,SBI Alert: Mandate for Rs 14500.00 created successfully for MakeMyTrip. Next deduction scheduled on 5-Oct-2026.,0,bank_transaction
+MSG-BENIGN-00709,Salary credited: Rs 2500.00 deposited into your IndusInd Bank account XX1483 for the month of October.,0,bank_transaction
+MSG-SCAM-00006,Critical Security Warning: Your Windows PC has been infected with spyware trojan virus. Your passwords and credit cards are compromised. Call Microsoft certified technician immediately at 1800-419-4731.,1,extortion_tech_support
+MSG-SCAM-00461,Axis Notice: Mandatory Aadhar-PAN link pending for A/C ending 3293. Complete e-KYC within 12 hours at http://axis-aadhaar-verification.cfd/portal to prevent account freeze.,1,kyc_bank_phishing
+MSG-BENIGN-01160,Coding Club Hackathon Announcement: Round 1 evaluation starts at 12:45 PM sharp in KLE Tech Campus.,0,college_notice
+MSG-BENIGN-00311,Your Axis Bank credit card ending XX5581 statement is ready. Minimum due: Rs 1250. Due date: 27-Oct-2026. Pay via mobile banking.,0,bank_transaction
+MSG-SCAM-00432,"URGENT: Dear customer, your Kotak account has been suspended due to pending KYC verification. Update PAN card details immediately at http://kotak-kyc-update.cfd/login to avoid permanent block.",1,kyc_bank_phishing
+MSG-SCAM-00243,Final warning: Your PNB account will be permanently deactivated tonight due to non-compliance of KYC. Restore access at http://restore-pnb-service.rest/activate,1,kyc_bank_phishing
+MSG-BENIGN-01444,"Hi Gaurav, the professor rescheduled tomorrow's Database Management Systems test to next Monday at 10:30 PM.",0,personal_chat
+MSG-SCAM-00735,Water Supply Dept Alert: Disconnection order issued for consumer meter #1339. Pay pending surcharge at http://municipal-water-billing.site/pay to avoid disconnection today.,1,electricity_threat
+MSG-BENIGN-00222,Your Kotak Mahindra Bank account ending in XX7151 was debited by Rs 1250.00 on 20-Oct-2026 for UPI ref 31596235. Available balance: Rs 11400.,0,bank_transaction
+MSG-BENIGN-00454,Your table reservation at the restaurant in Electronic City for party of 4 is confirmed for today at 3:00 PM.,0,delivery_update
+MSG-BENIGN-00880,Transaction successful: Rs 149.00 paid to MakeMyTrip from your ICICI Bank A/C XX2888 on 18-Oct-2026 at 8:00 AM.,0,bank_transaction
+MSG-SCAM-00714,Your Canara Bank debit card has been blocked due to suspicious activity. Unblock immediately by confirming OTP and PIN at http://canarabank-card-unblock.click/auth,1,kyc_bank_phishing
+MSG-SCAM-00427,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_5031,1,job_offer
+MSG-BENIGN-00011,Your fixed deposit with IndusInd Bank for Rs 24500 has been renewed automatically for 1 year at 7.1% interest.,0,bank_transaction
+MSG-BENIGN-01336,Your order from Nykaa has been dispatched! Delivery expected by 10:15 AM on 13-Oct-2026. Track package via official app.,0,delivery_update
+MSG-BENIGN-01357,"Security Alert: Your Punjab National Bank NetBanking login password was successfully updated on 20-Oct-2026. If not done by you, contact customer service.",0,bank_transaction
+MSG-BENIGN-00430,Your order from BookMyShow has been dispatched! Delivery expected by 9:00 PM on 13-Oct-2026. Track package via official app.,0,delivery_update
+MSG-BENIGN-00212,Let's grab a quick coffee at the canteen after our Software Engineering Principles practical class.,0,personal_chat
+MSG-BENIGN-00861,"Hey Lakshmi, are we still meeting at Computer Lab 2 today around 4:00 PM?",0,personal_chat
+MSG-BENIGN-00769,The scheduled seminar on Web Technologies and Frameworks will take place on 7-Oct-2026 in the Robotics Lab. Attendance is mandatory.,0,college_notice
+MSG-BENIGN-00889,Your OTP for Axis Bank NetBanking login is 901087. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-00022,Delivery code: 908577 for order #8239. Please share this secret code with your delivery partner upon package handover.,0,transactional_otp
+MSG-BENIGN-01494,297769 is your one-time verification password to confirm your mobile number on IRCTC. Expires in 5 minutes.,0,transactional_otp
+MSG-SCAM-00423,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_6746,1,job_offer
+MSG-BENIGN-00421,Your flight ticket booking to New Delhi is confirmed. PNR: 5540. Check-in opens 24 hours prior to departure at 6:30 PM.,0,delivery_update
+MSG-BENIGN-01146,Your Canara Bank credit card ending XX7860 statement is ready. Minimum due: Rs 14500. Due date: 13-Oct-2026. Pay via mobile banking.,0,bank_transaction
+MSG-BENIGN-00440,Notice from Electronics Lab: All students must submit Data Structures and Algorithms lab practical records by Friday 4 PM.,0,college_notice
+MSG-SCAM-00421,Final warning: Your Axis account will be permanently deactivated tonight due to non-compliance of KYC. Restore access at http://restore-axis-service.online/activate,1,kyc_bank_phishing
+MSG-SCAM-00881,SpeedPost Alert: Your document consignment #SP5317 requires signature verification. Verify your identity at http://speedpost-delivery-update.cfd/verify or visit depot.,1,delivery_phishing
+MSG-SCAM-00651,ATTENTION: I have recorded a video of you browsing adult content using your webcam. Send 0.15 Bitcoin to my wallet address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa19 within 48 hours or I will forward the video to all your Facebook and phone contacts.,1,extortion_tech_support
+MSG-BENIGN-01088,"Your cab is arriving in 4 minutes. Driver: Gaurav, White Sedan, vehicle number KA-02-AB-7913.",0,delivery_update
+MSG-BENIGN-00746,HDFC Bank Alert: Mandate for Rs 780.00 created successfully for Nykaa. Next deduction scheduled on 6-Oct-2026.,0,bank_transaction
+MSG-SCAM-00080,"Dear candidate, your resume has been shortlisted for Amazon remote data entry executive. Salary Rs 45,000/month. Pay Rs 499 registration fee to download appointment letter at http://remote-careers-portal.xyz/apply",1,job_offer
+MSG-BENIGN-00689,Your OTP for Kotak Mahindra Bank NetBanking login is 401982. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-00195,"Dear Customer, your monthly e-statement for IndusInd Bank A/C XX4366 has been generated and sent to your registered email.",0,bank_transaction
+MSG-SCAM-00332,Final warning: Your Bank of Baroda account will be permanently deactivated tonight due to non-compliance of KYC. Restore access at http://restore-bankofbaroda-service.xyz/activate,1,kyc_bank_phishing
+MSG-SCAM-00177,Kotak Notice: Mandatory Aadhar-PAN link pending for A/C ending 5184. Complete e-KYC within 12 hours at http://kotak-aadhaar-verification.live/portal to prevent account freeze.,1,kyc_bank_phishing
+MSG-BENIGN-00974,Delivery code: 446189 for order #3329. Please share this secret code with your delivery partner upon package handover.,0,transactional_otp
+MSG-BENIGN-00970,Use OTP 719110 to authenticate your transaction of Rs 450.00 on Ola Cabs. Valid for 3 mins. Never disclose OTP.,0,transactional_otp
+MSG-SCAM-00275,"Congratulations! Your mobile number won cash prize of Rs 15,00,000 in KBC Season 16 Lucky Draw. Call lottery manager Mr. Gupta on <PHONE> with your winning code 448553.",1,lottery_reward
+MSG-SCAM-00010,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_1359",1,job_offer
+MSG-BENIGN-01233,Your order from Uber has been dispatched! Delivery expected by 7:15 AM on 2-Oct-2026. Track package via official app.,0,delivery_update
+MSG-BENIGN-00428,Your fixed deposit with Kotak Mahindra Bank for Rs 11400 has been renewed automatically for 1 year at 7.1% interest.,0,bank_transaction
+MSG-BENIGN-00662,Your fixed deposit with Canara Bank for Rs 5800 has been renewed automatically for 1 year at 7.1% interest.,0,bank_transaction
+MSG-SCAM-00157,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_5215,1,job_offer
+MSG-BENIGN-00247,863187 is your verification code for Swiggy login. Valid for 10 minutes. Do NOT share this code with anyone.,0,transactional_otp
+MSG-BENIGN-00615,378711 is your verification code for Amazon login. Valid for 10 minutes. Do NOT share this code with anyone.,0,transactional_otp
+MSG-SCAM-00777,India Post Alert: Your parcel #IN9962 could not be delivered due to incomplete street address. Please update address details within 24 hours at http://indiapost-parcel-redirection.buzz/tracking or parcel will be returned.,1,delivery_phishing
+MSG-SCAM-00962,Critical Security Warning: Your Windows PC has been infected with spyware trojan virus. Your passwords and credit cards are compromised. Call Microsoft certified technician immediately at 1800-419-8045.,1,extortion_tech_support
+MSG-SCAM-00251,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-9016. Pay immediately at http://echallan-parivahan-traffic.cfd/pay to avoid court warrant.",1,extortion_tech_support
+MSG-BENIGN-01435,Your order from Blinkit has been dispatched! Delivery expected by 7:45 PM on 14-Oct-2026. Track package via official app.,0,delivery_update
+MSG-SCAM-00101,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_8554",1,job_offer
+MSG-SCAM-00483,India Post Alert: Your parcel #IN4279 could not be delivered due to incomplete street address. Please update address details within 24 hours at http://indiapost-parcel-redirection.xyz/tracking or parcel will be returned.,1,delivery_phishing
+MSG-BENIGN-00555,"Your ticket for Train #9591 departing on 22-Oct-2026 at 4:15 PM is confirmed. Seat details: Coach B3, Berth 42.",0,delivery_update
+MSG-BENIGN-00299,The scheduled seminar on Cybersecurity Basics will take place on 3-Oct-2026 in the Robotics Lab. Attendance is mandatory.,0,college_notice
+MSG-BENIGN-00135,"Your two-factor authentication code for account recovery is 701334. If you did not request this, secure your account.",0,transactional_otp
+MSG-BENIGN-00439,Your order from Uber has been dispatched! Delivery expected by 9:30 AM on 23-Oct-2026. Track package via official app.,0,delivery_update
+MSG-BENIGN-01469,Delivery code: 634185 for order #4649. Please share this secret code with your delivery partner upon package handover.,0,transactional_otp
+MSG-SCAM-00406,DHL Express: Package #9828494 is pending dispatch. Confirm your contact details and postal code at http://dhl-express-dispatch.online/confirm to avoid cancellation.,1,delivery_phishing
+MSG-SCAM-00955,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-1377. Pay immediately at http://echallan-parivahan-traffic.click/pay to avoid court warrant.",1,extortion_tech_support
+MSG-SCAM-00044,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_4566",1,job_offer
+MSG-BENIGN-00515,Library reminder: The book 'Software Engineering Principles Guide' is due for return on 5-Oct-2026. Renew online via campus portal if needed.,0,college_notice
+MSG-BENIGN-00634,Use OTP 245993 to authenticate your transaction of Rs 149.00 on Ola Cabs. Valid for 3 mins. Never disclose OTP.,0,transactional_otp
+MSG-SCAM-00798,DHL Express: Package #9824025 is pending dispatch. Confirm your contact details and postal code at http://dhl-express-dispatch.surf/confirm to avoid cancellation.,1,delivery_phishing
+MSG-BENIGN-00084,"Don't forget to bring your ID card tomorrow for the Data Structures and Algorithms practical examination, Pallavi.",0,personal_chat
+MSG-SCAM-00600,Your ICICI debit card has been blocked due to suspicious activity. Unblock immediately by confirming OTP and PIN at http://icici-card-unblock.rest/auth,1,kyc_bank_phishing
+MSG-BENIGN-01433,Transaction successful: Rs 14500.00 paid to Flipkart from your HDFC Bank A/C XX1529 on 1-Oct-2026 at 11:15 AM.,0,bank_transaction
+MSG-BENIGN-00808,Your flight ticket booking to New Delhi is confirmed. PNR: 8021. Check-in opens 24 hours prior to departure at 3:30 AM.,0,delivery_update
+MSG-BENIGN-00521,Hey! Are you attending the Cloud Computing Architecture lecture this afternoon with professor?,0,personal_chat
+MSG-BENIGN-00544,Use OTP 922781 to authenticate your transaction of Rs 5600.00 on Nykaa. Valid for 3 mins. Never disclose OTP.,0,transactional_otp
+MSG-SCAM-00543,"Congratulations! Your mobile number won cash prize of Rs 25,00,000 in KBC Season 16 Lucky Draw. Call lottery manager Mr. Kumar on <PHONE> with your winning code 648842.",1,lottery_reward
+MSG-BENIGN-00497,Library reminder: The book 'Computer Networks Guide' is due for return on 23-Oct-2026. Renew online via campus portal if needed.,0,college_notice
+MSG-BENIGN-00272,Your Swiggy package has been delivered safely at your address. Thank you for shopping with us!,0,delivery_update
+MSG-SCAM-00619,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_5093,1,job_offer
+MSG-BENIGN-00280,935474 is your one-time verification password to confirm your mobile number on Zepto. Expires in 5 minutes.,0,transactional_otp
+MSG-BENIGN-00039,"Hi Priya, I left my notebook in Computer Lab 2. Could you please check if it is still there?",0,personal_chat
+MSG-BENIGN-00317,Your order from Amazon has been dispatched! Delivery expected by 3:00 PM on 10-Oct-2026. Track package via official app.,0,delivery_update
+MSG-BENIGN-00531,Enter 510893 to complete payment of Rs 2400.00 to Amazon. Do not share this OTP with anyone to avoid fraud.,0,transactional_otp
+MSG-BENIGN-01328,Your flight ticket booking to New Delhi is confirmed. PNR: 2137. Check-in opens 24 hours prior to departure at 11:30 PM.,0,delivery_update
+MSG-BENIGN-00386,Out for delivery: Your Swiggy order containing electronics will be delivered today by courier partner.,0,delivery_update
+MSG-BENIGN-00566,Campus placement drive: Technical interviews for shortlisted candidates will commence tomorrow at 9 AM in Student Center.,0,college_notice
+MSG-SCAM-00538,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_9629",1,job_offer
+MSG-SCAM-00416,"Winner Notice: You have been selected for free gift voucher worth Rs 10,000 from Amazon Shopping festival! Claim your gift card before midnight at http://amazon-festive-rewards.click/freegift",1,lottery_reward
+MSG-SCAM-00337,"Earn Rs 2,500 to Rs 8,000 daily from home! Part-time online job liking YouTube videos and rating hotels on Google Maps. No experience needed. Contact HR manager on WhatsApp: https://wa.me/<PHONE>68?text=JOB",1,job_offer
+MSG-BENIGN-01389,276389 is your verification code for Zepto login. Valid for 10 minutes. Do NOT share this code with anyone.,0,transactional_otp
+MSG-BENIGN-01026,Guest lecture by industry expert on Data Structures and Algorithms scheduled for this Saturday at 9:30 PM in Computer Lab 2.,0,college_notice
+MSG-SCAM-00669,India Post Alert: Your parcel #IN7596 could not be delivered due to incomplete street address. Please update address details within 24 hours at http://indiapost-parcel-redirection.cfd/tracking or parcel will be returned.,1,delivery_phishing
+MSG-BENIGN-00802,970177 is your one-time verification password to confirm your mobile number on Nykaa. Expires in 5 minutes.,0,transactional_otp
+MSG-BENIGN-00289,Delivery code: 764343 for order #7201. Please share this secret code with your delivery partner upon package handover.,0,transactional_otp
+MSG-SCAM-00128,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-6767. Pay immediately at http://echallan-parivahan-traffic.buzz/pay to avoid court warrant.",1,extortion_tech_support
+MSG-SCAM-00491,DHL Express: Package #9821576 is pending dispatch. Confirm your contact details and postal code at http://dhl-express-dispatch.site/confirm to avoid cancellation.,1,delivery_phishing
+MSG-BENIGN-00459,Your flight ticket booking to New Delhi is confirmed. PNR: 9142. Check-in opens 24 hours prior to departure at 2:15 PM.,0,delivery_update
+MSG-BENIGN-00090,Salary credited: Rs 2500.00 deposited into your Canara Bank account XX6321 for the month of October.,0,bank_transaction
+MSG-BENIGN-00897,SBI Alert: Mandate for Rs 22000.00 created successfully for MakeMyTrip. Next deduction scheduled on 24-Oct-2026.,0,bank_transaction
+MSG-BENIGN-00410,Your OTP for SBI NetBanking login is 450533. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-01411,"Your ticket for Train #8512 departing on 8-Oct-2026 at 1:00 AM is confirmed. Seat details: Coach B3, Berth 42.",0,delivery_update
+MSG-SCAM-00199,Online survey recruitment: Get paid Rs 500 per survey directly to UPI. Limited slots remaining today. Apply now at http://instant-survey-rewards.site/start,1,job_offer
+MSG-BENIGN-01086,Your Canara Bank account ending in XX1985 was debited by Rs 149.00 on 9-Oct-2026 for UPI ref 91211357. Available balance: Rs 145000.,0,bank_transaction
+MSG-SCAM-00932,Critical Security Warning: Your Windows PC has been infected with spyware trojan virus. Your passwords and credit cards are compromised. Call Microsoft certified technician immediately at 1800-419-1480.,1,extortion_tech_support
+MSG-SCAM-00028,DHL Express: Package #9827125 is pending dispatch. Confirm your contact details and postal code at http://dhl-express-dispatch.live/confirm to avoid cancellation.,1,delivery_phishing
+MSG-SCAM-00131,"Dear candidate, your resume has been shortlisted for Amazon remote data entry executive. Salary Rs 45,000/month. Pay Rs 499 registration fee to download appointment letter at http://remote-careers-portal.online/apply",1,job_offer
+MSG-BENIGN-00234,Your flight ticket booking to New Delhi is confirmed. PNR: 2075. Check-in opens 24 hours prior to departure at 9:45 AM.,0,delivery_update
+MSG-BENIGN-00851,Your table reservation at the restaurant in Whitefield for party of 4 is confirmed for today at 12:45 AM.,0,delivery_update
+MSG-SCAM-00506,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_1579,1,job_offer
+MSG-BENIGN-00313,Your flight ticket booking to New Delhi is confirmed. PNR: 1781. Check-in opens 24 hours prior to departure at 12:15 AM.,0,delivery_update
+MSG-BENIGN-00785,Your OTP for SBI NetBanking login is 820147. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-00001,Hey! Are you attending the Web Technologies and Frameworks lecture this afternoon with professor?,0,personal_chat
+MSG-SCAM-00818,ATTENTION: I have recorded a video of you browsing adult content using your webcam. Send 0.15 Bitcoin to my wallet address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa42 within 48 hours or I will forward the video to all your Facebook and phone contacts.,1,extortion_tech_support
+MSG-BENIGN-01089,Campus placement drive: Technical interviews for shortlisted candidates will commence tomorrow at 9 AM in Robotics Lab.,0,college_notice
+MSG-BENIGN-00839,Your flight ticket booking to New Delhi is confirmed. PNR: 5344. Check-in opens 24 hours prior to departure at 1:00 PM.,0,delivery_update
+MSG-BENIGN-01372,Enter 303047 to complete payment of Rs 8900.00 to Nykaa. Do not share this OTP with anyone to avoid fraud.,0,transactional_otp
+MSG-BENIGN-00810,Your Kotak Mahindra Bank credit card ending XX8787 statement is ready. Minimum due: Rs 8900. Due date: 5-Oct-2026. Pay via mobile banking.,0,bank_transaction
+MSG-BENIGN-00007,"Dear Customer, your monthly e-statement for Union Bank of India A/C XX9830 has been generated and sent to your registered email.",0,bank_transaction
+MSG-SCAM-00761,"URGENT: Dear customer, your Canara Bank account has been suspended due to pending KYC verification. Update PAN card details immediately at http://canarabank-kyc-update.top/login to avoid permanent block.",1,kyc_bank_phishing
+MSG-SCAM-00192,ATTENTION: I have recorded a video of you browsing adult content using your webcam. Send 0.15 Bitcoin to my wallet address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa26 within 48 hours or I will forward the video to all your Facebook and phone contacts.,1,extortion_tech_support
+MSG-BENIGN-00883,Let's grab a quick coffee at the canteen after our Machine Learning Fundamentals practical class.,0,personal_chat
+MSG-SCAM-00109,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-9385. Pay immediately at http://echallan-parivahan-traffic.surf/pay to avoid court warrant.",1,extortion_tech_support
+MSG-BENIGN-00066,Your OTP for Union Bank of India NetBanking login is 177449. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-00825,Guest lecture by industry expert on Python Programming scheduled for this Saturday at 10:30 PM in Electronics Lab.,0,college_notice
+MSG-SCAM-00463,"URGENT: Dear customer, your ICICI account has been suspended due to pending KYC verification. Update PAN card details immediately at http://icici-kyc-update.rest/login to avoid permanent block.",1,kyc_bank_phishing
+MSG-SCAM-00003,"Congratulations! Your mobile number won cash prize of Rs 1,25,000 in KBC Season 16 Lucky Draw. Call lottery manager Mr. Sharma on <PHONE> with your winning code 853294.",1,lottery_reward
+MSG-SCAM-00853,Critical Security Warning: Your Windows PC has been infected with spyware trojan virus. Your passwords and credit cards are compromised. Call Microsoft certified technician immediately at 1800-419-7279.,1,extortion_tech_support
+MSG-BENIGN-00414,"Security Alert: Your Union Bank of India NetBanking login password was successfully updated on 3-Oct-2026. If not done by you, contact customer service.",0,bank_transaction
+MSG-SCAM-00445,Water Supply Dept Alert: Disconnection order issued for consumer meter #1274. Pay pending surcharge at http://municipal-water-billing.rest/pay to avoid disconnection today.,1,electricity_threat
+MSG-SCAM-00433,Water Supply Dept Alert: Disconnection order issued for consumer meter #4728. Pay pending surcharge at http://municipal-water-billing.online/pay to avoid disconnection today.,1,electricity_threat
+MSG-BENIGN-01054,"Dear Customer, your monthly e-statement for IndusInd Bank A/C XX7071 has been generated and sent to your registered email.",0,bank_transaction
+MSG-BENIGN-01443,Your order from Nykaa has been dispatched! Delivery expected by 6:00 PM on 17-Oct-2026. Track package via official app.,0,delivery_update
+MSG-BENIGN-00121,Your Myntra package has been delivered safely at your address. Thank you for shopping with us!,0,delivery_update
+MSG-BENIGN-01412,Campus placement drive: Technical interviews for shortlisted candidates will commence tomorrow at 9 AM in KLE BCA Department.,0,college_notice
+MSG-SCAM-00700,SpeedPost Alert: Your document consignment #SP3889 requires signature verification. Verify your identity at http://speedpost-delivery-update.cfd/verify or visit depot.,1,delivery_phishing
+MSG-BENIGN-00975,Your flight ticket booking to New Delhi is confirmed. PNR: 1721. Check-in opens 24 hours prior to departure at 3:15 PM.,0,delivery_update
+MSG-BENIGN-01330,"Your two-factor authentication code for account recovery is 965303. If you did not request this, secure your account.",0,transactional_otp
+MSG-SCAM-00792,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-6453. Pay immediately at http://echallan-parivahan-traffic.rest/pay to avoid court warrant.",1,extortion_tech_support
+MSG-SCAM-00298,"Congratulations! Your mobile number won cash prize of Rs 2,50,000 in KBC Season 16 Lucky Draw. Call lottery manager Mr. Kumar on <PHONE> with your winning code 751005.",1,lottery_reward
+MSG-BENIGN-00964,"Hi Karan, I left my notebook in KLE Tech Campus. Could you please check if it is still there?",0,personal_chat
+MSG-BENIGN-00107,Library reminder: The book 'Computer Networks Guide' is due for return on 28-Oct-2026. Renew online via campus portal if needed.,0,college_notice
+MSG-BENIGN-00227,Salary credited: Rs 95000.00 deposited into your HDFC Bank account XX4727 for the month of October.,0,bank_transaction
+MSG-BENIGN-01190,"Hey Olivia, please ping me when you reach home safely after class.",0,personal_chat
+MSG-SCAM-00378,DHL Express: Package #9824612 is pending dispatch. Confirm your contact details and postal code at http://dhl-express-dispatch.cfd/confirm to avoid cancellation.,1,delivery_phishing
+MSG-BENIGN-01075,Rs 1250.00 credited to your HDFC Bank A/C XX8482 via NEFT from Ritu on 14-Oct-2026. Current balance: Rs 95000.,0,bank_transaction
+MSG-BENIGN-01436,Guest lecture by industry expert on Machine Learning Fundamentals scheduled for this Saturday at 3:45 AM in Main Library.,0,college_notice
+MSG-BENIGN-00967,Notice from Main Library: All students must submit Python Programming lab practical records by Friday 4 PM.,0,college_notice
+MSG-BENIGN-00682,Guest lecture by industry expert on Computer Networks scheduled for this Saturday at 10:45 PM in Robotics Lab.,0,college_notice
+MSG-BENIGN-01464,Transaction successful: Rs 3850.00 paid to Blinkit from your SBI A/C XX9536 on 22-Oct-2026 at 9:15 PM.,0,bank_transaction
+MSG-BENIGN-01381,Your flight ticket booking to New Delhi is confirmed. PNR: 1651. Check-in opens 24 hours prior to departure at 7:00 PM.,0,delivery_update
+MSG-BENIGN-00849,Your Union Bank of India account ending in XX3612 was debited by Rs 450.00 on 27-Oct-2026 for UPI ref 96716010. Available balance: Rs 95000.,0,bank_transaction
+MSG-BENIGN-00320,"Dear Customer, your monthly e-statement for Bank of Baroda A/C XX1172 has been generated and sent to your registered email.",0,bank_transaction
+MSG-BENIGN-00143,"Hey Alex, are we still meeting at Student Center today around 9:30 AM?",0,personal_chat
+MSG-SCAM-00942,"Alert: Unusual transaction attempt of Rs 48,990 detected on your SBI account. If you did not authorize, stop payment immediately at http://sbi-fraud-dispute.surf/cancel",1,kyc_bank_phishing
+MSG-SCAM-00864,SpeedPost Alert: Your document consignment #SP1506 requires signature verification. Verify your identity at http://speedpost-delivery-update.top/verify or visit depot.,1,delivery_phishing
+MSG-BENIGN-00436,"Don't forget to bring your ID card tomorrow for the Web Technologies and Frameworks practical examination, Arjun.",0,personal_chat
+MSG-BENIGN-00747,Use OTP 205317 to authenticate your transaction of Rs 22000.00 on MakeMyTrip. Valid for 3 mins. Never disclose OTP.,0,transactional_otp
+MSG-SCAM-00447,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_4943,1,job_offer
+MSG-BENIGN-01108,Your Union Bank of India credit card ending XX1606 statement is ready. Minimum due: Rs 8900. Due date: 11-Oct-2026. Pay via mobile banking.,0,bank_transaction
+MSG-BENIGN-00822,"Dear Customer, your monthly e-statement for Kotak Mahindra Bank A/C XX8004 has been generated and sent to your registered email.",0,bank_transaction
+MSG-SCAM-00346,FedEx Notification: Your international parcel has been held at customs. Pay mandatory clearance duty of Rs 149 at http://fedex-parcel-clearance.online/pay to release your package.,1,delivery_phishing
+MSG-BENIGN-00594,"Dear Customer, your monthly e-statement for Canara Bank A/C XX4687 has been generated and sent to your registered email.",0,bank_transaction
+MSG-BENIGN-00721,Your table reservation at the restaurant in Indiranagar for party of 4 is confirmed for today at 3:45 AM.,0,delivery_update
+MSG-BENIGN-00205,Your IndusInd Bank account ending in XX8600 was debited by Rs 22000.00 on 5-Oct-2026 for UPI ref 59428849. Available balance: Rs 24500.,0,bank_transaction
+MSG-BENIGN-01053,Guest lecture by industry expert on Cybersecurity Basics scheduled for this Saturday at 9:15 AM in Department of Computer Science.,0,college_notice
+MSG-BENIGN-00711,"Your cab is arriving in 4 minutes. Driver: Sophia, White Sedan, vehicle number KA-02-AB-9046.",0,delivery_update
+MSG-BENIGN-01155,"Dear Customer, your monthly e-statement for ICICI Bank A/C XX1206 has been generated and sent to your registered email.",0,bank_transaction
+MSG-SCAM-00310,"Dear user, you received a scratch card bonus of Rs 4,999 in GooglePay! Tap link to transfer reward directly to your bank: http://gpay-reward-claim.top/payout",1,lottery_reward
+MSG-BENIGN-01341,"Hi Kunal, I left my notebook in Department of Computer Science. Could you please check if it is still there?",0,personal_chat
+MSG-SCAM-00666,SpeedPost Alert: Your document consignment #SP1670 requires signature verification. Verify your identity at http://speedpost-delivery-update.live/verify or visit depot.,1,delivery_phishing
+MSG-BENIGN-00921,ICICI Bank Alert: Mandate for Rs 5600.00 created successfully for Swiggy. Next deduction scheduled on 3-Oct-2026.,0,bank_transaction
+MSG-SCAM-00707,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_7704,1,job_offer
+MSG-SCAM-00967,DHL Express: Package #9825227 is pending dispatch. Confirm your contact details and postal code at http://dhl-express-dispatch.surf/confirm to avoid cancellation.,1,delivery_phishing
+MSG-BENIGN-01473,Your OTP for ICICI Bank NetBanking login is 851232. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-SCAM-00585,"Income Tax Department Alert: A tax refund of Rs 24,800 has been approved for your PAN card. Submit bank account and verify Aadhaar at http://incometax-refund-verification.surf/claim to receive funds.",1,lottery_reward
+MSG-SCAM-00765,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_9639",1,job_offer
+MSG-BENIGN-00795,Library reminder: The book 'Computer Networks Guide' is due for return on 24-Oct-2026. Renew online via campus portal if needed.,0,college_notice
+MSG-BENIGN-00903,402056 is your one-time verification password to confirm your mobile number on Zepto. Expires in 5 minutes.,0,transactional_otp
+MSG-BENIGN-00928,Notice from KLE BCA Department: All students must submit Machine Learning Fundamentals lab practical records by Friday 4 PM.,0,college_notice
+MSG-BENIGN-01314,"Your two-factor authentication code for account recovery is 431573. If you did not request this, secure your account.",0,transactional_otp
+MSG-BENIGN-01405,"Security Alert: Your HDFC Bank NetBanking login password was successfully updated on 11-Oct-2026. If not done by you, contact customer service.",0,bank_transaction
+MSG-SCAM-00114,"Your Amazon Prime subscription has expired and auto-renewed for Rs 12,499. If you did not make this purchase, call support at <PHONE> to cancel and request instant refund.",1,extortion_tech_support
+MSG-BENIGN-01150,"Hey Suresh, I will be arriving 15 minutes late to Innovation Hub due to traffic on Whitefield.",0,personal_chat
+MSG-SCAM-00294,Electricity Department: Your bill payment was rejected. Pay now via http://state-electricity-bill-pay.live/quickpay to prevent automatic power disconnection.,1,electricity_threat
+MSG-SCAM-00195,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_6609,1,job_offer
+MSG-SCAM-00722,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_3704",1,job_offer
+MSG-SCAM-00580,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_2993",1,job_offer
+MSG-SCAM-00918,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_8016",1,job_offer
+MSG-SCAM-00533,ATTENTION: I have recorded a video of you browsing adult content using your webcam. Send 0.15 Bitcoin to my wallet address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa58 within 48 hours or I will forward the video to all your Facebook and phone contacts.,1,extortion_tech_support
+MSG-SCAM-00154,"Dear PNB User, your net banking access will be terminated within 24 hours. Verify your account credentials now at http://secure-pnb-portal.top/verify or visit bank branch with penalty fee.",1,kyc_bank_phishing
+MSG-BENIGN-00508,Your fixed deposit with Bank of Baroda for Rs 2500 has been renewed automatically for 1 year at 7.1% interest.,0,bank_transaction
+MSG-BENIGN-00741,"Hi Swati, are you free for a 10-minute phone call regarding the group project?",0,personal_chat
+MSG-SCAM-00512,Canara Bank Notice: Mandatory Aadhar-PAN link pending for A/C ending 9971. Complete e-KYC within 12 hours at http://canarabank-aadhaar-verification.rest/portal to prevent account freeze.,1,kyc_bank_phishing
+MSG-BENIGN-00029,"Hey Anita, I will be arriving 15 minutes late to Innovation Hub due to traffic on Jayanagar.",0,personal_chat
+MSG-SCAM-00377,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_6721",1,job_offer
+MSG-BENIGN-00194,"Sneha, did the department share the submission deadline for the Data Structures and Algorithms project?",0,personal_chat
+MSG-SCAM-00181,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-3464. Pay immediately at http://echallan-parivahan-traffic.top/pay to avoid court warrant.",1,extortion_tech_support
+MSG-BENIGN-01352,"Dear Customer, your monthly e-statement for Kotak Mahindra Bank A/C XX8246 has been generated and sent to your registered email.",0,bank_transaction
+MSG-BENIGN-00092,Your table reservation at the restaurant in HSR Layout for party of 4 is confirmed for today at 3:15 AM.,0,delivery_update
+MSG-BENIGN-00665,Semester Examination Circular: Download your hall ticket from the student intranet portal before 8-Oct-2026.,0,college_notice
+MSG-BENIGN-00326,Enter 308855 to complete payment of Rs 2400.00 to Flipkart. Do not share this OTP with anyone to avoid fraud.,0,transactional_otp
+MSG-BENIGN-00290,Coding Club Hackathon Announcement: Round 1 evaluation starts at 2:15 PM sharp in Department of Computer Science.,0,college_notice
+MSG-SCAM-00426,"URGENT ELECTRICITY NOTICE: Power cutoff scheduled for your meter tonight due to pending arrears of Rs 3,450. Contact executive Mr. Verma on <PHONE> to settle immediately.",1,electricity_threat
+MSG-SCAM-00779,"Dear customer, your credit points of Rs 9,850 on PNB Credit Card are expiring tonight. Redeem cash directly to your account at http://pnb-rewards-claim.click/redeem",1,kyc_bank_phishing
+MSG-BENIGN-01063,Your fixed deposit with Canara Bank for Rs 95000 has been renewed automatically for 1 year at 7.1% interest.,0,bank_transaction
+MSG-SCAM-00487,"Earn Rs 2,500 to Rs 8,000 daily from home! Part-time online job liking YouTube videos and rating hotels on Google Maps. No experience needed. Contact HR manager on WhatsApp: https://wa.me/<PHONE>09?text=JOB",1,job_offer
+MSG-BENIGN-01274,201807 is your verification code for MakeMyTrip login. Valid for 10 minutes. Do NOT share this code with anyone.,0,transactional_otp
+MSG-BENIGN-01365,"Hi Alex, are you free for a 10-minute phone call regarding the group project?",0,personal_chat
+MSG-BENIGN-00033,The scheduled seminar on Python Programming will take place on 3-Oct-2026 in the Auditorium. Attendance is mandatory.,0,college_notice
+MSG-BENIGN-00708,"Hey Sunil, please ping me when you reach home safely after class.",0,personal_chat
+MSG-SCAM-00764,"Dear customer, your credit points of Rs 9,850 on Kotak Credit Card are expiring tonight. Redeem cash directly to your account at http://kotak-rewards-claim.cfd/redeem",1,kyc_bank_phishing
+MSG-BENIGN-00798,"Your two-factor authentication code for account recovery is 463191. If you did not request this, secure your account.",0,transactional_otp
+MSG-SCAM-00288,Work from home opportunity! Earn easy money reviewing products on shopping platforms. Daily payout via UPI. Message our team on Telegram at @daily_task_payout_1555,1,job_offer
+MSG-BENIGN-01321,"Dear Customer, your monthly e-statement for Punjab National Bank A/C XX8357 has been generated and sent to your registered email.",0,bank_transaction
+MSG-SCAM-00948,"Earn Rs 2,500 to Rs 8,000 daily from home! Part-time online job liking YouTube videos and rating hotels on Google Maps. No experience needed. Contact HR manager on WhatsApp: https://wa.me/<PHONE>30?text=JOB",1,job_offer
+MSG-SCAM-00074,ATTENTION: I have recorded a video of you browsing adult content using your webcam. Send 0.15 Bitcoin to my wallet address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa76 within 48 hours or I will forward the video to all your Facebook and phone contacts.,1,extortion_tech_support
+MSG-SCAM-00746,Your HDFC debit card has been blocked due to suspicious activity. Unblock immediately by confirming OTP and PIN at http://hdfc-card-unblock.live/auth,1,kyc_bank_phishing
+MSG-SCAM-00020,"Dear consumer, your electricity power will be disconnected tonight at 9:30 PM from the power station because your previous month bill was not updated. Call electricity officer at <PHONE> immediately.",1,electricity_threat
+MSG-BENIGN-01327,Your OTP for Axis Bank NetBanking login is 118241. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-01109,Delivery code: 284693 for order #7468. Please share this secret code with your delivery partner upon package handover.,0,transactional_otp
+MSG-BENIGN-00704,Transaction successful: Rs 299.00 paid to Swiggy from your ICICI Bank A/C XX8801 on 12-Oct-2026 at 5:00 PM.,0,bank_transaction
+MSG-SCAM-00147,You have won a free iPhone 15 Pro in the festive customer appreciation draw! Confirm your delivery address and pay Rs 199 shipping fee at http://apple-festive-giveaway.buzz/claim,1,lottery_reward
+MSG-BENIGN-00650,IndusInd Bank Alert: ATM cash withdrawal of Rs 1250 carried out from ATM located at Electronic City on 23-Oct-2026. Balance: Rs 145000.,0,bank_transaction
+MSG-BENIGN-00942,"Dear Customer, your monthly e-statement for Bank of Baroda A/C XX4548 has been generated and sent to your registered email.",0,bank_transaction
+MSG-SCAM-00733,"Income Tax Department Alert: A tax refund of Rs 55,200 has been approved for your PAN card. Submit bank account and verify Aadhaar at http://incometax-refund-verification.live/claim to receive funds.",1,lottery_reward
+MSG-BENIGN-01008,Your Axis Bank account ending in XX4020 was debited by Rs 22000.00 on 23-Oct-2026 for UPI ref 96009479. Available balance: Rs 11400.,0,bank_transaction
+MSG-BENIGN-00906,"Good morning Ananya, please find attached the study notes for Software Engineering Principles.",0,personal_chat
+MSG-SCAM-00550,"Earn Rs 2,500 to Rs 8,000 daily from home! Part-time online job liking YouTube videos and rating hotels on Google Maps. No experience needed. Contact HR manager on WhatsApp: https://wa.me/<PHONE>98?text=JOB",1,job_offer
+MSG-SCAM-00934,DHL Express: Package #9825300 is pending dispatch. Confirm your contact details and postal code at http://dhl-express-dispatch.buzz/confirm to avoid cancellation.,1,delivery_phishing
+MSG-BENIGN-00004,Your table reservation at the restaurant in Malleshwaram for party of 4 is confirmed for today at 4:30 AM.,0,delivery_update
+MSG-SCAM-00143,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_6914",1,job_offer
+MSG-BENIGN-00327,"Your ticket for Train #4568 departing on 2-Oct-2026 at 5:15 PM is confirmed. Seat details: Coach B3, Berth 42.",0,delivery_update
+MSG-SCAM-00219,Critical Security Warning: Your Windows PC has been infected with spyware trojan virus. Your passwords and credit cards are compromised. Call Microsoft certified technician immediately at 1800-419-9466.,1,extortion_tech_support
+MSG-BENIGN-01157,Your BookMyShow package has been delivered safely at your address. Thank you for shopping with us!,0,delivery_update
+MSG-SCAM-00993,India Post Alert: Your parcel #IN1542 could not be delivered due to incomplete street address. Please update address details within 24 hours at http://indiapost-parcel-redirection.xyz/tracking or parcel will be returned.,1,delivery_phishing
+MSG-SCAM-00368,"Dear customer, your credit points of Rs 9,850 on PNB Credit Card are expiring tonight. Redeem cash directly to your account at http://pnb-rewards-claim.site/redeem",1,kyc_bank_phishing
+MSG-BENIGN-01128,Your Union Bank of India account ending in XX7230 was debited by Rs 299.00 on 25-Oct-2026 for UPI ref 85622173. Available balance: Rs 24500.,0,bank_transaction
+MSG-SCAM-00174,"Dear SBI customer, Rs 50,000 reward has been credited to your reward wallet. Click http://sbi-cashback-wallet.cfd/claim to deposit into your bank account immediately.",1,kyc_bank_phishing
+MSG-BENIGN-01260,Your table reservation at the restaurant in Whitefield for party of 4 is confirmed for today at 10:15 AM.,0,delivery_update
+MSG-BENIGN-00878,Semester Examination Circular: Download your hall ticket from the student intranet portal before 22-Oct-2026.,0,college_notice
+MSG-BENIGN-00579,"Your ticket for Train #8462 departing on 9-Oct-2026 at 12:00 AM is confirmed. Seat details: Coach B3, Berth 42.",0,delivery_update
+MSG-SCAM-00676,India Post Alert: Your parcel #IN4945 could not be delivered due to incomplete street address. Please update address details within 24 hours at http://indiapost-parcel-redirection.online/tracking or parcel will be returned.,1,delivery_phishing
+MSG-BENIGN-01500,Happy birthday Naveen! Wishing you a fantastic year ahead with great achievements.,0,personal_chat
+MSG-BENIGN-00312,"Your two-factor authentication code for account recovery is 944804. If you did not request this, secure your account.",0,transactional_otp
+MSG-BENIGN-01315,"Your cab is arriving in 4 minutes. Driver: Neha, White Sedan, vehicle number KA-02-AB-4695.",0,delivery_update
+MSG-SCAM-00656,"Income Tax Department Alert: A tax refund of Rs 36,500 has been approved for your PAN card. Submit bank account and verify Aadhaar at http://incometax-refund-verification.xyz/claim to receive funds.",1,lottery_reward
+MSG-SCAM-00689,"Income Tax Department Alert: A tax refund of Rs 73,400 has been approved for your PAN card. Submit bank account and verify Aadhaar at http://incometax-refund-verification.surf/claim to receive funds.",1,lottery_reward
+MSG-BENIGN-00163,Your Punjab National Bank credit card ending XX5441 statement is ready. Minimum due: Rs 450. Due date: 6-Oct-2026. Pay via mobile banking.,0,bank_transaction
+MSG-BENIGN-00218,Rs 8900.00 credited to your HDFC Bank A/C XX6514 via NEFT from Ritu on 26-Oct-2026. Current balance: Rs 5800.,0,bank_transaction
+MSG-BENIGN-00732,Your fixed deposit with HDFC Bank for Rs 72500 has been renewed automatically for 1 year at 7.1% interest.,0,bank_transaction
+MSG-SCAM-00828,"Congratulations! Your mobile number won cash prize of Rs 1,25,000 in KBC Season 16 Lucky Draw. Call lottery manager Mr. Sharma on <PHONE> with your winning code 271676.",1,lottery_reward
+MSG-BENIGN-00786,Your flight ticket booking to New Delhi is confirmed. PNR: 7551. Check-in opens 24 hours prior to departure at 11:45 PM.,0,delivery_update
+MSG-BENIGN-00181,Delivery code: 619013 for order #8272. Please share this secret code with your delivery partner upon package handover.,0,transactional_otp
+MSG-SCAM-00724,"Alert: Unusual transaction attempt of Rs 48,990 detected on your Union Bank account. If you did not authorize, stop payment immediately at http://unionbank-fraud-dispute.click/cancel",1,kyc_bank_phishing
+MSG-SCAM-00347,ATTENTION: I have recorded a video of you browsing adult content using your webcam. Send 0.15 Bitcoin to my wallet address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa22 within 48 hours or I will forward the video to all your Facebook and phone contacts.,1,extortion_tech_support
+MSG-BENIGN-00220,"Your ticket for Train #6234 departing on 12-Oct-2026 at 6:00 AM is confirmed. Seat details: Coach B3, Berth 42.",0,delivery_update
+MSG-BENIGN-01258,Your Canara Bank account ending in XX4721 was debited by Rs 2400.00 on 22-Oct-2026 for UPI ref 33798199. Available balance: Rs 24500.,0,bank_transaction
+MSG-BENIGN-00281,Your order from Flipkart has been dispatched! Delivery expected by 5:15 PM on 7-Oct-2026. Track package via official app.,0,delivery_update
+MSG-BENIGN-00094,"Hey Swati, please ping me when you reach home safely after class.",0,personal_chat
+MSG-BENIGN-00872,"Your cab is arriving in 4 minutes. Driver: Sunil, White Sedan, vehicle number KA-02-AB-7623.",0,delivery_update
+MSG-SCAM-00084,"Jio 5G Lucky Winner: Your SIM card won Rs 25,000 cash prize! Contact lottery officer on WhatsApp at <PHONE> to claim your prize cheque today.",1,lottery_reward
+MSG-SCAM-00699,PNB Notice: Mandatory Aadhar-PAN link pending for A/C ending 4841. Complete e-KYC within 12 hours at http://pnb-aadhaar-verification.site/portal to prevent account freeze.,1,kyc_bank_phishing
+MSG-BENIGN-00720,459793 is your one-time verification password to confirm your mobile number on Flipkart. Expires in 5 minutes.,0,transactional_otp
+MSG-BENIGN-00111,Your flight ticket booking to New Delhi is confirmed. PNR: 8204. Check-in opens 24 hours prior to departure at 3:45 PM.,0,delivery_update
+MSG-BENIGN-00318,Coding Club Hackathon Announcement: Round 1 evaluation starts at 6:45 PM sharp in Coding Club Hall.,0,college_notice
+MSG-BENIGN-01302,"Hey Alex, I will be arriving 15 minutes late to Coding Club Hall due to traffic on Indiranagar.",0,personal_chat
+MSG-BENIGN-00793,"Your two-factor authentication code for account recovery is 442452. If you did not request this, secure your account.",0,transactional_otp
+MSG-SCAM-00040,"Security Alert: Someone accessed your email from IP address 185.220.101.4 in Moscow, Russia. Secure your account now at http://account-security-checkpoint.online/auth",1,extortion_tech_support
+MSG-BENIGN-00231,Could you send me the code repository link we worked on during the Operating Systems lab?,0,personal_chat
+MSG-SCAM-00687,Critical Security Warning: Your Windows PC has been infected with spyware trojan virus. Your passwords and credit cards are compromised. Call Microsoft certified technician immediately at 1800-419-5354.,1,extortion_tech_support
+MSG-SCAM-00138,Water Supply Dept Alert: Disconnection order issued for consumer meter #3616. Pay pending surcharge at http://municipal-water-billing.top/pay to avoid disconnection today.,1,electricity_threat
+MSG-BENIGN-01052,"Your cab is arriving in 4 minutes. Driver: Abhishek, White Sedan, vehicle number KA-02-AB-1852.",0,delivery_update
+MSG-BENIGN-00472,601602 is your verification code for Nykaa login. Valid for 10 minutes. Do NOT share this code with anyone.,0,transactional_otp
+MSG-BENIGN-01259,Your OTP for HDFC Bank NetBanking login is 285632. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-BENIGN-01004,Salary credited: Rs 5800.00 deposited into your Kotak Mahindra Bank account XX9993 for the month of October.,0,bank_transaction
+MSG-SCAM-00650,"Income Tax Department Alert: A tax refund of Rs 42,100 has been approved for your PAN card. Submit bank account and verify Aadhaar at http://incometax-refund-verification.click/claim to receive funds.",1,lottery_reward
+MSG-BENIGN-01387,Campus placement drive: Technical interviews for shortlisted candidates will commence tomorrow at 9 AM in KLE Tech Campus.,0,college_notice
+MSG-SCAM-00960,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_6716",1,job_offer
+MSG-BENIGN-00450,Coding Club Hackathon Announcement: Round 1 evaluation starts at 1:00 PM sharp in KLE Tech Campus.,0,college_notice
+MSG-SCAM-00928,"Dear PNB User, your net banking access will be terminated within 24 hours. Verify your account credentials now at http://secure-pnb-portal.xyz/verify or visit bank branch with penalty fee.",1,kyc_bank_phishing
+MSG-BENIGN-00671,Rs 99.00 credited to your IndusInd Bank A/C XX9548 via NEFT from Olivia on 17-Oct-2026. Current balance: Rs 11400.,0,bank_transaction
+MSG-BENIGN-00657,Union Bank of India Alert: ATM cash withdrawal of Rs 22000 carried out from ATM located at Electronic City on 18-Oct-2026. Balance: Rs 11400.,0,bank_transaction
+MSG-BENIGN-00844,Guest lecture by industry expert on Database Management Systems scheduled for this Saturday at 10:45 PM in Main Library.,0,college_notice
+MSG-SCAM-00214,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-1985. Pay immediately at http://echallan-parivahan-traffic.cfd/pay to avoid court warrant.",1,extortion_tech_support
+MSG-BENIGN-00178,"Your cab is arriving in 4 minutes. Driver: Swati, White Sedan, vehicle number KA-02-AB-4228.",0,delivery_update
+MSG-BENIGN-00683,"Hey Karan, let's form a team for the upcoming KLE BCA Coding Club hackathon.",0,personal_chat
+MSG-SCAM-00631,India Post Alert: Your parcel #IN7079 could not be delivered due to incomplete street address. Please update address details within 24 hours at http://indiapost-parcel-redirection.rest/tracking or parcel will be returned.,1,delivery_phishing
+MSG-SCAM-00380,Final warning: Your Union Bank account will be permanently deactivated tonight due to non-compliance of KYC. Restore access at http://restore-unionbank-service.site/activate,1,kyc_bank_phishing
+MSG-BENIGN-01386,Your MakeMyTrip package has been delivered safely at your address. Thank you for shopping with us!,0,delivery_update
+MSG-BENIGN-00104,Your Bank of Baroda account ending in XX5700 was debited by Rs 299.00 on 20-Oct-2026 for UPI ref 73411827. Available balance: Rs 2500.,0,bank_transaction
+MSG-SCAM-00954,SpeedPost Alert: Your document consignment #SP2896 requires signature verification. Verify your identity at http://speedpost-delivery-update.xyz/verify or visit depot.,1,delivery_phishing
+MSG-BENIGN-01289,"Hi Suresh, are you free for a 10-minute phone call regarding the group project?",0,personal_chat
+MSG-BENIGN-01485,"Don't forget to bring your ID card tomorrow for the Data Structures and Algorithms practical examination, Aditya.",0,personal_chat
+MSG-BENIGN-00452,Punjab National Bank Alert: Mandate for Rs 5600.00 created successfully for Uber. Next deduction scheduled on 28-Oct-2026.,0,bank_transaction
+MSG-BENIGN-00249,"Great presentation today in Data Structures and Algorithms, Gaurav! You explained the architecture very clearly.",0,personal_chat
+MSG-SCAM-00424,ATTENTION: I have recorded a video of you browsing adult content using your webcam. Send 0.15 Bitcoin to my wallet address 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa31 within 48 hours or I will forward the video to all your Facebook and phone contacts.,1,extortion_tech_support
+MSG-BENIGN-00274,"Hi Karan, the professor rescheduled tomorrow's Cybersecurity Basics test to next Monday at 2:30 AM.",0,personal_chat
+MSG-SCAM-00782,"Alert: Unusual transaction attempt of Rs 48,990 detected on your Kotak account. If you did not authorize, stop payment immediately at http://kotak-fraud-dispute.rest/cancel",1,kyc_bank_phishing
+MSG-BENIGN-01078,Notice from Campus Cafeteria: All students must submit Python Programming lab practical records by Friday 4 PM.,0,college_notice
+MSG-SCAM-00613,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_3508",1,job_offer
+MSG-SCAM-00742,Final warning: Your Union Bank account will be permanently deactivated tonight due to non-compliance of KYC. Restore access at http://restore-unionbank-service.top/activate,1,kyc_bank_phishing
+MSG-SCAM-00176,SpeedPost Alert: Your document consignment #SP1718 requires signature verification. Verify your identity at http://speedpost-delivery-update.rest/verify or visit depot.,1,delivery_phishing
+MSG-SCAM-00908,ICICI Notice: Mandatory Aadhar-PAN link pending for A/C ending 2101. Complete e-KYC within 12 hours at http://icici-aadhaar-verification.cfd/portal to prevent account freeze.,1,kyc_bank_phishing
+MSG-SCAM-00665,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_9465",1,job_offer
+MSG-SCAM-00245,FedEx Notification: Your international parcel has been held at customs. Pay mandatory clearance duty of Rs 149 at http://fedex-parcel-clearance.xyz/pay to release your package.,1,delivery_phishing
+MSG-BENIGN-01017,"Hey Suresh, are we still meeting at Computer Lab 2 today around 4:45 PM?",0,personal_chat
+MSG-SCAM-00417,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_5455",1,job_offer
+MSG-SCAM-00693,You have won a free iPhone 15 Pro in the festive customer appreciation draw! Confirm your delivery address and pay Rs 199 shipping fee at http://apple-festive-giveaway.cfd/claim,1,lottery_reward
+MSG-SCAM-00602,Critical Security Warning: Your Windows PC has been infected with spyware trojan virus. Your passwords and credit cards are compromised. Call Microsoft certified technician immediately at 1800-419-6165.,1,extortion_tech_support
+MSG-SCAM-00248,"Congratulations! Your mobile number won cash prize of Rs 25,00,000 in KBC Season 16 Lucky Draw. Call lottery manager Mr. Choudhury on <PHONE> with your winning code 878266.",1,lottery_reward
+MSG-BENIGN-01251,Enter 920102 to complete payment of Rs 299.00 to Nykaa. Do not share this OTP with anyone to avoid fraud.,0,transactional_otp
+MSG-BENIGN-00267,Your table reservation at the restaurant in HSR Layout for party of 4 is confirmed for today at 11:30 AM.,0,delivery_update
+MSG-BENIGN-00784,Axis Bank Alert: Mandate for Rs 780.00 created successfully for Swiggy. Next deduction scheduled on 24-Oct-2026.,0,bank_transaction
+MSG-BENIGN-01184,"Hey Meera, are we still meeting at Main Library today around 5:15 PM?",0,personal_chat
+MSG-SCAM-00611,"Traffic Police E-Challan Notice: You have 1 unpaid traffic violation fine of Rs 1,500 on vehicle #KA-03-EX-5545. Pay immediately at http://echallan-parivahan-traffic.live/pay to avoid court warrant.",1,extortion_tech_support
+MSG-SCAM-00133,"Congratulations! Your mobile number won cash prize of Rs 25,00,000 in KBC Season 16 Lucky Draw. Call lottery manager Mr. Kumar on <PHONE> with your winning code 122427.",1,lottery_reward
+MSG-BENIGN-01162,Your OTP for IndusInd Bank NetBanking login is 579245. Valid for 5 minutes. Bank officials will NEVER ask for your OTP.,0,transactional_otp
+MSG-SCAM-00641,"URGENT: Dear customer, your Axis account has been suspended due to pending KYC verification. Update PAN card details immediately at http://axis-kyc-update.live/login to avoid permanent block.",1,kyc_bank_phishing
+MSG-SCAM-00931,Critical Security Warning: Your Windows PC has been infected with spyware trojan virus. Your passwords and credit cards are compromised. Call Microsoft certified technician immediately at 1800-419-2709.,1,extortion_tech_support
+MSG-BENIGN-00069,"Hi Emma, I left my notebook in Robotics Lab. Could you please check if it is still there?",0,personal_chat
+MSG-SCAM-00773,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_6462",1,job_offer
+MSG-SCAM-00795,India Post Alert: Your parcel #IN3630 could not be delivered due to incomplete street address. Please update address details within 24 hours at http://indiapost-parcel-redirection.live/tracking or parcel will be returned.,1,delivery_phishing
+MSG-BENIGN-00647,"Your ticket for Train #5626 departing on 12-Oct-2026 at 2:30 AM is confirmed. Seat details: Coach B3, Berth 42.",0,delivery_update
+MSG-SCAM-00039,"Telegram Part-Time Hiring: Work 30 minutes daily and earn Rs 3,000 instant payout. Daily payment guaranteed. Join our recruitment channel immediately: https://t.me/vip_task_earning_9536",1,job_offer
+MSG-BENIGN-01446,Enter 325242 to complete payment of Rs 2400.00 to BookMyShow. Do not share this OTP with anyone to avoid fraud.,0,transactional_otp
+MSG-SCAM-00775,"Winner Notice: You have been selected for free gift voucher worth Rs 10,000 from Amazon Shopping festival! Claim your gift card before midnight at http://amazon-festive-rewards.surf/freegift",1,lottery_reward
+MSG-SCAM-00036,Kotak Notice: Mandatory Aadhar-PAN link pending for A/C ending 9525. Complete e-KYC within 12 hours at http://kotak-aadhaar-verification.buzz/portal to prevent account freeze.,1,kyc_bank_phishing
+MSG-SCAM-00857,SpeedPost Alert: Your document consignment #SP6604 requires signature verification. Verify your identity at http://speedpost-delivery-update.buzz/verify or visit depot.,1,delivery_phishing
+MSG-BENIGN-00914,"Your ticket for Train #5081 departing on 27-Oct-2026 at 6:15 AM is confirmed. Seat details: Coach B3, Berth 42.",0,delivery_update

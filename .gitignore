@@ -27,17 +27,16 @@ coverage.xml
 htmlcov/
 *.log
 
-# ── Trained model artefacts (large binary files) ──────────────
-# Serialized models live here; do not commit binaries to Git
-# unless you explicitly decide to version a specific release.
-app/models/*.joblib
+# ── Trained model artefacts ───────────────────────────────────
+# Versioned production baseline model artifact:
+!app/models/text_model.joblib
 app/models/*.pkl
 app/models/*.bin
 
-# ── Raw & processed datasets (may contain PII even if scrubbed)─
+# ── Raw & processed datasets ──────────────────────────────────
 data/raw/
-data/processed/
-# Synthetic fixtures are small & safe to version; include them:
+# Versioned processed benchmark splits for CI/test reproducibility:
+!data/processed/*.csv
 !data/synthetic/
 
 # ── IDE & editor noise ────────────────────────────────────────
