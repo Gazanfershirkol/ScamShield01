@@ -2,7 +2,42 @@
 
 All notable changes to the ScamShield AI project will be documented chronologically in this file. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [Unreleased] - Stages A, B & C: Production Hardening, Test Isolation & Telemetry (2026-10-23)
+
+### Added
+- **Test Database Isolation Boundary (Stage A / Task T-014)**:
+  - Added dynamic `SCAMSHIELD_DB_PATH` and `SCAMSHIELD_BACKUP_DIR` environment overrides to `app/config.py` and `app/db/database.py`.
+  - Added global pytest session fixture in `tests/conftest.py` allocating isolated temporary SQLite database and backup directories.
+  - Hardened `get_db_path()` to raise `RuntimeError` if tests attempt to connect to or fall back to live `data/scamshield.db`.
+  - Proven with `scripts/verify_isolation.py`: Zero test modifications to live database files.
+- **Trusted Reverse Proxy Security Boundary (Stage A / Task T-014)**:
+  - Re-architected `extract_client_ip()` in `app/api/endpoints.py` with RFC 7239 compliant right-to-left header parsing.
+  - Added IP address syntax validation using standard library `ipaddress.ip_address`.
+  - Implemented `is_trusted_proxy()` with CIDR subnet matching (`10.0.0.0/8`, `172.16.0.0/12`, `127.0.0.1/32`).
+  - Completely neutralized client-side IP spoofing, blind leftmost header forgery, and rate-limiting bypass.
+- **Production Telemetry Probes & Security Headers (Stage B / Task T-015)**:
+  - Upgraded `/api/v1/health` with active database connection ping while preserving `HealthResponse` schema compatibility.
+  - Added `/api/v1/health/live` (liveness heartbeat) and `/api/v1/health/ready` (ML & database readiness check).
+  - Added defensive ASGI security headers middleware (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `X-XSS-Protection: 1; mode=block`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: geolocation=(), camera=(), microphone=()`).
+  - Added configurable `CORS_ORIGINS`, `SERVER_HOST`, and `SERVER_PORT` in `app/config.py`.
+- **Production Deployment Suite (Stage B / Task T-015)**:
+  - Authored `deploy/env.production.example`: Fully documented production environment template.
+  - Authored `deploy/nginx/scamshield.conf`: Hardened Nginx configuration with edge rate limiting, TLS 1.3/1.2 ciphers, and security headers.
+  - Authored `deploy/systemd/scamshield.service`: Systemd service unit with Linux OS-level sandboxing.
+  - Authored `deploy/DEPLOYMENT.md`: Operational deployment runbook for high-availability setups.
+- **Dynamic Frontend Health & Diagnostic HUD (Stage C / Task T-016)**:
+  - Integrated live `checkEngineHealth()` polling in `app/static/js/app.js` updating the engine status badge.
+  - Added "Copy Report" button in `app/static/index.html` allowing one-click export of structured threat assessment reports to clipboard.
+  - Authored `scripts/prune_data.py`: Database maintenance utility for token pruning and SQLite integrity validation.
+  - Expanded automated test suite to 83 passing tests across all 8 suites.
+- **Privacy Alignment, Scope Harmonization & Terminology Hardening (Stage C.2 / Task T-017)**:
+  - Harmonized `app/static/privacy.html` and `index.html` tour modal: explicitly clarified Guest Zero-Retention (100% ephemeral in-memory) vs. Registered Account Mode (isolated row-level security audit trail with 1-click GDPR deletion).
+  - Clarified confidence terminology in `app/api/schemas.py`, `app/static/js/app.js`, and `app/static/index.html`: updated clipboard export and UI badge descriptions to "Risk Index (Score Normalized)".
+  - Updated `extract_client_ip()` docstring in `app/api/endpoints.py` to accurately document right-to-left traversal across `X-Forwarded-For`.
+  - Reconciled test-suite baseline at 83 collected and passing tests.
+
 ## [Unreleased] - Phase 11: Production SaaS Evolution & 19-Point Hardening (2026-10-21)
+
 
 ### Added
 - **Full Production SaaS Architecture**: Implemented all 19 checklist items for a production-grade cyber SaaS platform.

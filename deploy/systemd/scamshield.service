@@ -1,0 +1,59 @@
+# ==============================================================================
+# ScamShield AI — Systemd Production Service Unit File
+# ==============================================================================
+# Place in /etc/systemd/system/scamshield.service
+# Enable & start via:
+#   systemctl daemon-reload
+#   systemctl enable scamshield.service
+#   systemctl start scamshield.service
+# Inspect logs via:
+#   journalctl -u scamshield.service -f
+
+[Unit]
+Description=ScamShield AI Production FastAPI Service
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=scamshield
+Group=scamshield
+WorkingDirectory=/opt/scamshield
+EnvironmentFile=/opt/scamshield/.env
+
+# Multi-worker Uvicorn invocation
+# (Calculated as 2 * cores + 1; default 4 workers for standard dual-core VMs)
+ExecStart=/opt/scamshield/.venv/bin/uvicorn app.main:app \
+    --host 127.0.0.1 \
+    --port 8000 \
+    --workers 4 \
+    --timeout-keep-alive 30 \
+    --proxy-headers \
+    --forwarded-allow-ips "127.0.0.1,::1"
+
+# Service lifecycle & auto-recovery
+Restart=always
+RestartSec=3s
+KillMode=mixed
+TimeoutStopSec=10s
+
+# Linux OS-level Security Sandboxing
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+
+# Resource limits
+LimitNOFILE=65535
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target

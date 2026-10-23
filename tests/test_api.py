@@ -262,3 +262,32 @@ def test_error_tracking_incident_id(monkeypatch):
     assert data["incident_id"].startswith("INC-")
 
 
+def test_health_probes_liveness_and_readiness(client):
+    """Liveness and readiness probes return HTTP 200 with proper subsystem status (Stage B)."""
+    # 1. Liveness
+    live_res = client.get("/api/v1/health/live")
+    assert live_res.status_code == 200
+    assert live_res.json()["status"] == "alive"
+
+    # 2. Readiness
+    ready_res = client.get("/api/v1/health/ready")
+    assert ready_res.status_code == 200
+    ready_data = ready_res.json()
+    assert ready_data["ready"] is True
+    assert ready_data["model_loaded"] is True
+    assert ready_data["database_connected"] is True
+
+
+def test_security_headers_present_on_responses(client):
+    """Defensive HTTP security headers are present on all responses (Stage B Hardening)."""
+    response = client.get("/api/v1/health")
+    assert response.status_code == 200
+    headers = response.headers
+    assert headers.get("x-content-type-options") == "nosniff"
+    assert headers.get("x-frame-options") == "DENY"
+    assert headers.get("x-xss-protection") == "1; mode=block"
+    assert "strict-origin-when-cross-origin" in headers.get("referrer-policy", "")
+    assert "geolocation=()" in headers.get("permissions-policy", "")
+
+
+

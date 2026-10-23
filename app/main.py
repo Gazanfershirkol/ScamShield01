@@ -47,14 +47,27 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Configure Cross-Origin Resource Sharing (CORS) for local and competition UI access
+# Configure Cross-Origin Resource Sharing (CORS) for local and production access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    """Adds defensive HTTP security headers to all responses (Stage B Hardening)."""
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "geolocation=(), camera=(), microphone=()"
+    return response
+
 
 # Register API v1 endpoints routers
 app.include_router(api_v1_router)
@@ -145,4 +158,10 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app.main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run(
+        "app.main:app",
+        host=settings.SERVER_HOST,
+        port=settings.SERVER_PORT,
+        reload=(settings.APP_ENV == "development"),
+    )
+

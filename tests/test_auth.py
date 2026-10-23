@@ -206,3 +206,45 @@ def test_automated_database_backup(tmp_path):
     assert backup_path.exists()
     assert backup_path.stat().st_size > 0
     assert "scamshield_backup_" in backup_path.name
+
+
+def test_database_pruning_and_integrity():
+    """Database Hygiene (Stage C): Token pruning and SQLite integrity check."""
+    import time
+    from scripts.prune_data import prune_expired_tokens, check_database_integrity, checkpoint_wal
+    from app.db.database import get_db_connection
+
+    # 1. Integrity check on clean test DB
+    assert check_database_integrity() is True
+
+    # 2. Insert expired reset token
+    conn = get_db_connection()
+    try:
+        with conn:
+            conn.execute(
+                """
+                INSERT INTO users (email, password_hash, salt, reset_token, reset_expires, created_at)
+                VALUES ('expired.user@test.com', 'dummy_hash', 'dummy_salt', 'expired_tok_123', ?, ?);
+                """,
+                (time.time() - 3600, time.time() - 7200),
+            )
+    finally:
+        conn.close()
+
+    # 3. Prune expired tokens
+    cleared = prune_expired_tokens()
+    assert cleared == 1
+
+    # 4. Verify token was cleared
+    conn = get_db_connection()
+    try:
+        cursor = conn.execute("SELECT reset_token, reset_expires FROM users WHERE email = 'expired.user@test.com';")
+        row = cursor.fetchone()
+        assert row["reset_token"] is None
+        assert row["reset_expires"] is None
+    finally:
+        conn.close()
+
+    # 5. Checkpoint WAL
+    checkpoint_wal()
+

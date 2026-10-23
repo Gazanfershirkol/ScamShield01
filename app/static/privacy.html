@@ -125,18 +125,21 @@
         <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         </svg>
-        1. The Zero-Retention Ephemeral Architecture
+        1. The Zero-Retention Ephemeral Architecture &amp; Dual Operational Modes
       </h2>
       <p>
         At ScamShield AI, we operate on a fundamental cybersecurity principle: <strong>You cannot leak what you do not store.</strong>
       </p>
       <div class="legal-highlight-box">
         <p>
-          We do not record, store, log, or persist the message text, SMS snippets, or suspect URLs that you submit to our inspection engine. Payloads are processed in volatile RAM (ephemeral memory) and immediately cleared once the risk assessment is dispatched.
+          <strong>Guest Scanning (Default):</strong> Pure stateless ephemeral analysis. Submissions (message snippets and suspicious URLs) are processed entirely in volatile RAM and immediately discarded. No database rows, persistent logs, or tracking cookies are created.
         </p>
       </div>
       <p>
-        Unlike commercial platforms that build ad-targeting profiles or train closed-source models on user communications, ScamShield AI operates as a pure stateless scanning utility.
+        <strong>Registered Account Mode (Optional Audit Trail):</strong> For users who opt to register an account, ScamShield AI maintains a private, cryptographically isolated history log (recording timestamps, risk metrics, and truncated previews) solely for the account holder's personal auditing and threat tracking.
+      </p>
+      <p>
+        Unlike commercial platforms that build ad-targeting profiles or train closed-source models on user communications, ScamShield AI never sells, shares, or uses submitted content for commercial tracking.
       </p>
     </section>
 

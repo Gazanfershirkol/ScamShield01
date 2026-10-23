@@ -62,7 +62,7 @@ class AnalyzeResponse(BaseModel):
 
     verdict: str = Field(description="Three-state verdict: 'likely safe', 'needs review', or 'likely scam'.")
     risk_score: int = Field(ge=0, le=100, description="Normalized risk score from 0 (safest) to 100 (highest risk).")
-    confidence: float = Field(ge=0.0, le=1.0, description="Normalized composite decision confidence index.")
+    confidence: float = Field(ge=0.0, le=1.0, description="Normalized composite decision confidence / risk index (0.0 to 1.0).")
     summary: str = Field(description="Concise 1-sentence diagnostic explanation.")
     text_analysis: TextAnalysisResponse
     url_analysis: URLAnalysisResponse

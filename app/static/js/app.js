@@ -210,7 +210,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------------------------------------------------------------------------
   // Safe DOM Rendering (Zero XSS)
   // ---------------------------------------------------------------------------
+  let latestVerdictData = null;
+
   function renderVerdict(data) {
+    latestVerdictData = data;
     loadingState.classList.remove("visible");
 
     // 1. Reset theme classes
@@ -402,6 +405,91 @@ document.addEventListener("DOMContentLoaded", () => {
   // Trigger telemetry on load and periodically
   fetchTelemetry();
   setInterval(fetchTelemetry, 15000);
+
+  // ---------------------------------------------------------------------------
+  // Dynamic Engine Runtime Health Polling (Stage B/C)
+  // ---------------------------------------------------------------------------
+  const runtimeBadge = document.getElementById("runtime-badge");
+  const runtimeDot = document.getElementById("runtime-dot");
+  const runtimeText = document.getElementById("runtime-text");
+
+  async function checkEngineHealth() {
+    try {
+      const res = await fetch("/api/v1/health");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status === "healthy") {
+          if (runtimeDot) runtimeDot.style.background = "var(--safe-text)";
+          if (runtimeText) runtimeText.textContent = "Engine Online";
+          if (runtimeBadge) runtimeBadge.title = "ML Model & Database operational";
+        } else {
+          if (runtimeDot) runtimeDot.style.background = "var(--review-text)";
+          if (runtimeText) runtimeText.textContent = "Subsystem Degraded";
+          if (runtimeBadge) runtimeBadge.title = "Core subsystem degraded";
+        }
+      } else {
+        if (runtimeDot) runtimeDot.style.background = "var(--danger)";
+        if (runtimeText) runtimeText.textContent = "Engine Offline";
+      }
+    } catch {
+      if (runtimeDot) runtimeDot.style.background = "var(--danger)";
+      if (runtimeText) runtimeText.textContent = "Engine Offline";
+    }
+  }
+
+  checkEngineHealth();
+  setInterval(checkEngineHealth, 30000);
+
+  // ---------------------------------------------------------------------------
+  // Copy Threat Assessment Report to Clipboard
+  // ---------------------------------------------------------------------------
+  const btnCopyReport = document.getElementById("btn-copy-report");
+  const btnCopyReportText = document.getElementById("btn-copy-report-text");
+
+  if (btnCopyReport) {
+    btnCopyReport.addEventListener("click", () => {
+      if (!latestVerdictData) return;
+      const d = latestVerdictData;
+      const confidencePct = Math.round((d.confidence || 0) * 100);
+      const evidenceLines = (d.evidence && d.evidence.length > 0)
+        ? d.evidence.map(e => `  - ${e}`).join("\n")
+        : "  - No critical threat anomalies detected.";
+
+      const report = [
+        "==================================================",
+        "  SCAMSHIELD AI — THREAT ASSESSMENT REPORT",
+        "==================================================",
+        `Verdict:         ${(d.verdict || "UNKNOWN").toUpperCase()}`,
+        `Risk Score:      ${d.risk_score} / 100`,
+        `Risk Band:       ${(d.risk_band || "").toUpperCase()}`,
+        `Risk Index:      ${confidencePct}% (Score Normalized)`,
+        "",
+        `Diagnostic Summary:`,
+        `  ${d.summary || "No diagnostic summary available."}`,
+        "",
+        `Observed Evidence:`,
+        evidenceLines,
+        "",
+        `Recommended Protective Action:`,
+        `  ${d.action || "Verify independently with official institution."}`,
+        "==================================================",
+        "Verified by ScamShield AI (Zero-Network Passive Heuristics)",
+      ].join("\n");
+
+      navigator.clipboard.writeText(report).then(() => {
+        if (btnCopyReportText) {
+          const original = btnCopyReportText.textContent;
+          btnCopyReportText.textContent = "Copied!";
+          setTimeout(() => {
+            btnCopyReportText.textContent = original;
+          }, 2000);
+        }
+      }).catch(() => {
+        showAlert("Unable to access clipboard. Please copy manually.");
+      });
+    });
+  }
+
 
   // ---------------------------------------------------------------------------
   // Interactive Onboarding Tour Controller (Item 19)

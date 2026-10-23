@@ -268,3 +268,208 @@ def test_security_unicode_and_null_bytes(client):
         assert response.status_code == 200
         data = response.json()
         assert data["verdict"] in ("likely safe", "needs review", "likely scam")
+
+
+# -----------------------------------------------------------------------------
+# 8. Trusted Proxy & Client-IP Boundary Verification (Stage A Security)
+# -----------------------------------------------------------------------------
+
+def _make_mock_request(headers=None, client_host="127.0.0.1", client_port=50000):
+    """Constructs a lightweight Starlette Request with specific client host and headers."""
+    from starlette.requests import Request
+    raw_headers = []
+    if headers:
+        for k, v in headers.items():
+            raw_headers.append((k.lower().encode("latin-1"), str(v).encode("latin-1")))
+    client = (client_host, client_port) if client_host is not None else None
+    scope = {
+        "type": "http",
+        "method": "POST",
+        "path": "/api/v1/analyze",
+        "headers": raw_headers,
+        "client": client,
+    }
+    return Request(scope)
+
+
+def test_client_ip_direct_untrusted_ignores_forwarded_headers():
+    """
+    Direct untrusted peer cannot spoof IP: client-supplied X-Forwarded-For
+    and X-Real-IP are strictly ignored when direct peer is not in TRUSTED_PROXIES.
+    """
+    from app.api.endpoints import extract_client_ip
+
+    # Direct connection from public IP not in trusted proxies
+    req = _make_mock_request(
+        headers={
+            "X-Forwarded-For": "1.1.1.1",
+            "X-Real-IP": "2.2.2.2",
+        },
+        client_host="203.0.113.10",
+    )
+    extracted = extract_client_ip(req, trusted_proxies={"127.0.0.1", "::1", "testclient"})
+    assert extracted == "203.0.113.10"
+
+
+def test_client_ip_trusted_proxy_single_client():
+    """
+    When direct peer is a trusted proxy, legitimate client IP from X-Forwarded-For
+    is extracted and validated.
+    """
+    from app.api.endpoints import extract_client_ip
+
+    req = _make_mock_request(
+        headers={"X-Forwarded-For": "198.51.100.50"},
+        client_host="127.0.0.1",
+    )
+    extracted = extract_client_ip(req, trusted_proxies={"127.0.0.1"})
+    assert extracted == "198.51.100.50"
+
+
+def test_client_ip_trusted_proxy_x_real_ip():
+    """
+    When direct peer is trusted and X-Forwarded-For is absent, X-Real-IP is honored if valid.
+    """
+    from app.api.endpoints import extract_client_ip
+
+    req = _make_mock_request(
+        headers={"X-Real-IP": "198.51.100.77"},
+        client_host="127.0.0.1",
+    )
+    extracted = extract_client_ip(req, trusted_proxies={"127.0.0.1"})
+    assert extracted == "198.51.100.77"
+
+
+def test_client_ip_multi_hop_proxy_chain_safe_extraction():
+    """
+    Multi-hop proxy chain: walks right-to-left through trusted proxies
+    and identifies the authentic untrusted client boundary.
+    """
+    from app.api.endpoints import extract_client_ip
+
+    # Architecture: Client (198.51.100.25) -> Cloudflare (10.0.0.1) -> Nginx (127.0.0.1) -> ScamShield
+    trusted = {"127.0.0.1", "10.0.0.1"}
+    req = _make_mock_request(
+        headers={"X-Forwarded-For": "198.51.100.25, 10.0.0.1"},
+        client_host="127.0.0.1",
+    )
+    extracted = extract_client_ip(req, trusted_proxies=trusted)
+    assert extracted == "198.51.100.25"
+
+
+def test_client_ip_leftmost_spoofing_prevented():
+    """
+    Blind leftmost trust prevention:
+    If an attacker injects a spoofed IP into X-Forwarded-For before hitting a reverse proxy,
+    the proxy appends the real client IP. Right-to-left traversal picks the real client IP,
+    rejecting the forged leftmost value.
+    """
+    from app.api.endpoints import extract_client_ip
+
+    # Attacker at 198.51.100.42 injects '8.8.8.8' as X-Forwarded-For.
+    # Proxy at 127.0.0.1 appends real client IP: '8.8.8.8, 198.51.100.42'.
+    req = _make_mock_request(
+        headers={"X-Forwarded-For": "8.8.8.8, 198.51.100.42"},
+        client_host="127.0.0.1",
+    )
+    extracted = extract_client_ip(req, trusted_proxies={"127.0.0.1"})
+    # Must NOT blindly return 8.8.8.8
+    assert extracted == "198.51.100.42"
+
+
+def test_client_ip_malformed_headers_safe_fallback():
+    """
+    Malformed IP values, non-IP strings, and header injection attempts
+    must fail validation safely and fall back to direct peer without 500 crashes.
+    """
+    from app.api.endpoints import extract_client_ip
+
+    malformed_vectors = [
+        "not-an-ip-address",
+        "999.999.999.999",
+        "<script>alert(1)</script>",
+        "127.0.0.1; rm -rf /",
+        "203.0.113.1, invalid_hop",
+        "",
+    ]
+    for vector in malformed_vectors:
+        req = _make_mock_request(
+            headers={"X-Forwarded-For": vector, "X-Real-IP": vector},
+            client_host="127.0.0.1",
+        )
+        extracted = extract_client_ip(req, trusted_proxies={"127.0.0.1"})
+        assert extracted == "127.0.0.1"
+
+
+def test_client_ip_missing_client_never_maps_to_localhost():
+    """
+    Unknown or absent socket peer must return 'unknown' and NEVER silently map to localhost.
+    """
+    from app.api.endpoints import extract_client_ip
+
+    req_none_client = _make_mock_request(client_host=None)
+    assert extract_client_ip(req_none_client) == "unknown"
+
+    req_empty_host = _make_mock_request(client_host="")
+    assert extract_client_ip(req_empty_host) == "unknown"
+
+
+def test_client_ip_cidr_subnet_matching():
+    """
+    Trusted proxies configured as CIDR subnets (e.g. 10.0.0.0/8, 172.16.0.0/12)
+    correctly match peer IPs within the subnet and reject outside IPs.
+    """
+    from app.api.endpoints import is_trusted_proxy
+
+    trusted_cidrs = {"10.0.0.0/8", "172.16.0.0/12", "127.0.0.1"}
+
+    assert is_trusted_proxy("10.1.2.3", trusted_cidrs) is True
+    assert is_trusted_proxy("10.254.254.254", trusted_cidrs) is True
+    assert is_trusted_proxy("172.16.5.1", trusted_cidrs) is True
+    assert is_trusted_proxy("172.31.255.255", trusted_cidrs) is True
+    assert is_trusted_proxy("127.0.0.1", trusted_cidrs) is True
+
+    # Outside CIDR ranges
+    assert is_trusted_proxy("172.32.0.1", trusted_cidrs) is False
+    assert is_trusted_proxy("192.168.1.1", trusted_cidrs) is False
+    assert is_trusted_proxy("203.0.113.1", trusted_cidrs) is False
+
+
+def test_rate_limit_bypass_prevention_via_spoofed_headers(client):
+    """
+    Attack simulation: Untrusted client attempting to bypass rate limits
+    by rotating forged X-Forwarded-For headers.
+    Because the direct peer is untrusted, all requests hit the same rate-limit bucket
+    and the attack is throttled with HTTP 429.
+    """
+    from app.services.rate_limiter import rate_limiter
+
+    rate_limiter.reset()
+
+    # Configure TRUSTED_PROXIES so 'testclient' is NOT trusted for this test
+    from app.api.endpoints import extract_client_ip
+    from app.config import settings
+
+    # Simulate 65 requests from an untrusted peer rotating forged headers
+    peer_ip = "198.51.100.99"
+    untrusted_proxies = {"127.0.0.1", "::1"} # 'testclient' is NOT in here
+
+    responses = []
+    for i in range(65):
+        req = _make_mock_request(
+            headers={"X-Forwarded-For": f"1.2.3.{i+1}"},
+            client_host=peer_ip,
+        )
+        ip = extract_client_ip(req, trusted_proxies=untrusted_proxies)
+        # Verify forged header was discarded
+        assert ip == peer_ip
+        allowed, retry_after = rate_limiter.is_allowed(ip)
+        responses.append(allowed)
+
+    # First 60 requests allowed, remaining 5 blocked
+    assert sum(responses[:60]) == 60
+    assert sum(responses[60:]) == 0
+    assert not responses[60]
+
+    rate_limiter.reset()
+

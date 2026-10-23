@@ -26,9 +26,9 @@
         </div>
       </div>
       <div class="header-actions">
-        <div class="runtime-badge" title="Model loaded and operational">
-          <span class="pulse-dot"></span>
-          <span>Engine Online</span>
+        <div id="runtime-badge" class="runtime-badge" title="Live subsystem connectivity">
+          <span id="runtime-dot" class="pulse-dot"></span>
+          <span id="runtime-text">Engine Online</span>
         </div>
         <button id="btn-open-tour" class="btn-secondary" aria-label="Open guided onboarding tour">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
@@ -209,7 +209,7 @@
                 <span id="score-value" class="score-number">0</span>
                 <span class="score-max">/ 100</span>
               </div>
-              <span id="confidence-badge" class="confidence-chip">0% Risk Index</span>
+              <span id="confidence-badge" class="confidence-chip" title="Normalized decision risk index derived from multi-modal analysis">0% Risk Index</span>
             </div>
           </div>
 
@@ -250,16 +250,26 @@
 
           <!-- Protective Action Guidance -->
           <div class="action-box">
-            <div class="action-header">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <line x1="12" y1="8" x2="12" y2="12"/>
-                <line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
-              Recommended Safety Action
+            <div class="action-header" style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                Recommended Safety Action
+              </div>
+              <button type="button" id="btn-copy-report" class="btn-ghost" style="padding:0.25rem 0.6rem; font-size:0.75rem; gap:0.35rem;" title="Copy threat assessment summary to clipboard">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                <span id="btn-copy-report-text">Copy Report</span>
+              </button>
             </div>
             <p id="action-text" class="action-text"></p>
           </div>
+
         </div>
       </section>
     </main>
@@ -415,7 +425,7 @@
           </div>
           <h3 class="tour-slide-title">Zero-Retention Privacy Guarantee</h3>
           <p class="tour-slide-desc">
-            Your privacy is absolute. Submitted messages and URLs are never recorded to any database, file, or cloud AI API. All analysis executes in ephemeral RAM and is instantly discarded after results are delivered.
+            Your privacy is absolute. For guest scans, submitted messages and URLs are never recorded to any database or external cloud API, executing purely in volatile RAM. Registered users enjoy private, isolated audit history with 1-click GDPR deletion.
           </p>
         </div>
       </div>

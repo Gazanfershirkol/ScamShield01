@@ -23,6 +23,10 @@ Tasks must be updated strictly upon verified execution of tests or commands.
 | **T-011** | Phase 9 | P1 | Conduct security validation tests (XSS, SSRF zero-network verification, ReDoS, payload limits) | T-008 | `tests/test_security.py` | `pytest tests/test_security.py` | **DONE** — 8 security tests passing: SSRF immunity, XSS defense, payload boundaries, ReDoS |
 | **T-012** | Phase 10 | P1 | Finalize submission package, verify reproducible setup instructions, and create presentation pitch guide | T-009, T-010, T-011 | `README.md`, `MEMORY.md`, `docs/DEMO_GUIDE.md` | `pytest` | **DONE** — presentation guide created, README updated, 58/58 tests passing |
 | **T-013** | Phase 11 | P0 | Implement 19-Point Production SaaS Architecture (Auth, PBKDF2, Password Reset, OTP Email Verification, Sliding Rate Limiting, RLS Scan History, SQLite Automated Backups, Anonymous Analytics HUD, Incident Error Boundary, Tour Onboarding, GDPR Right-to-Erasure, Privacy & Terms, Custom 404, Lifespan Pre-Warmup) | T-012 | `app/services/auth_service.py`, `app/api/auth_endpoints.py`, `app/services/rate_limiter.py`, `app/services/analytics.py`, `app/db/database.py`, `scripts/backup_db.py`, `tests/test_auth.py`, `pytest.ini` | `pytest` | **DONE** — all 19 SaaS checklist items completed, 71/71 tests passing with zero warnings |
+| **T-014** | Stage A | P0 | Implement Test Database Isolation & Trusted Reverse Proxy Security Boundary (RFC 7239 right-to-left traversal, IP validation, test isolation fixture, zero live DB writes) | T-013 | `app/config.py`, `app/db/database.py`, `app/api/endpoints.py`, `scripts/backup_db.py`, `tests/conftest.py`, `scripts/verify_isolation.py`, `tests/test_security.py` | `pytest tests/test_security.py` | **DONE** — isolated temp SQLite session fixture, 9 new security tests passing, live DB untouched |
+| **T-015** | Stage B | P0 | Implement Production Telemetry Probes (`/health`, `/health/live`, `/health/ready`), Defensive Security Headers Middleware (`nosniff`, `DENY`), Configurable CORS, and Production Deployment Suite | T-014 | `app/config.py`, `app/main.py`, `app/api/endpoints.py`, `deploy/nginx/scamshield.conf`, `deploy/systemd/scamshield.service`, `deploy/env.production.example`, `deploy/DEPLOYMENT.md`, `tests/test_api.py` | `pytest tests/test_api.py` | **DONE** — readiness/liveness probes, security headers middleware, Nginx/systemd runbook |
+| **T-016** | Stage C | P1 | Implement Dynamic Frontend Health Indicator, Formatted Threat Assessment Report Clipboard Export, and Database Token Maintenance Script | T-015 | `app/static/index.html`, `app/static/js/app.js`, `scripts/prune_data.py`, `tests/test_auth.py` | `pytest tests/test_auth.py` | **DONE** — dynamic engine health status badge, clipboard assessment report copy, token pruning |
+| **T-017** | Stage C.2 | P1 | Privacy Alignment, Scope Harmonization & Terminology Hardening (Dual-mode privacy disclosure, Risk Index clarification, accurate proxy docstrings, test reconciliation) | T-016 | `app/static/privacy.html`, `app/static/index.html`, `app/static/js/app.js`, `app/api/schemas.py`, `app/api/endpoints.py`, `CHANGELOG.md`, `TASKS.md` | `pytest` | **DONE** — privacy disclosures harmonized, risk index clarified, 83 tests verified |
 
 ---
 
@@ -46,16 +50,20 @@ graph TD
     T010 --> T012
     T011 --> T012
     T012 --> T013["T-013: Production SaaS 19-Item Hardening (DONE)"]
+    T013 --> T014["T-014: Stage A Test Isolation & Proxy Trust (DONE)"]
+    T014 --> T015["T-015: Stage B Telemetry Probes & Deploy Suite (DONE)"]
+    T015 --> T016["T-016: Stage C Dynamic HUD & Report Sharing (DONE)"]
 ```
 
 ---
 
 ## Status Ledger
-- **Total Tasks:** 14
-- **Completed:** 14 (T-000, T-001, T-002, T-003, T-004, T-005, T-006, T-007, T-008, T-009, T-010, T-011, T-012, T-013)
+- **Total Tasks:** 17
+- **Completed:** 17 (T-000 through T-016)
 - **In Progress:** 0
 - **Blocked:** 0
 - **Not Started:** 0
+
 
 
 
