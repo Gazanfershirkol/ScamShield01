@@ -172,14 +172,17 @@ async def get_me(user: Dict[str, Any] = Depends(get_current_user_required)):
     return {"status": "success", "user": user}
 
 
-@router.post("/forgot-password", summary="Request Password Reset Token (Item 2)")
+@router.post("/forgot-password", summary="Request Password Reset")
 async def forgot_password(payload: ForgotPasswordRequest):
-    """Generates password reset token."""
-    token = auth_service.create_password_reset(payload.email)
+    """
+    Initiates password reset workflow.
+    Always returns a generic, uniform message to prevent account enumeration.
+    Never exposes reset tokens in public HTTP responses, headers, or application logs.
+    """
+    auth_service.create_password_reset(payload.email)
     return {
         "status": "success",
-        "message": "If an account exists with this email, a reset token has been dispatched.",
-        "reset_token": token,  # Provided for demonstration and testing
+        "message": "If an account exists with this email address, password reset instructions have been dispatched.",
     }
 
 

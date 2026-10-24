@@ -790,10 +790,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         const data = await res.json();
         showAuthMsg(data.message, true);
-        if (data.reset_token && sectionReset) {
+        if (sectionReset) {
           sectionReset.style.display = "block";
-          const tokenInput = document.getElementById("reset-token-input");
-          if (tokenInput) tokenInput.value = data.reset_token;
         }
       } catch (err) {
         showAuthMsg(err.message, false);

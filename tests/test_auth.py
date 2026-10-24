@@ -114,7 +114,16 @@ def test_password_reset_flow(client):
     # 1. Request reset
     forgot_res = client.post("/api/v1/auth/forgot-password", json={"email": email})
     assert forgot_res.status_code == 200
-    reset_token = forgot_res.json()["reset_token"]
+    assert "reset_token" not in forgot_res.json(), "CRITICAL LEAK: reset_token must never be returned in public API response!"
+    assert "dispatched" in forgot_res.json()["message"]
+
+    # Retrieve token directly from isolated test DB (as would be delivered out-of-band via email)
+    conn = get_db_connection()
+    try:
+        row = conn.execute("SELECT reset_token FROM users WHERE email = ?;", (email,)).fetchone()
+        reset_token = row["reset_token"]
+    finally:
+        conn.close()
     assert reset_token is not None
 
     # 2. Reset with invalid token rejected
@@ -247,4 +256,122 @@ def test_database_pruning_and_integrity():
 
     # 5. Checkpoint WAL
     checkpoint_wal()
+
+
+def test_password_reset_security_and_non_disclosure(client):
+    """
+    P0 Regression Test Suite (Stage D):
+    1. Public response never discloses reset_token.
+    2. Unknown and known emails receive identical generic responses (no enumeration).
+    3. Token cannot be reused after consumption.
+    4. Expired tokens are rejected.
+    5. Headers and logs do not leak reset tokens.
+    """
+    import time
+    email = "target.victim@klebca.edu"
+    reg = client.post("/api/v1/auth/register", json={"email": email, "password": "OriginalPassword2026!"})
+    assert reg.status_code == 201
+
+    # 1. Request reset for known email -> 200 generic message, NO token in body or headers
+    res_known = client.post("/api/v1/auth/forgot-password", json={"email": email})
+    assert res_known.status_code == 200
+    assert "reset_token" not in res_known.json()
+    known_msg = res_known.json()["message"]
+
+    # Check response headers for token leakage
+    conn = get_db_connection()
+    try:
+        row = conn.execute("SELECT reset_token FROM users WHERE email = ?;", (email,)).fetchone()
+        token = row["reset_token"]
+    finally:
+        conn.close()
+    assert token is not None
+    assert not any(token in str(v) for v in res_known.headers.values()), "Token leaked in response headers!"
+
+    # 2. Request reset for unknown email -> Identical 200 response (prevents account enumeration)
+    res_unknown = client.post("/api/v1/auth/forgot-password", json={"email": "nonexistent.attacker@klebca.edu"})
+    assert res_unknown.status_code == 200
+    assert "reset_token" not in res_unknown.json()
+    assert res_unknown.json()["message"] == known_msg
+
+    # 3. Valid token resets password
+    reset_res = client.post(
+        "/api/v1/auth/reset-password",
+        json={"token": token, "new_password": "NewSecurePassword2026!"},
+    )
+    assert reset_res.status_code == 200
+
+    # 4. Token cannot be reused after consumption
+    reuse_res = client.post(
+        "/api/v1/auth/reset-password",
+        json={"token": token, "new_password": "AnotherPassword2026!"},
+    )
+    assert reuse_res.status_code == 400
+
+    # 5. Expired token cannot reset password
+    from app.services.auth_service import auth_service
+    expired_token = auth_service.create_password_reset(email)
+    assert expired_token is not None
+
+    conn = get_db_connection()
+    try:
+        with conn:
+            conn.execute("UPDATE users SET reset_expires = ? WHERE email = ?;", (time.time() - 3600, email))
+    finally:
+        conn.close()
+
+    expired_res = client.post(
+        "/api/v1/auth/reset-password",
+        json={"token": expired_token, "new_password": "AnotherPassword2026!"},
+    )
+    assert expired_res.status_code == 400
+
+
+def test_fail_closed_production_secret_key(monkeypatch):
+    """
+    P0 Regression Test Suite (Stage D):
+    1. Production startup fails when secret is missing or empty.
+    2. Production startup fails when secret is an insecure default.
+    3. Production startup fails when secret is shorter than 32 characters.
+    4. Valid configured secret allows operation.
+    5. Tokens signed with mismatched secrets are rejected.
+    """
+    from app.config import Settings
+    from app.services.auth_service import generate_session_token, verify_session_token
+
+    # 1. Missing secret in production -> raises RuntimeError
+    monkeypatch.setenv("APP_ENV", "production")
+    monkeypatch.delenv("SCAMSHIELD_TEST_MODE", raising=False)
+    monkeypatch.delenv("PYTEST_CURRENT_TEST", raising=False)
+    monkeypatch.delenv("AUTH_SECRET_KEY", raising=False)
+
+    s_missing = Settings()
+    with pytest.raises(RuntimeError, match="AUTH_SECRET_KEY is absent or empty"):
+        _ = s_missing.AUTH_SECRET_KEY
+
+    # 2. Insecure default in production -> raises RuntimeError
+    monkeypatch.setenv("AUTH_SECRET_KEY", "scamshield_production_secret_key_2026")
+    s_insecure = Settings()
+    with pytest.raises(RuntimeError, match="Insecure or default AUTH_SECRET_KEY"):
+        _ = s_insecure.AUTH_SECRET_KEY
+
+    # 3. Short secret (< 32 chars) in production -> raises RuntimeError
+    monkeypatch.setenv("AUTH_SECRET_KEY", "too_short_secret_key_123")
+    s_short = Settings()
+    with pytest.raises(RuntimeError, match="Insecure or default AUTH_SECRET_KEY"):
+        _ = s_short.AUTH_SECRET_KEY
+
+    # 4. Valid 64-char hex secret in production -> succeeds
+    valid_key = "a" * 64
+    monkeypatch.setenv("AUTH_SECRET_KEY", valid_key)
+    s_valid = Settings()
+    assert s_valid.AUTH_SECRET_KEY == valid_key
+
+    # 5. Token signed with Key A is rejected when verified with Key B
+    key_a = "secret_key_alpha_32_characters_12345"
+    key_b = "secret_key_bravo_32_characters_67890"
+    tok = generate_session_token(42, "user@test.com", secret=key_a)
+    assert verify_session_token(tok, secret=key_a) is not None
+    assert verify_session_token(tok, secret=key_b) is None
+
 

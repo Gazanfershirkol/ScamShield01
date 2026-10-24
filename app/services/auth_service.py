@@ -18,8 +18,12 @@ from app.db.database import get_db_connection
 
 # PBKDF2 configuration
 PBKDF2_ITERATIONS = 100_000
-TOKEN_SECRET = settings.AUTH_SECRET_KEY
 TOKEN_EXPIRY_SECONDS = settings.TOKEN_EXPIRY_SECONDS
+
+
+def get_token_secret() -> str:
+    """Returns dynamic active secret key from application settings."""
+    return settings.AUTH_SECRET_KEY
 
 
 def hash_password(password: str, salt: Optional[str] = None) -> Tuple[str, str]:
@@ -41,8 +45,9 @@ def verify_password(password: str, salt: str, expected_hash: str) -> bool:
     return hmac.compare_digest(computed_hash, expected_hash)
 
 
-def generate_session_token(user_id: int, email: str) -> str:
+def generate_session_token(user_id: int, email: str, secret: Optional[str] = None) -> str:
     """Generates a tamper-proof signed bearer session token."""
+    key = secret if secret is not None else get_token_secret()
     payload = {
         "sub": user_id,
         "email": email,
@@ -51,22 +56,23 @@ def generate_session_token(user_id: int, email: str) -> str:
     }
     raw_payload = base64.urlsafe_b64encode(json.dumps(payload).encode("utf-8")).decode("utf-8")
     signature = hmac.new(
-        TOKEN_SECRET.encode("utf-8"),
+        key.encode("utf-8"),
         raw_payload.encode("utf-8"),
         hashlib.sha256,
     ).hexdigest()
     return f"{raw_payload}.{signature}"
 
 
-def verify_session_token(token: str) -> Optional[Dict[str, Any]]:
+def verify_session_token(token: str, secret: Optional[str] = None) -> Optional[Dict[str, Any]]:
     """Verifies and decodes a bearer session token. Returns payload dict or None."""
+    key = secret if secret is not None else get_token_secret()
     try:
         parts = token.split(".")
         if len(parts) != 2:
             return None
         raw_payload, signature = parts
         expected_sig = hmac.new(
-            TOKEN_SECRET.encode("utf-8"),
+            key.encode("utf-8"),
             raw_payload.encode("utf-8"),
             hashlib.sha256,
         ).hexdigest()

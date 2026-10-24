@@ -55,6 +55,10 @@ Digital fraud delivered via SMS, WhatsApp, email, and instant messaging poses an
 
 ## 4. Benchmark Evaluation Results
 
+> [!NOTE]
+> **Synthetic Benchmark Evaluation Notice:**
+> These 100% metrics reflect classification performance on a held-out test split of the curated synthetic benchmark dataset (`data/processed/test.csv`, 375 samples). They do not establish 100% detection accuracy on arbitrary real-world wild scam messages, which frequently exhibit out-of-distribution variations, novel evasion patterns, and regional language nuances. External wild dataset validation is tracked as ongoing evaluation work.
+
 Evaluated on the held-out test split of **375 strictly unobserved samples** (`data/processed/test.csv`) with zero cross-split leakage:
 
 | Performance Metric | Observed Result | Definition / Benchmark Formula |

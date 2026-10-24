@@ -25,7 +25,14 @@ logger = logging.getLogger("scamshield")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Pre-warms ML model and underlying subsystems on startup to ensure zero-latency first requests."""
+    """
+    Startup lifecycle manager:
+    1. Enforces fail-closed cryptographic secret validation in production mode.
+    2. Pre-warms ML model to ensure zero-latency first requests.
+    """
+    # Fail-closed secret validation on application startup
+    _ = settings.AUTH_SECRET_KEY
+
     try:
         from app.services.text_analyzer import get_text_analyzer
         get_text_analyzer()

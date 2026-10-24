@@ -32,10 +32,13 @@ def main():
     print("[*] Proving ScamShield AI Test Database Isolation Boundary...")
 
     live_db = PROJECT_ROOT / "data" / "scamshield.db"
-    assert live_db.exists(), f"Live DB not found at {live_db}"
-    initial_live_hash = get_file_sha256(live_db)
-    initial_live_mtime = live_db.stat().st_mtime
-    print(f"[*] Live DB: {live_db} (size={live_db.stat().st_size}, sha256={initial_live_hash})")
+    live_db_existed = live_db.exists()
+    if live_db_existed:
+        initial_live_hash = get_file_sha256(live_db)
+        initial_live_mtime = live_db.stat().st_mtime
+        print(f"[*] Live DB found on host: {live_db} (size={live_db.stat().st_size}, sha256={initial_live_hash})")
+    else:
+        print(f"[*] Clean environment detected: Live DB does not exist on disk at {live_db} (git-ignored)")
 
     # 1. Test Mode Active, live DB target -> MUST raise RuntimeError
     os.environ["SCAMSHIELD_TEST_MODE"] = "1"
@@ -93,12 +96,16 @@ def main():
         assert backup_file.parent.resolve() == tmp_backup_dir.resolve(), "Backup must be in temp dir"
         print(f"[+] PROOF 4 PASSED: Backup executed strictly inside temp directory: {backup_file.name}")
 
-    # 4. Verify live database and backups were NEVER modified
-    final_live_hash = get_file_sha256(live_db)
-    final_live_mtime = live_db.stat().st_mtime
-    assert initial_live_hash == final_live_hash, f"CRITICAL LEAK: Live DB hash changed from {initial_live_hash} to {final_live_hash}!"
-    assert initial_live_mtime == final_live_mtime, "Live DB mtime changed!"
-    print(f"[+] PROOF 5 PASSED: Live DB integrity verified 100% UNTOUCHED (SHA256: {final_live_hash})")
+    # 4. Verify live database was NEVER created or modified
+    if live_db_existed:
+        final_live_hash = get_file_sha256(live_db)
+        final_live_mtime = live_db.stat().st_mtime
+        assert initial_live_hash == final_live_hash, f"CRITICAL LEAK: Live DB hash changed from {initial_live_hash} to {final_live_hash}!"
+        assert initial_live_mtime == final_live_mtime, "Live DB mtime changed!"
+        print(f"[+] PROOF 5 PASSED: Live DB integrity verified 100% UNTOUCHED (SHA256: {final_live_hash})")
+    else:
+        assert not live_db.exists(), f"CRITICAL LEAK: Live DB was unexpectedly created at {live_db} during test operations!"
+        print("[+] PROOF 5 PASSED: Clean checkout invariant verified: Live DB was NEVER created during test operations.")
     print("[*] TEST DATABASE ISOLATION RIGOROUSLY PROVEN.")
 
 

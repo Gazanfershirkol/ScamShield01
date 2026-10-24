@@ -8,10 +8,21 @@ for the ScamShield AI detection engine, API service, and evaluation pipeline.
 from dataclasses import dataclass
 import os
 from pathlib import Path
+import sys
 from typing import Set
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+INSECURE_SECRET_DEFAULTS: Set[str] = {
+    "scamshield_production_secret_key_2026",
+    "CHANGE_THIS_TO_A_CRYPTOGRAPHICALLY_RANDOM_64_CHAR_HEX_KEY",
+    "secret",
+    "secretkey",
+    "password",
+    "changeme",
+    "default",
+}
 
 
 @dataclass(frozen=True)
@@ -32,10 +43,46 @@ class Settings:
     VERDICT_SCAM_THRESHOLD: int = int(os.getenv("VERDICT_SCAM_THRESHOLD", "75"))
     VERDICT_REVIEW_THRESHOLD: int = int(os.getenv("VERDICT_REVIEW_THRESHOLD", "35"))
 
-    # Production SaaS Settings (Items 1, 8, 9)
     RATE_LIMIT_PER_MINUTE: int = int(os.getenv("RATE_LIMIT_PER_MINUTE", "60"))
-    AUTH_SECRET_KEY: str = os.getenv("AUTH_SECRET_KEY", "scamshield_production_secret_key_2026")
     TOKEN_EXPIRY_SECONDS: int = int(os.getenv("TOKEN_EXPIRY_SECONDS", "86400"))
+
+    @property
+    def AUTH_SECRET_KEY(self) -> str:
+        """
+        Cryptographic signing secret for bearer session tokens.
+        Enforces strict fail-closed validation:
+        - In production mode (APP_ENV='production'), startup aborts immediately if AUTH_SECRET_KEY
+          is missing, empty, shorter than 32 characters, or matches any known insecure default.
+        - In test mode, returns explicit isolated test secret.
+        - In development mode, falls back to a development secret.
+        """
+        app_env = os.getenv("APP_ENV", self.APP_ENV).lower().strip()
+        is_testing = (
+            os.getenv("SCAMSHIELD_TEST_MODE") == "1"
+            or "PYTEST_CURRENT_TEST" in os.environ
+            or "pytest" in sys.modules
+        )
+
+        val = os.getenv("AUTH_SECRET_KEY", "").strip()
+
+        if app_env == "production":
+            if not val:
+                raise RuntimeError(
+                    "CRITICAL SECURITY CONFIGURATION ERROR: AUTH_SECRET_KEY is absent or empty in production mode! "
+                    "Startup aborted. You must configure a cryptographically random secret (min 32 characters)."
+                )
+            if val in INSECURE_SECRET_DEFAULTS or len(val) < 32:
+                raise RuntimeError(
+                    "CRITICAL SECURITY CONFIGURATION ERROR: Insecure or default AUTH_SECRET_KEY detected in production mode! "
+                    "Startup aborted. You must configure a high-entropy secret (min 32 characters)."
+                )
+            return val
+
+        if is_testing:
+            return val if val else "scamshield_isolated_test_secret_key_2026"
+
+        # Development fallback
+        return val if val else "scamshield_dev_secret_not_for_production_2026"
 
     # Production Server & Networking Settings (Stage B Hardening)
     SERVER_HOST: str = os.getenv("SERVER_HOST", "127.0.0.1")

@@ -1,0 +1,45 @@
+# Git metadata
+.git/
+.gitignore
+.github/
+
+# Python Virtual Environments & Packages
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Bytecode & Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.log
+
+# Databases & Backups (Prevent local DB leakage into images)
+*.db
+*.sqlite
+*.sqlite3
+data/scamshield.db
+data/backups/
+
+# Local Secrets & Environment overrides
+.env
+.env.*
+!.env.example
+
+# OS & Editor Detritus
+.vscode/
+.idea/
+*.swp
+*.bak
+Thumbs.db
+Desktop.ini
+.DS_Store
