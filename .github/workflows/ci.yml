@@ -30,11 +30,14 @@ jobs:
           pip install -r requirements.txt
 
       - name: Verify Test Database Isolation
+        env:
+          PYTHONPATH: "."
         run: |
           python scripts/verify_isolation.py
 
       - name: Run Pytest Test Suite
         env:
           SCAMSHIELD_TEST_MODE: "1"
+          PYTHONPATH: "."
         run: |
           pytest -v

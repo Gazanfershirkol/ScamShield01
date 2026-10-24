@@ -34,7 +34,8 @@ app/models/*.pkl
 app/models/*.bin
 
 # ── Raw & processed datasets ──────────────────────────────────
-data/raw/
+data/raw/*
+!data/raw/.gitkeep
 # Versioned processed benchmark splits for CI/test reproducibility:
 !data/processed/*.csv
 !data/synthetic/
